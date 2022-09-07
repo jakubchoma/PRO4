@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * deklarovat jako typ vytvářené proměnné. Pokus o vytvoření pole generického typu vyvolá syntaktickou
  * chybu, a to přesto, že pole instancí surového typu vytvořit lze.
  */
-public class GenerikaAPole {
+public class BGenerikaAPole {
     public static void main(String[] args) {
         //Diamantový operátor - nelze:
         //ArrayList<String>[] listS = new ArrayList<>[5];
@@ -16,7 +16,7 @@ public class GenerikaAPole {
         //ArrayList<String>[] listS = new ArrayList<String>[5];
 
         //Pole surových typů - lze, ale přicházíme o typovou kontrolu:
-        ArrayList[] listS = new ArrayList[5];
+        //ArrayList[] listS = new ArrayList[5];
 
         // Pole je deklarováno jako generické, ale má přiřazené instance surového typu - lze, ale vypíše varování:
         ArrayList<String>[] listS2 = new ArrayList[5];

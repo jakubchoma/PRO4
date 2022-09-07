@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PromennyPocetArgumentuAParametrickeTypy {
+public class CPromennyPocetArgumentuAParametrickeTypy {
     /***
      * Takto obdržíme varovné hlášení. To lze potlačit anotací @SuppressWarnings("unchecked"),
      * nicméně pro tento případ byla vytvořena anotace @SafeVarargs
@@ -21,8 +21,7 @@ public class PromennyPocetArgumentuAParametrickeTypy {
         String s = stringLists[0].get(0); // Dostáváme CastClassException za běhu v silně typovaném jazyce !
 
     }
-
     public static void main(String[] args) {
-        mtd(new ArrayList<String>());
+        mtd(new ArrayList<String>(), new ArrayList<String>());
     }
 }

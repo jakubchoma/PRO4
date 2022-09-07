@@ -4,7 +4,7 @@ package cz.spsmb.ctvrtak.a_promenny_pocet_argumentu_metod;
  * Díky anotaci @SafeVarargs nyní můžeme vytvořit doposud zakázaná pole. Stačí definovat metodu s proměnným počtem
  * argumentů a pole stěmito argumenty pak vrátit jako funkční hodnotu.
  */
-public class VytvoreniPoleSGenerickymiInstancemi {
+public class DVytvoreniPoleSGenerickymiInstancemi {
     @SafeVarargs
     public static <E> E[] arrayOf(E... array){
         return array;

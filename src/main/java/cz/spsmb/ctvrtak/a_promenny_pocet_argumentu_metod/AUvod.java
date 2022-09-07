@@ -7,11 +7,11 @@ import java.util.Arrays;
  * se počet jejich parametrů nezmění.
  * Chceme-li definovat metodu s proměnným počtem argumentů, je potřeba definovat společný typ argumentů,
  * jejichž počet předem neznáme. V seznamu parametrů tento typ uvádíme jako poslední a připíšeme za něj
- * tzv. výpostku v podobě tří teček.
+ * tzv. "výpustku" v podobě tří teček.
  * Tento proměnný počet argumentů je reprezentován obyčejným jednorozměrným polem.
  *
  */
-public class Uvod {
+public class AUvod {
     public static void variant(String title, int... args) {
         int count = args.length;
         System.out.println(count + " volitelných argumentů pro " + title);
@@ -19,7 +19,11 @@ public class Uvod {
     }
 
     public static void main(String[] args) {
+        // může být i nulový počet argumentů
         variant("Nic");
         variant("pět", 1, 2, 3, 4, 5);
+        // mohu zadat i pole jako argumenty
+        int[] a = {5, 4, 3, 2, 1};
+        variant("dalsi", a);
     }
 }
