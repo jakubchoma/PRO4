@@ -13,6 +13,8 @@ public class DVytvoreniPoleSGenerickymiInstancemi {
     public static void main(String[] args) {
         var aint = arrayOf(1, 2, 3, 5, 7, 11);
         var astr = arrayOf("raz", "dva", "tři");
+        var abool = arrayOf(true, false, false);
+
         // U takto vytvořeného pole překladač nekontroluje typ přiřazované hodnoty. tj. následující kód vede k chybě
         // v runtime:
         Object[] oo = aint;

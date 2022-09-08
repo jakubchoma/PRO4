@@ -22,6 +22,6 @@ public class CPromennyPocetArgumentuAParametrickeTypy {
 
     }
     public static void main(String[] args) {
-        mtd(new ArrayList<String>(), new ArrayList<String>());
+        m(new ArrayList<String>(), new ArrayList<String>());
     }
 }
