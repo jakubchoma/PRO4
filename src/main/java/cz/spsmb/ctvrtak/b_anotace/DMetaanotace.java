@@ -17,7 +17,8 @@ package cz.spsmb.ctvrtak.b_anotace;
  *               instalaci. Zavaděč tříd jí však nezapracuje do runtime. Výchozí hodnota.
  *    RUNTIME  - informace o anotaci se dostane až do class-objektu třídy, kterou anotace označuje.
  *               pomocí reflexe je pak možné za běhu příslušnou informaci zjistit.
- * @Target     - jednoparametrická, výčtový typ java.lang.annotation.ElementType:
+ * @Target     - jednoparametrická, specifikuje, které druhy entit je možno jí označenou anotací
+ *               označit výčtový typ java.lang.annotation.ElementType:
  *    ANNOTATION_TYPE - definice jiné anotace
  *    CONSTRUCTR      - definice konstruktoru
  *    FIELD           - deklarace atributu
