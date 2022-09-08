@@ -14,9 +14,24 @@ package cz.spsmb.ctvrtak.b_anotace;
  *
  */
 public class AUvod {
+    @MojeAnotace
+    public static void test(){
+        return;
+    }
     //Anotace mohou mít parametry:
     @Testovat(druh = "A")
-    public void mojeMetoda(){
+    public static void mojeMetoda(){
 
     }
+    //Parametrem anotace může být i pole. Ve skutečnosti se však žádné pole nevytváří a výčet ve
+    // složených závorkách je jediným povoleným způsobem, jak anotaci předat skupinu hodnot:
+    @Testovat(frekvence = {Den.SO, Den.NE})
+    public static void mojeMetoda2(){
+
+    }
+    // deklaraci lze označit i více anotacemi:
+    @Testovat
+    @MojeAnotace
+    public static void mojeMetoda3(){}
+
 }
