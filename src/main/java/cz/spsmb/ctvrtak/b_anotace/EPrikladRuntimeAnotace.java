@@ -43,7 +43,8 @@ public class EPrikladRuntimeAnotace {
         Assertions.assertEquals(1, annotatedMethods.size());
         Assertions.assertEquals("annotatedMethod", annotatedMethods.get(0));
     }
-    // Pomocí frameworku Spring můžeme číst třídy, bez znalosti jejich názvu.
+    // Pomocí frameworku Spring můžeme číst třídy, bez znalosti jejich názvu. Zde zadáváme celé jméno balíku,
+    // kde chceme anotace projít. V tomto případě "cz.spsmb.ctvrtak.b_anotace";
     @Test
     public void testWithSpringContext(){
         ClassPathScanningCandidateComponentProvider provider =
@@ -51,18 +52,19 @@ public class EPrikladRuntimeAnotace {
         provider.addIncludeFilter(new AnnotationTypeFilter(SampleAnnotation.class));
 
         Set<BeanDefinition> beanDefs = provider
-                .findCandidateComponents("cz.spsmb.ctvrtak.b_anotace.EPrikladRuntimeAnotace");
+                .findCandidateComponents("cz.spsmb.ctvrtak.b_anotace");
         List<String> annotatedBeans = new ArrayList<>();
         for (BeanDefinition bd : beanDefs) {
             if (bd instanceof AnnotatedBeanDefinition) {
                 Map<String, Object> annotAttributeMap = ((AnnotatedBeanDefinition) bd)
                         .getMetadata()
                         .getAnnotationAttributes(SampleAnnotation.class.getCanonicalName());
+                //zajímá nás parametr name
                 annotatedBeans.add(annotAttributeMap.get("name").toString());
             }
         }
         Assertions.assertEquals(1, annotatedBeans.size());
-        Assertions.assertEquals("EPrikladRuntimeAnotace", annotatedBeans.get(0));
+        Assertions.assertEquals("annotatedMethod", annotatedBeans.get(0));
     }
     // With the help of AnnotationUtils and ClassUtils,
     // it's possible to find the methods and classes annotated with a specific annotation.
