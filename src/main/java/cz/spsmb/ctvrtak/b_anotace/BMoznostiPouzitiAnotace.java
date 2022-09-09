@@ -23,7 +23,7 @@ public class BMoznostiPouzitiAnotace {
     @Override public String toString() {return "";}
     //Anotace parametrů metod, vč. this:
     @MojeAnotace
-    public void metoda(/*@MojeAnotace BMoznostiPouzitiAnotace this,*/ @MojeAnotace int i) {
+    public void metoda(/*@A BMoznostiPouzitiAnotace this,*/ @MojeAnotace int i) {
         @MojeAnotace String lp = "lokální proměnná";
     }
     //Anotace typových argumenty parametrizovaných typů:
@@ -55,7 +55,7 @@ public class BMoznostiPouzitiAnotace {
     //List<@MojeAnotace ? extends String> laem;
     //List<? extends @MojeAnotace String> leam;
 
-    //Anotace odkazu na metodu repreyenovaný operátorem čtyřtečka:
+    //Anotace odkazu na metodu reprezenovaný operátorem čtyřtečka:
     //@MojeAnotace AUvod::test;
 
 

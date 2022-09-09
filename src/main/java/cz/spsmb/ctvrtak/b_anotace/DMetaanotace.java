@@ -3,7 +3,7 @@ package cz.spsmb.ctvrtak.b_anotace;
 /***
  * Metaanotace jsou anotace určené k označení definic jiných anotací.
  *
- * @Documented - bez parametrů. Sděluje, že jí anotovaná anotace má být uvedena v dokumantaci touto
+ * @Documented - bez parametrů. Sděluje, že jí anotovaná anotace má být uvedena v dokumentaci touto
  *               anotací označených entit. Javadoc jí pak uvede jako součást popisu dokumentace. Příkladem
  *               je anotace @Deprecated.
  * @Inherited  - indikuje, že anotace jejíž definici s ní označíme, se stane součístí dědictví dceřinných
