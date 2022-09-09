@@ -12,8 +12,13 @@ package cz.spsmb.ctvrtak.b_anotace;
  *
  * Označení anotace provádíme znakem @. Za ním může být klidně jedna, nebo více mezer.
  *
+ * Anotace, které nedefinují žádné parametry jsou označovány jako "značky" (markers) případně
+ * "značkovací anotace" (marker annotations). Jedná se o obdobu "značkovacích rozhraní"
+ * (marker interfaces), které neobsahují žádnou metodu (Př. Cloneable, Serializable...).
+ *
  */
 public class AUvod {
+    //Příklad značkovací anotace:
     @MojeAnotace
     public static void test(){
         return;
