@@ -5,7 +5,7 @@ package cz.spsmb.ctvrtak.b_anotace;
  * určené pro
  * - nástroje pro práci se zdrojovým kódem, např. javadoc
  * - začlenění do přeloženého .class souboru a určeny pro nástroje pracující s těmito
- *   soubory (Např nástroje připravující instalaci na aplikační server), před vlastním
+ *   soubory (Např. nástroje připravující instalaci na aplikační server), před vlastním
  *   spuštěním programu
  * - mohou být začleněny do class souboru a určeny pro zpracování za běhu programu
  *   s pomocí reflexe.

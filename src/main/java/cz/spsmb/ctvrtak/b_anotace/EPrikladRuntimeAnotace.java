@@ -30,8 +30,10 @@ public class EPrikladRuntimeAnotace {
     @Test
     public void testWithJavaReflection() throws ClassNotFoundException {
         Class<?> clazz = ClassLoader.getSystemClassLoader().loadClass("cz.spsmb.ctvrtak.b_anotace.EPrikladRuntimeAnotace");
+        //pomocí reflexe beru anotaci SampleAnnotation k dané třídě
         SampleAnnotation classAnnotation = clazz.getAnnotation(SampleAnnotation.class);
         Assertions.assertEquals("annotatedClass", classAnnotation.name());
+        //Pomocí reflexe získávám seznam metod třídy EPrikladRuntimeAnotace
         Method[] methods = clazz.getMethods();
         List<String> annotatedMethods = new ArrayList<>();
         for (Method method : methods) {

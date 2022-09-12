@@ -14,9 +14,9 @@ public class DVytvoreniPoleSGenerickymiInstancemi {
 
     public static void main(String[] args) {
         var aint = arrayOf(1, 2, 3, 5, 7, 11);
-        Object[] astr = arrayOf("raz", "dva", "tři");
+        var astr = arrayOf("raz", "dva", "tři");
         var abool = arrayOf(true, false, false);
-        var alist = arrayOf(new ArrayList<String>(), new ArrayList<Object>());
+        var alist = arrayOf(new ArrayList<Integer>(), new ArrayList<String>(), new ArrayList<Object>());
 
         // U takto vytvořeného pole překladač nekontroluje typ přiřazované hodnoty. tj. následující kód vede k chybě
         // v runtime:

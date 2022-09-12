@@ -18,9 +18,11 @@ import java.util.Comparator;
 public class BMoznostiPouzitiAnotace {
     Integer o = Integer.valueOf(5);
     //Anotace atributu (proměnné):
-    @MojeAnotace String atribut = "Atribut";
+    @MojeAnotace
+    String atribut = "Atribut";
     //Anotace metody:
-    @Override public String toString() {return "";}
+    @Override
+    public String toString() {return "";}
     //Anotace parametrů metod, vč. this:
     @MojeAnotace
     public void metoda(/*@A BMoznostiPouzitiAnotace this,*/ @MojeAnotace int i) {

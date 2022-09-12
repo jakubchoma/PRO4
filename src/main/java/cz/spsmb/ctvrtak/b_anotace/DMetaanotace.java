@@ -20,7 +20,7 @@ package cz.spsmb.ctvrtak.b_anotace;
  * @Target     - jednoparametrická, specifikuje, které druhy entit je možno jí označenou anotací
  *               označit výčtový typ java.lang.annotation.ElementType:
  *    ANNOTATION_TYPE - definice jiné anotace
- *    CONSTRUCTR      - definice konstruktoru
+ *    CONSTRUCTOR     - definice konstruktoru
  *    FIELD           - deklarace atributu
  *    LOCAL_VARIABLE  - deklarace lokální proměnné
  *    METHOD          - deklarace metody
