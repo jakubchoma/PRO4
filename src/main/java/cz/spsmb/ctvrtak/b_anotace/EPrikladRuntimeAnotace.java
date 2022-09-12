@@ -58,6 +58,7 @@ public class EPrikladRuntimeAnotace {
         List<String> annotatedBeans = new ArrayList<>();
         for (BeanDefinition bd : beanDefs) {
             if (bd instanceof AnnotatedBeanDefinition) {
+                //výběr parametrů jméno - hodnota dané anotace
                 Map<String, Object> annotAttributeMap = ((AnnotatedBeanDefinition) bd)
                         .getMetadata()
                         .getAnnotationAttributes(SampleAnnotation.class.getCanonicalName());
@@ -66,7 +67,7 @@ public class EPrikladRuntimeAnotace {
             }
         }
         Assertions.assertEquals(1, annotatedBeans.size());
-        Assertions.assertEquals("annotatedMethod", annotatedBeans.get(0));
+        Assertions.assertEquals("annotatedClass", annotatedBeans.get(0));
     }
     // With the help of AnnotationUtils and ClassUtils,
     // it's possible to find the methods and classes annotated with a specific annotation.
@@ -88,7 +89,7 @@ public class EPrikladRuntimeAnotace {
     // It scans and indexes the project's classpath metadata.
     @Test
     public void testWithReflection(){
-        Reflections reflections = new Reflections("com.baeldung.annotation.scanner");
+        Reflections reflections = new Reflections(EPrikladRuntimeAnotace.class);
 
         Set<Method> methods = reflections
                 .getMethodsAnnotatedWith(SampleAnnotation.class);
