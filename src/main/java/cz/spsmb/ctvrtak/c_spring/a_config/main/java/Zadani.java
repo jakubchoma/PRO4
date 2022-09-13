@@ -28,6 +28,7 @@ package cz.spsmb.ctvrtak.c_spring.a_config.main.java;
  *
  * V obou případech použijte třídu Assertions pro kontrolu výsledků.
  *
+ * 4. výsledek pošlete pull-requestem zpátky na github pro oznámkování.
  */
 public class Zadani {
 }
