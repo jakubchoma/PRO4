@@ -1,11 +1,11 @@
 /**
  * 
  */
-package cz.spsmb.ctvrtak.c_spring_konfigurace.test.java.java;
+package cz.spsmb.ctvrtak.c_spring.a_config.test.java.java;
 
-import cz.spsmb.ctvrtak.c_spring_konfigurace.main.java.SearchEngine;
-import cz.spsmb.ctvrtak.c_spring_konfigurace.main.java.Type;
-import cz.spsmb.ctvrtak.c_spring_konfigurace.main.java.Doc;
+import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
+import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type;
+import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

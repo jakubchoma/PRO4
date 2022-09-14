@@ -1,13 +1,12 @@
 /**
  * 
  */
-package cz.spsmb.ctvrtak.c_spring_konfigurace.test.java.spring;
+package cz.spsmb.ctvrtak.c_spring.a_config.test.java.spring;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeAll;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import cz.spsmb.ctvrtak.c_spring_konfigurace.main.java.*;
+import cz.spsmb.ctvrtak.c_spring.a_config.main.java.*;
 
 import java.util.List;
 
