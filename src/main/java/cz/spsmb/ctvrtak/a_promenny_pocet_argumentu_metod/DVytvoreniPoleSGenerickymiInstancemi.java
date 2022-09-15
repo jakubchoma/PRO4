@@ -17,11 +17,11 @@ public class DVytvoreniPoleSGenerickymiInstancemi {
         var astr = arrayOf("raz", "dva", "tři");
         var abool = arrayOf(true, false, false);
         var alist = arrayOf(new ArrayList<Integer>(), new ArrayList<String>(), new ArrayList<Object>());
-
+        var ppole = arrayOf(new ArrayList<String>(), new ArrayList<String>());
         // U takto vytvořeného pole překladač nekontroluje typ přiřazované hodnoty. tj. následující kód vede k chybě
         // v runtime:
         Object[] oo = aint;
-        oo[0] = "NULA";
+        oo[0] = 3545;//"NULA";
     }
 
 }

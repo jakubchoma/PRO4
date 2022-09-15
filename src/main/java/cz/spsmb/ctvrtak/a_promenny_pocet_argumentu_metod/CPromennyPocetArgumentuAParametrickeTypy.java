@@ -19,7 +19,6 @@ public class CPromennyPocetArgumentuAParametrickeTypy {
         List<Integer> tmpList = Arrays.asList(42);
         array[0] = tmpList; //sémanticky špatně, překlad však proběhne bez problémů
         String s = stringLists[0].get(0); // Dostáváme CastClassException za běhu v silně typovaném jazyce !
-
     }
     public static void main(String[] args) {
         m(new ArrayList<String>(), new ArrayList<String>());

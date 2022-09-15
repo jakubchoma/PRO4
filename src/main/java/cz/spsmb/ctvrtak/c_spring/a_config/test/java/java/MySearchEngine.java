@@ -10,7 +10,10 @@ import java.util.List;
 public class MySearchEngine implements SearchEngine {
     @Override
     public List<Doc> findByType(Type documentType) {
-        return this.storage().stream().filter(doc -> doc.getType().getName().equals(documentType.getName())).toList();
+        return this.storage().stream().filter(
+                doc -> doc.getType().getName().equals(documentType.getName())
+        ).toList();
+
     }
 
     @Override

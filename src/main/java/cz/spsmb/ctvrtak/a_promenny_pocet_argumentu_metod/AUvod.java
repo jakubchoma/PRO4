@@ -22,6 +22,7 @@ public class AUvod {
         // může být i nulový počet argumentů
         variant("Nic");
         variant("pět", 1, 2, 3, 4, 5);
+        variant("cosi", 5, 6, 7);
         // mohu zadat i pole jako argumenty
         int[] a = {5, 4, 3, 2, 1};
         variant("dalsi", a);
