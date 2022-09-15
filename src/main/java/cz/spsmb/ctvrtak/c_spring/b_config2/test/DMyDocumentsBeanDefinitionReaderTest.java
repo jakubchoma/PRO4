@@ -3,9 +3,8 @@
  */
 package cz.spsmb.ctvrtak.c_spring.b_config2.test;
 
-
-
 import java.util.List;
+
 
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
@@ -14,28 +13,27 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.context.support.GenericGroovyApplicationContext;
 
 /**
  * @author Felipe Gutierrez
  *
  */
-public class MyDocumentsAnnotatedTest {
-	
+public class DMyDocumentsBeanDefinitionReaderTest {
+
 	private ApplicationContext context;
 	private SearchEngine engine;
 	private Type webType;
 	
 	@BeforeEach
 	public void setup(){
-		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-annotations-context.xml");	
+		context = new GenericGroovyApplicationContext("META-INF/spring/mydocuments.groovy");
 		engine = context.getBean(SearchEngine.class);
-		webType = context.getBean(Type.class);
+		webType = context.getBean("webType",Type.class);
 	}
 	
 	@Test
-	public void testWithAnnotationsFindByType() {	
+	public void testWithGroovyFindByType() {	
 		List<Doc> documents = engine.findByType(webType);
 		Assertions.assertNotNull(documents);
 		Assertions.assertTrue(documents.size() == 1);
@@ -45,9 +43,10 @@ public class MyDocumentsAnnotatedTest {
 	}
 
 	@Test
-	public void testWithAnnotationsListAll() {		
+	public void testWithGroovyListAll() {		
 		List<Doc> documents = engine.listAll();
 		Assertions.assertNotNull(documents);
 		Assertions.assertTrue(documents.size() == 4);
 	}
+
 }

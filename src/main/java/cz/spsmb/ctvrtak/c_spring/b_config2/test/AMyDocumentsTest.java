@@ -3,8 +3,8 @@
  */
 package cz.spsmb.ctvrtak.c_spring.b_config2.test;
 
-
 import java.util.List;
+
 
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
@@ -12,27 +12,28 @@ import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+
 /**
  * @author Felipe Gutierrez
  *
  */
-public class MyDocumentsBeanConfigurationTest {
+public class AMyDocumentsTest {
 
-	private ApplicationContext context;
+	private ClassPathXmlApplicationContext context;
 	private SearchEngine engine;
 	private Type webType;
-	
+
 	@BeforeEach
 	public void setup(){
-		context = new AnnotationConfigApplicationContext(MyDocumentsContext.class);
+		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-context.xml");
 		engine = context.getBean(SearchEngine.class);
-		webType = context.getBean(Type.class);
+		webType = context.getBean("webType",Type.class);
 	}
 	
 	@Test
-	public void testWithBeanConfigurationFindByType() {	
+	public void testWithSpringFindByType() {	
 		List<Doc> documents = engine.findByType(webType);
 		Assertions.assertNotNull(documents);
 		Assertions.assertTrue(documents.size() == 1);
@@ -42,7 +43,7 @@ public class MyDocumentsBeanConfigurationTest {
 	}
 
 	@Test
-	public void testWithBeanConfigurationListAll() {		
+	public void testWithSpringListAll() {		
 		List<Doc> documents = engine.listAll();
 		Assertions.assertNotNull(documents);
 		Assertions.assertTrue(documents.size() == 4);
