@@ -38,7 +38,7 @@ public class MyDocumentsTest {
 	public void testListAll() {		
 		List<Doc> documents = engine.listAll();
 		Assertions.assertNotNull(documents);
-		Assertions.assertTrue(documents.size() == 4);
+		Assertions.assertEquals(4, documents.size());
 	}
 
 }
