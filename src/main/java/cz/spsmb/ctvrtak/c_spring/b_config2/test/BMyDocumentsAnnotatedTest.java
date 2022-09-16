@@ -29,7 +29,7 @@ public class BMyDocumentsAnnotatedTest {
 	
 	@BeforeEach
 	public void setup(){
-		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-annotations-context.xml");	
+		context = new ClassPathXmlApplicationContext("mydocuments-annotations-context.xml");
 		engine = context.getBean(SearchEngine.class);
 		webType = context.getBean(Type.class);
 	}
