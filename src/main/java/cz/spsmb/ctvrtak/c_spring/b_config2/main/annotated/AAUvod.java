@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
  *         annotation = Component.class
  *     )
  * a používají se výhradně k označení třídy:
- * @Component   - značkovací anotace, používá se k označení třídy, která je pro framework Spring tak označena
+ * @Component   - značkovací anotace, slouží  k označení místa definic beanů pro Spring kontejner.
+ *                Lze také  použít k označení třídy, která je pro framework Spring tak označena
  *                jako komponenta. Pomocí metody getBean tak můžeme získat  instanci tédo třídy.
  * @Repository  - specializace anotace @Component, která pomocí parametru value označuje název objektu přístupu k datům
  *                (DAO - Data Access Object).

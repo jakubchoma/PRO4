@@ -16,7 +16,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 /**
  * @author Felipe Gutierrez
- *
+ * Java bean konfigurace Springu
+ *				- v dnešní době nejvíce preferovaný způsob konfigurace.
+ *				  Dostupné od Spring v 3.0.
  */
 public class CMyDocumentsBeanConfigurationTest {
 

@@ -17,6 +17,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author Felipe Gutierrez
+ * Spring XML konfigurace
+ * 		- Dobře čitelné, můžeme rozšiřovat, lze pro přehlednost i rozdělit do vícero souborů.
  *
  */
 public class AMyDocumentsTest {

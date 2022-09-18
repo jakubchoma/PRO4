@@ -18,6 +18,9 @@ import org.springframework.context.support.GenericGroovyApplicationContext;
 /**
  * @author Felipe Gutierrez
  *
+ * Konfigurace Springu pomocí pogramovacího jazyka Groovy
+ * 				- oproti Java beans konfigurace je Groovy jednodušší. Ve springu dostupné od v 4.0.
+ * 			-
  */
 public class DMyDocumentsBeanDefinitionReaderTest {
 
