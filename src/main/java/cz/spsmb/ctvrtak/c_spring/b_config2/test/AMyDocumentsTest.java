@@ -30,7 +30,7 @@ public class AMyDocumentsTest {
 	@BeforeEach
 	public void setup(){
 		context = new ClassPathXmlApplicationContext("mydocuments-context.xml");
-		engine = context.getBean(SearchEngine.class);
+		engine = context.getBean("engine", SearchEngine.class);
 		webType = context.getBean("webType",Type.class);
 	}
 	
@@ -38,7 +38,7 @@ public class AMyDocumentsTest {
 	public void testWithSpringFindByType() {	
 		List<Doc> documents = engine.findByType(webType);
 		Assertions.assertNotNull(documents);
-		Assertions.assertTrue(documents.size() == 1);
+		Assertions.assertEquals(1, documents.size());
 		Assertions.assertEquals(webType.getName(),documents.get(0).getType().getName());
 		Assertions.assertEquals(webType.getDesc(),documents.get(0).getType().getDesc());
 		Assertions.assertEquals(webType.getExtension(),documents.get(0).getType().getExtension());
