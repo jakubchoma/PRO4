@@ -31,7 +31,7 @@ public class BMyDocumentsAnnotatedTest {
 	@BeforeEach
 	public void setup(){
 		context = new ClassPathXmlApplicationContext("mydocuments-annotations-context.xml");
-		engine = context.getBean(SearchEngine.class);
+		engine = context.getBean("engine", SearchEngine.class);
 		webType = context.getBean(Type.class);
 	}
 	

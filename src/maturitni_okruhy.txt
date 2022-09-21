@@ -1,0 +1,151 @@
+Maturitní okruhy PRO 2022/2023
+1. Algoritmizace a programování
+1.1. Algoritmus a jeho základní vlastnosti
+1.2. Zápisy algoritmu
+1.3. Programovací jazyky vyšší a nižší
+1.4. Programovací jazyky interpretované a kompilované
+
+2. Vývojové prostředí a obecná znalost
+2.1. Vývojové prostředí IntelliJ IDEA
+2.2. Zařazení jazyka Java do programovacích jazyků
+2.3. JDK, JRE, JVM, JIT
+
+3. Rozdíly mezi Javou a JavaScriptem
+3.1. Zařazení jazyka Java do programovacích jazyků
+3.2. Zařazení jazyka JavaScript do programovacích jazyků
+3.3. Vytváření proměnných
+3.4. Výstup do konzole
+3.5. Rozdíl mezi var v Javě a v JavaScriptu
+3.6. Vytváření funkcí/metod
+
+4. Proměnné a paměťové oblasti
+4.1. Definice proměnné
+4.2. Druhy proměnných
+4.3. Deklarace a inicializace
+4.4. Přetypování, casting, parsování
+4.5. Konvence
+4.6. Stack a Heap
+
+5. Operátory
+5.1. Aritmetické
+5.2. Relační
+5.3. Logické
+5.4. Bitové
+5.5. Operátory přiřazení
+5.6. Ternární operátor
+
+6. Podmíněné větvení
+6.1. Podstata podmíněného větvení
+6.2. Příkazy pro větvení
+6.3. Starý a nový zápis příkazu switch
+6.4. Ternární operátor
+
+7. Cykly
+7.1. Definice cyklů
+7.2. Příkazy pro cyklení
+7.3. break, continue
+7.4. Cykly a label
+
+8. Pole
+8.1. Definice pole
+8.2. Jednorozměrné a dvourozměrné pole
+8.3. Index
+8.4. Zjištění délky pole
+8.5. Procházení pole
+8.6. Třída Arrays
+
+9. OOP
+9.1. Pojem OOP
+9.2. Vlastnosti OOP
+9.3. Třída a její instance
+9.4. Modifikátory
+9.5. static
+9.6. extends
+9.7. final
+9.8. this, super
+
+10. Interface a anotace
+10.1. Definice rozhraní
+
+10.2. Rozdíl mezi rozhraním a abstraktní třídou
+10.3. implements, extends
+10.4. Marker interface
+10.5. Anotace
+11. Enum
+11.1. Definice výčtového typu
+11.2. Atributy a metody
+11.3. Enum s interfacem
+
+12. Návrhové vzory
+12.1. MVC
+12.2. Singleton
+12.3. Factory
+12.4. Builder
+
+13. Datum a čas
+13.1. Získání současného data a času
+13.2. Formátování
+14. Práce se soubory
+14.1. Vytvoření souboru
+14.2. Čtení a zápis
+14.3. Struktura souborů .csv a .json
+14.4. Třída FileChooser
+
+15. Kolekce
+15.1. Definice kolekce
+15.2. Obecné a neobecné kolekce
+15.3. ArrayList, LinkedList, HashMap, HashSet, Queue, Stack
+
+16. Výjimky a ladění
+16.1. try, catch
+16.2. Typy výjimek
+16.3. Vlastní výjimka
+16.4. Debugger
+
+17. Komentáře, konvence
+17.1. Typy komentářů
+17.2. JavaDoc
+17.3. Konvence pro psaní názvů proměnných, tříd a konstant
+
+18. JavaFX
+18.1. Struktura okna
+18.2. Struktura JavaFX aplikace
+18.3. Scene Builder
+18.4. JavaFX komponenty
+
+19. Vstupy
+19.1. Scanner
+19.2. KeyEvent
+19.3. MouseEvent
+19.4. ActionEvent
+19.5. Ovládací komponenty
+
+20. Práce s grafikou
+20.1. Canvas
+20.2. Třída Shape
+
+21. Animace
+21.1. Timeline
+21.2. AnimationTimer
+22. Práce s databází
+22.1. Vytvoření databáze
+22.2. Napojení databáze
+22.3. CRUD
+
+23. Základy 2D her
+23.1. Renderování
+23.2. Pohyb postavy přes WASD
+23.3. Kolize
+23.4. Výpočet obdélníkové kolize
+
+24. Build systémy
+24.1. Vytvoření aplikace s build systémem
+24.2. Struktura aplikace
+24.3. Přidání knihoven
+24.4. Vytvoření JavaFX aplikace a její export
+
+25. Vlákna
+25.1. Definice vlákna
+25.2. Životní cyklus
+25.3. Thread
+25.4. Runnable

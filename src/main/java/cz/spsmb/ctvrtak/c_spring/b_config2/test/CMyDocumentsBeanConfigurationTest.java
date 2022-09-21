@@ -29,8 +29,8 @@ public class CMyDocumentsBeanConfigurationTest {
 	@BeforeEach
 	public void setup(){
 		context = new AnnotationConfigApplicationContext(MyDocumentsContext.class);
-		engine = context.getBean(SearchEngine.class);
-		webType = context.getBean(Type.class);
+		engine = context.getBean("engine", SearchEngine.class);
+		webType = context.getBean("webType", Type.class);
 	}
 	
 	@Test

@@ -31,7 +31,7 @@ public class AMyDocumentsTest {
 	public void setup(){
 		context = new ClassPathXmlApplicationContext("mydocuments-context.xml");
 		engine = context.getBean("engine", SearchEngine.class);
-		webType = context.getBean("webType",Type.class);
+		webType = context.getBean("testWebType",Type.class);
 	}
 	
 	@Test
