@@ -23,6 +23,7 @@ public class EMyDocumentsI18nTest {
 	
 	@BeforeEach
 	public void setup(){
+		System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "Debug");
 		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-i18n-context.xml");
 	}
 	
