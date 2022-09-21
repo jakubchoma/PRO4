@@ -17,13 +17,16 @@ import org.springframework.core.io.Resource;
 /**
  * @author Felipe Gutierrez
  *
+ * Jednoduché načtení souboru z resources pomocí metody getResource(String location). Zde menu.txt
+ *
  */
-public class MyDocumentsTest {
-	private static final Logger log = LoggerFactory.getLogger(MyDocumentsTest.class);
+public class AMyDocumentsTest {
+	private static final Logger log = LoggerFactory.getLogger(AMyDocumentsTest.class);
 	private ClassPathXmlApplicationContext context;
 	
 	@BeforeEach
 	public void setup(){
+		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
 		context = new ClassPathXmlApplicationContext("spring/mydocuments-context.xml");
 	}
 	
