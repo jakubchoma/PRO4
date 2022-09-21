@@ -27,7 +27,7 @@ public class AMyDocumentsTest {
 	@BeforeEach
 	public void setup(){
 		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
-		context = new ClassPathXmlApplicationContext("spring/mydocuments-context.xml");
+		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-context.xml");
 	}
 	
 	@Test

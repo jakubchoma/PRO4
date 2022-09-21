@@ -18,7 +18,8 @@ public class CMyDocumentsWithResourceLoaderInjectionTest {
 
     @BeforeEach
     public void setup(){
-        context = new ClassPathXmlApplicationContext("spring/mydocuments-resourceloader-injection-context.xml");
+        System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
+        context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-resourceloader-injection-context.xml");
     }
 
     @Test
@@ -26,6 +27,6 @@ public class CMyDocumentsWithResourceLoaderInjectionTest {
         log.debug("Calling the Menu as Resourceloader Injection:");
         ResourceLoaderMenu menu = context.getBean(ResourceLoaderMenu.class);
         Assertions.assertNotNull(menu);
-        menu.printMenu("classpath:data/menu.txt");
+        menu.printMenu("classpath:META-INF/data/menu.txt");
     }
 }

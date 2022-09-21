@@ -27,7 +27,8 @@ public class BMyDocumentsWithResourceInjectionTest {
 	
 	@BeforeEach
 	public void setup(){
-		context = new ClassPathXmlApplicationContext("spring/mydocuments-resource-injection-context.xml");
+		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
+		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-resource-injection-context.xml");
 	}
 	
 	@Test

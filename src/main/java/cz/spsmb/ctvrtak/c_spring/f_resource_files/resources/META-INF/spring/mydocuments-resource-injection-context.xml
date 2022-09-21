@@ -8,7 +8,7 @@
     <property name="menuFile" value="url:http://localhost/~fgutierrezcru/menu.txt"/>
     <property name="menuFile" value="file:/Users/<username>/Sites/menu.txt"/>
     -->
-    <property name="menuFile" value="classpath:data/menu.txt"/>
+    <property name="menuFile" value="classpath:META-INF/data/menu.txt"/>
     
   </bean>
 
