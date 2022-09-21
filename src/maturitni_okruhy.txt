@@ -66,11 +66,11 @@ Maturitní okruhy PRO 2022/2023
 
 10. Interface a anotace
 10.1. Definice rozhraní
-
 10.2. Rozdíl mezi rozhraním a abstraktní třídou
 10.3. implements, extends
 10.4. Marker interface
 10.5. Anotace
+
 11. Enum
 11.1. Definice výčtového typu
 11.2. Atributy a metody
@@ -85,6 +85,7 @@ Maturitní okruhy PRO 2022/2023
 13. Datum a čas
 13.1. Získání současného data a času
 13.2. Formátování
+
 14. Práce se soubory
 14.1. Vytvoření souboru
 14.2. Čtení a zápis
