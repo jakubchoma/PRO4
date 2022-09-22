@@ -6,7 +6,7 @@
     <!-- resource bundle - property soubor má před podtržítkem stejné jméno. Dál se liší - tak
     vznikne "bundle"-->
   <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basename" value="classpath:META-INF/data/dictionary"/>
+    <property name="basename" value="META-INF/data/dictionary"/>
   </bean>
 
   <bean id="engine" class="cz.spsmb.ctvrtak.c_spring.e_collections.main.service.SearchEngineService">
