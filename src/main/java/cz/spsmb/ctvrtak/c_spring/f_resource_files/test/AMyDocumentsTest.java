@@ -35,7 +35,7 @@ public class AMyDocumentsTest {
 		log.debug("About to read the Resource file: menu.txt ");
 		//Resource resource = context.getResource("url:http://localhost/~username/menu.txt");
 		//Resource resource = context.getResource("file:/Users/username/Sites/menu.txt");
-		Resource resource = context.getResource("classpath:data/menu.txt");
+		Resource resource = context.getResource("classpath:META-INF/data/menu.txt");
 		
 		try{
 			InputStream stream = resource.getInputStream();

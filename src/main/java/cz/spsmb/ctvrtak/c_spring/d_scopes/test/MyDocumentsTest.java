@@ -51,5 +51,18 @@ public class MyDocumentsTest {
 		Assertions.assertTrue(documents.size() == 4);
 	}
 
+	@Test
+	public void testIsPrototype() {
+		SearchEngine se1 = context.getBean(SearchEngine.class);
+		SearchEngine se2 = context.getBean(SearchEngine.class);
+		Assertions.assertNotEquals(se1, se2);
+	}
+
+	@Test
+	public void testIsSingleton() {
+		SearchEngine se1 = context.getBean(SearchEngine.class);
+		SearchEngine se2 = context.getBean(SearchEngine.class);
+		Assertions.assertEquals(se1, se2);
+	}
 
 }
