@@ -43,19 +43,19 @@ beans {
 		location = "http://www.apress.com/9781430248187"
 	}
 	
-	webType(com.apress.isf.java.model.Type){
+	webType(cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type){
 		name = "WEB"
 		desc = "Web Link"
 		extension = ".url"
 	}
 	
-	pdfType(com.apress.isf.java.model.Type){
+	pdfType(cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type){
 		name = "PDF"
 		desc = "Portable Document Format"
 		extension = ".url"
 	}
 	
-	noteType(com.apress.isf.java.model.Type){
+	noteType(cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type){
 		name = "NOTE"
 		desc = "Text Notes"
 		extension = ".txt"
