@@ -3,37 +3,38 @@
  */
 package cz.spsmb.ctvrtak.c_spring.e_collections.test;
 
-
-import java.util.List;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type;
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
 
+import java.util.List;
+
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 /**
  * @author Felipe Gutierrez
- *
+ * gradle -Dtest.single=MyDocumentsBeanConfigurationTest test
  */
-public class MyDocumentsTest {
+public class BMyDocumentsBeanConfigurationTest {
 
-	private ClassPathXmlApplicationContext context;
+	private ApplicationContext context;
 	private SearchEngine engine;
 	private Type webType;
 	
 	@BeforeEach
 	public void setup(){
-		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
-		context = new ClassPathXmlApplicationContext("mydocuments-context.xml");
+		context = new AnnotationConfigApplicationContext(MyDocumentsContext.class);	
 	}
 	
 	@Test
-	public void testAll() {	
+	public void testWithBeanConfigurationAll() {	
 		engine = context.getBean(SearchEngine.class);
-		webType = context.getBean("webType",Type.class);
+		webType = context.getBean(Type.class);
 		
 		List<Doc> documents = engine.findByType(webType);
 		Assertions.assertNotNull(documents);
@@ -41,11 +42,12 @@ public class MyDocumentsTest {
 		Assertions.assertEquals(webType.getName(),documents.get(0).getType().getName());
 		Assertions.assertEquals(webType.getDesc(),documents.get(0).getType().getDesc());
 		Assertions.assertEquals(webType.getExtension(),documents.get(0).getType().getExtension());
-		
+	
 		engine = context.getBean(SearchEngine.class);
 		
 		documents = engine.listAll();
 		Assertions.assertNotNull(documents);
 		Assertions.assertTrue(documents.size() == 4);
 	}
+
 }
