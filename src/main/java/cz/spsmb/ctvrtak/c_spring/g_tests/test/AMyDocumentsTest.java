@@ -8,10 +8,12 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 //import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
@@ -25,6 +27,8 @@ import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
  */
 // junit 5 toto nevyžaduje
 //@RunWith(SpringJUnit4ClassRunner.class)
+// zato vyžaduje toto:
+@ExtendWith(SpringExtension.class)
 /***
  * Anotace @ContextConfiguration je součástí balíčku org.springframework.test.context. Je dobrá k
  * rychlému načtení beanů do Spring kontrjneru pomocí zadaného konfiguračního xml. Zde
