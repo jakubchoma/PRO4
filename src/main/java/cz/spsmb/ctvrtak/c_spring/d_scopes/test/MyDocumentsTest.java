@@ -26,7 +26,7 @@ public class MyDocumentsTest {
 
 	@BeforeEach
 	public void setup(){
-		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
+		//System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
 		context = new ClassPathXmlApplicationContext("mydocuments-context.xml");
 	}
 	
