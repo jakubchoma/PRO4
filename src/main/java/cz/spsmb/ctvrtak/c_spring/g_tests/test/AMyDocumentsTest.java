@@ -36,6 +36,10 @@ import cz.spsmb.ctvrtak.c_spring.a_config.main.java.SearchEngine;
  * */
 @ContextConfiguration("classpath:META-INF/spring/mydocuments-context.xml")
 public class AMyDocumentsTest {
+	static {
+		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
+	}
+
 	private static final Logger log = LoggerFactory.getLogger(AMyDocumentsTest.class);
 	
 	@Autowired
@@ -45,7 +49,6 @@ public class AMyDocumentsTest {
 	
 	@Test
 	public void testUsingSpringTest() {
-		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
 		log.debug("Using Spring Test fixtures:");
 		Assertions.assertNotNull(engine);
 		List<Doc> documents = engine.findByType(webType);

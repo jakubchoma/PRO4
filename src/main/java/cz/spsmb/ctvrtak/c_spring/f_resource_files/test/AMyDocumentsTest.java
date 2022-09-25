@@ -21,12 +21,14 @@ import org.springframework.core.io.Resource;
  *
  */
 public class AMyDocumentsTest {
+	static {
+		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
+	}
 	private static final Logger log = LoggerFactory.getLogger(AMyDocumentsTest.class);
 	private ClassPathXmlApplicationContext context;
 	
 	@BeforeEach
 	public void setup(){
-		System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Debug");
 		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-context.xml");
 	}
 	
