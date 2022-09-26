@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-  <bean id="engine" class="com.apress.isf.spring.service.SearchEngineService">
+  <bean id="engine" class="cz.spsmb.ctvrtak.c_spring.e_collections.main.service.SearchEngineService">
 		<property name="documentDAO" ref="documentDAO" />
 	</bean>
 
-	<bean id="documentDAO" class="com.apress.isf.spring.data.DocumentRepository">
+	<bean id="documentDAO" class="cz.spsmb.ctvrtak.c_spring.e_collections.main.data.DocumentRepository">
 		<property name="documents">
 			<list>
 				<ref bean="doc1" />
@@ -19,7 +19,7 @@
 		</property>
 	</bean>
 
-	<bean id="typeDAO" class="com.apress.isf.spring.data.TypeDataRepository">
+	<bean id="typeDAO" class="cz.spsmb.ctvrtak.c_spring.e_collections.main.data.TypeDataRepository">
 		<property name="types">
 			<map>
 				<entry key="webType" value-ref="webType" />
@@ -29,17 +29,17 @@
 		</property>
 	</bean>
 
-	<bean id="doc1" class="com.apress.isf.java.model.Document">
+	<bean id="doc1" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc">
 		<property name="name" value="Book Template" />
 		<property name="type" ref="pdfType" />
 		<property name="location"
 			value="/Users/felipeg/Documents/Random/Book Template.pdf" />
 	</bean>
 
-	<bean id="doc2" class="com.apress.isf.java.model.Document">
+	<bean id="doc2" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc">
 		<property name="name" value="Sample Contract" />
 		<property name="type">
-			<bean id="pdfType" class="com.apress.isf.java.model.Type">
+			<bean id="pdfType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
 				<property name="name" value="PDF" />
 				<property name="desc" value="Portable Document Format" />
 				<property name="extension" value=".pdf" />
@@ -49,32 +49,32 @@
 			value="/Users/felipeg/Documents/Contracts/Sample Contract.pdf" />
 	</bean>
 
-	<bean id="doc3" class="com.apress.isf.java.model.Document">
+	<bean id="doc3" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc">
 		<property name="name" value="Clustering with RabbitMQ" />
 		<property name="type" ref="noteType" />
 		<property name="location"
 			value="/Users/felipeg/Documents/Random/Clustering with RabbitMQ.txt" />
 	</bean>
 
-	<bean id="doc4" class="com.apress.isf.java.model.Document">
+	<bean id="doc4" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc">
 		<property name="name" value="Pro Spring Security Book" />
 		<property name="type" ref="webType" />
 		<property name="location" value="http://www.apress.com/9781430248187" />
 	</bean>
 
-	<bean id="webType" class="com.apress.isf.java.model.Type">
+	<bean id="webType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
 		<property name="name" value="WEB" />
 		<property name="desc" value="Web Link" />
 		<property name="extension" value=".url" />
 	</bean>
 
-	<bean id="pdfType" class="com.apress.isf.java.model.Type">
+	<bean id="pdfType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
 		<property name="name" value="PDF" />
 		<property name="desc" value="Portable Document Format" />
 		<property name="extension" value=".pdf" />
 	</bean>
 
-	<bean id="noteType" class="com.apress.isf.java.model.Type">
+	<bean id="noteType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
 		<property name="name" value="NOTE" />
 		<property name="desc" value="Text Notes" />
 		<property name="extension" value=".txt" />
