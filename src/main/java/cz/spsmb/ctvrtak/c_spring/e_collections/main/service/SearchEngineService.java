@@ -40,8 +40,7 @@ public class SearchEngineService implements SearchEngine {
 		this.documentDAO = documentDAO;
 	}
 
-	public List<Doc
-			> findByType(Type documentType) {
+	public List<Doc> findByType(Type documentType) {
 		if(log.isDebugEnabled())
 			log.debug("Start <findByType> Params: " + documentType);
 		
