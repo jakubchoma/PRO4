@@ -56,6 +56,7 @@ public class AMyDocumentsTest {
 	public void testUsingSpringTest() {
 
 		log.debug("Using Spring Test fixtures:");
+		log.info("info...");
 		Assertions.assertNotNull(engine);
 		List<Doc> documents = engine.findByType(webType);
 		Assertions.assertNotNull(documents);
