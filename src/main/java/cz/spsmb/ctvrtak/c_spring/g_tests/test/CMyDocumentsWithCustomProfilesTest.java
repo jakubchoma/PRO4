@@ -27,6 +27,8 @@ import cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc;
  */
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("classpath:META-INF/spring/mydocuments-custom-profiles-context.xml")
+// Zdroj profilů. Pokud odebereme, vlastnosti se získají z System.getProperty(propertyKey), tj. z proměnných
+// prostředí OS
 @ProfileValueSourceConfiguration(CustomProfile.class)
 public class CMyDocumentsWithCustomProfilesTest {
 	private static final Logger log = LoggerFactory.getLogger(CMyDocumentsWithCustomProfilesTest.class);
