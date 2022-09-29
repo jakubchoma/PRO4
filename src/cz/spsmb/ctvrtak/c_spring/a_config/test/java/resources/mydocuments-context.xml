@@ -22,9 +22,9 @@ destroy-method
 lazy-init
 
 -->
-    <bean id="engine" class="MySearchEngine" />
+    <bean id="engine" class="cz.spsmb.ctvrtak.c_spring.a_config.test.java.java.MySearchEngine" />
 
-    <bean id="documentType" class="Type">
+    <bean id="documentType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
         <property name="name" value="WEB" />
         <property name="desc" value="Web Link" />
         <property name="extension" value=".url" />

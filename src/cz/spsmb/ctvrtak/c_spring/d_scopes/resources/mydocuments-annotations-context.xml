@@ -7,7 +7,7 @@
 
   <context:component-scan base-package="cz.spsmb.ctvrtak.c_spring.d_scopes.main.service"/>
   
-  <bean id="webType" class="Type">
+  <bean id="webType" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Type">
     <property name="name" value="WEB" />  
     <property name="desc" value="Web Link" /> 
     <property name="extension" value=".url" />        
