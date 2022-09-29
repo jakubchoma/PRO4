@@ -15,11 +15,11 @@
     <property name="password" value="${jdbc.password}"/>
   </bean>
  
-  <bean id="engine" class="SearchEngineService">
+  <bean id="engine" class="cz.spsmb.ctvrtak.c_spring.i_db1.main.spring.service.SearchEngineService">
       <property name="documentDAO" ref="documentDAO"/>
   </bean>
     
-  <bean id="documentDAO" class="DocumentRepository" init-method="initialize">
+  <bean id="documentDAO" class="cz.spsmb.ctvrtak.c_spring.i_db1.main.spring.data.DocumentRepository" init-method="initialize">
       <property name="dataSource" ref="dataSource"/>
       <property name="schema" value="classpath:META-INF/data/schema.sql"/>
       <property name="data" value="classpath:META-INF/data/data.sql"/>
@@ -33,7 +33,7 @@
       </property>
   </bean>
     
-  <bean id="typeDAO" class="TypeDataRepository">
+  <bean id="typeDAO" class="cz.spsmb.ctvrtak.c_spring.i_db1.main.spring.data.TypeDataRepository">
       
   </bean>
   

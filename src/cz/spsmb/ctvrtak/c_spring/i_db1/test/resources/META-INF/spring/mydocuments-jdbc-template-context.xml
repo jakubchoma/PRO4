@@ -12,11 +12,11 @@
       <jdbc:script location="classpath:META-INF/data/data.sql"/>
   </jdbc:embedded-database>
   
-   <bean id="engine" class="SearchEngineService">
+   <bean id="engine" class="cz.spsmb.ctvrtak.c_spring.i_db1.main.spring.service.SearchEngineService">
       <property name="documentDAO" ref="documentDAO"/>
   </bean>
   
-   <bean id="documentDAO" class="DocumentJdbcTemplateRepository">
+   <bean id="documentDAO" class="cz.spsmb.ctvrtak.c_spring.i_db1.main.spring.jdbc.DocumentJdbcTemplateRepository">
       <property name="dataSource" ref="dataSource"/>
        <property name="query">
         <value>
