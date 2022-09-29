@@ -43,7 +43,7 @@ public class MyDocumentsTest {
 		log.debug("Testing Email...");
 		Assertions.assertNotNull(email);
 		long start = new Date().getTime();
-		email.send("Pavel.Pstros@seznam.cz", "stemberk@spsmb.cz", "Hello World1!", "Hello There!!");
+		email.send("ahoj@seznam.cz", "stemberk@spsmb.cz", "Hello World1!", "Hello There!!");
 		long end = new Date().getTime();
 		long time = (end - start)/1000;
 		log.debug("Sending email done. Took: " + time + " seconds.");
@@ -55,7 +55,7 @@ public class MyDocumentsTest {
 		log.debug("Testing Async Email...");
 		Assertions.assertNotNull(email);
 		long start = new Date().getTime();
-		email.sendAsync("Pavel.Pstros@seznam.cz", "stemberk@spsmb.cz", "Hello World Async, 2. pokus!", "Hello There!!");
+		email.sendAsync("ahoj@seznam.cz", "stemberk@spsmb.cz", "Hello World Async, 2. pokus!", "Hello There!!");
 		long end = new Date().getTime();
 		long time = (end - start)/1000;
 		log.debug("Sending Async email done. Took: " + time + " seconds.");
