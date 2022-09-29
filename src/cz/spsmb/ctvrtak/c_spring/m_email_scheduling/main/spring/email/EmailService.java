@@ -26,7 +26,6 @@ public class EmailService {
 	@Autowired
 	private MailSender mailSender;
 
-	@Async
 	public void send(String from, String to, String subject, String message) {
 		sendEmail(from,to,subject,message);
 	}
