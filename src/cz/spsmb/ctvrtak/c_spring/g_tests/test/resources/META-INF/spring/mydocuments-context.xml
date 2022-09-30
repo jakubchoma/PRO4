@@ -18,7 +18,7 @@
      </property>
   </bean>
     
-  <bean id="typeDAO" class="TypeDataRepository">
+  <bean id="typeDAO" class="cz.spsmb.ctvrtak.c_spring.e_collections.main.data.TypeDataRepository">
       <property name="types">
           <map>
               <entry key="webType" value-ref="webType"/>
