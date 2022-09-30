@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="menu" class="Menu">
+  <bean id="menu" class="cz.spsmb.ctvrtak.c_spring.f_resource_files.main.views.Menu">
     <!-- 
     <property name="menuFile" value="url:http://localhost/~fgutierrezcru/menu.txt"/>
     <property name="menuFile" value="file:/Users/<username>/Sites/menu.txt"/>
