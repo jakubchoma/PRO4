@@ -29,7 +29,7 @@ public class AMyDocumentsTest {
 	
 	@BeforeEach
 	public void setup(){
-		context = new ClassPathXmlApplicationContext("cz/spsmb/ctvrtak/c_spring/m_email_scheduling/test/resources/META-INF/spring/mydocuments-context.xml");
+		context = new ClassPathXmlApplicationContext("META-INF/spring/mydocuments-context.xml");
 	}
 	
 	@Test

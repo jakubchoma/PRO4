@@ -28,7 +28,7 @@
       </property>
   </bean>
   
-  <bean id="doc1" class="Doc">
+  <bean id="doc1" class="cz.spsmb.ctvrtak.c_spring.a_config.main.java.Doc">
       <property name="name" value="Book Template"/> 
       <property name="type" ref="pdfType"/> 
       <property name="location" value="/Users/felipeg/Documents/Random/Book Template.pdf"/>     
