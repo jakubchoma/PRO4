@@ -10,7 +10,7 @@
     <property name="location" value="classpath:META-INF/data/env_dev.properties"/>
   </bean>
   
-  <bean id="login" class="LoginService">
+  <bean id="login" class="cz.spsmb.ctvrtak.c_spring.f_resource_files.main.service.LoginService">
     <property name="username" value="${user.email}"/>
     <property name="password" value="${user.pass}"/>
   </bean>
