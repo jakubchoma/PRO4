@@ -128,6 +128,7 @@ Maturitní okruhy PRO 2022/2023
 21. Animace
 21.1. Timeline
 21.2. AnimationTimer
+
 22. Práce s databází
 22.1. Vytvoření databáze
 22.2. Napojení databáze
