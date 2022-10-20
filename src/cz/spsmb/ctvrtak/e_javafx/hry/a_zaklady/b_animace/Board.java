@@ -41,7 +41,6 @@ public class Board extends javafx.animation.AnimationTimer {
         y += 1;
 
         if (y > B_HEIGHT) {
-
             y = INITIAL_Y;
             x = INITIAL_X;
         }
