@@ -14,17 +14,10 @@ public class MovingSpriteEx extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("Moving sprite");
         Board b = new Board();
-        //setSize(400, 300);
         Pane root = new Pane(b.getCanvas());
-        //root.getChildren().add(b.getCanvas());
         Scene scene = new Scene(root);
+        // Důležité, bez vyžádaného focusu nebudou klávesy reagovat
         b.getCanvas().requestFocus();
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                int i;
-            }
-        });
         stage.setScene(scene);
         stage.show();
     }
