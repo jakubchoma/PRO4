@@ -62,6 +62,10 @@ public class Board extends javafx.animation.AnimationTimer {
     }
     private void drawStar() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeRect(this.x-1, this.y-1, star.getWidth()+2, star.getHeight()+2);
+
         gc.drawImage(star, x, y);
         gc.setLineWidth(2);
         gc.setStroke(Color.BLACK);

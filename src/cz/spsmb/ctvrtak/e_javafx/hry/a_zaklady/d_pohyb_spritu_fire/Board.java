@@ -1,4 +1,4 @@
-package cz.spsmb.ctvrtak.e_javafx.hry.a_zaklady.c_pohyb_spritu;
+package cz.spsmb.ctvrtak.e_javafx.hry.a_zaklady.d_pohyb_spritu_fire;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -7,8 +7,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+import java.util.List;
+
 
 public class Board extends AnimationTimer {
+    private final int ICRAFT_X = 40;
+    private final int ICRAFT_Y = 60;
     private SpaceShip spaceShip;
     private Canvas canvas;
     //private final int DELAY = 10;
@@ -40,7 +44,7 @@ public class Board extends AnimationTimer {
         //setBackground(Color.black);
         //setFocusable(true);
 
-        spaceShip = new SpaceShip();
+        spaceShip = new SpaceShip(ICRAFT_X, ICRAFT_Y);
 
         //timer = new Timer(DELAY, this);
         this.start();
@@ -55,14 +59,41 @@ public class Board extends AnimationTimer {
     }
 
     private void step() {
-        spaceShip.move();
+        this.updateMissiles();
+        this.updateSpaceShip();
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.setStroke(Color.BLACK);
         gc.setLineWidth(6);
         gc.strokeRect(spaceShip.getX()-3, spaceShip.getY()-3, spaceShip.getImage().getWidth()+6, spaceShip.getImage().getHeight()+6);
         gc.drawImage(spaceShip.getImage(), spaceShip.getX(), spaceShip.getY());
+
+        List<Missile> missiles = spaceShip.getMissiles();
+
+        for (Missile missile : missiles) {
+            gc.setStroke(Color.BLACK);
+            gc.setLineWidth(3);
+            gc.strokeLine(missile.getX()-3, missile.getY(), missile.getX()-3, missile.getY()+missile.height);
+            gc.drawImage(missile.getImage(), missile.getX(),
+                    missile.getY());
+        }
         //repaint(spaceShip.getX()-1, spaceShip.getY()-1,
         //        spaceShip.getWidth()+2, spaceShip.getHeight()+2);
+    }
+
+    private void updateMissiles() {
+        List<Missile> missiles = spaceShip.getMissiles();
+        for (int i = 0; i < missiles.size(); i++) {
+            Missile missile = missiles.get(i);
+            if (missile.isVisible()) {
+                missile.move();
+            } else {
+                missiles.remove(i);
+            }
+        }
+    }
+
+    private void updateSpaceShip() {
+        spaceShip.move();
     }
 /*
     private class TAdapter extends KeyAdapter {
