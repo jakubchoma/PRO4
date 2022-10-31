@@ -22,6 +22,8 @@ public class JavaFXTimerEx extends Application {
         root.getChildren().add(b.getCanvas());
 
         Scene scene = new Scene(root);
+        b.getCanvas().heightProperty().bind(scene.heightProperty());
+        b.getCanvas().widthProperty().bind(scene.widthProperty());
         stage.setScene(scene);
         stage.show();
     }
