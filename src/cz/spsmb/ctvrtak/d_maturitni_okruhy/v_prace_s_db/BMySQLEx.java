@@ -2,7 +2,7 @@ package cz.spsmb.ctvrtak.d_maturitni_okruhy.v_prace_s_db;
 
 import java.sql.*;
 
-public class AutoimkrementId {
+public class BMySQLEx {
     //File->Project Structure->Libraries, Maven,  mysql:mysql-connector-java:5.1.40
     private final String dbms="mysql";
     private final String serverName = "vydb1.spsmb.cz";
@@ -111,30 +111,34 @@ public class AutoimkrementId {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        /*try {
-            Class.forName("com.mysql.jdbc.Driver");
-            AutoimkrementId dbConnection = new AutoimkrementId();
-            dbConnection.getConnectionToDatabase();
-            Statement stmt = dbConnection.conn.createStatement();
-            String[][] q = Questions.question1();
-            for (int i = 0; i < q.length; i++) {
-                //vložení správné odpovědí - index 1:
-                long answerId = dbConnection.insertAnswer(q[i][1]);
-                //vložení otázky - index 0
-                long questionId = dbConnection.insertQuestion(1, q[i][0], answerId);
-                //vložení špatných odpovědí
-                for (int j = 2; j <= 4 ; j++) {
-                    answerId = dbConnection.insertAnswer(q[i][j]);
-                    dbConnection.insertWrongAnswerMap(questionId, answerId);
-                }
+        Statement stmt;
+        // Connection string pro DB sqlite a uložení DB v relativní cestě moje.db
+        String url = "jdbc:mysql://vydb1.spsmb.cz:3306/mojedb";
+        Connection conn = DriverManager.getConnection(url, "mojejmeno", "mojeheslo");
 
-            }
-            //ResultSet rs = stmt.executeQuery("select * from vyrobky");
-            //while (rs.next())
-            //    System.out.println(rs.getInt(1) + "  " + rs.getString(2) + "  " + rs.getString(3));
-            dbConnection.conn.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }*/
+        // vytvoření tabulky ((C)RUD - Create)
+        stmt = conn.createStatement();
+        String sql = "CREATE TABLE IF NOT EXISTS mojetabulka " +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " name VARCHAR(255) NOT NULL)" ;
+        stmt.executeUpdate(sql);
+        stmt.close();
+
+        //naplnění daty ((C)RUD -Create)
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO mojetabulka (name) VALUES (?)");
+        pstmt.setString(1, "první záznam do DB");
+        pstmt.executeUpdate();
+
+        //čtení dat (C(R)UD - Read)
+        stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM mojetabulka;");
+        String format = "%3s|%20s\n";
+        System.out.format(format, "id", "name");
+        while(rs.next()){
+            System.out.format(format, rs.getInt("id"), rs.getString("name"));
+        }
+
+        //uzavření spojení s DB
+        conn.close();
     }
 }
