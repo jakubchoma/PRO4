@@ -38,10 +38,14 @@ import java.util.*;
  *   pro modifikaci stavu modelu. Pohled by měl být vždy sesynchronizován s modelem tak, že model informuje
  *   pohled o změnách jeho stavu tak, aby vždy zobrazoval aktuální data (návrhový vzor observer).
  *
- * Model-view-presenter (MVP)
- * Dnes moderní operační systémy kombinují funkci pohledu a řediče do jednoho prvku - tzv. presenteru.
- * Moderní widgety též podporují data binding, což pomáhá velmi snadno synchronizovat pohled s modelem.
+ * Model-view-presenter (MVP) - pasivní mód
+ * Dnes moderní operační systémy kombinují funkci pohledu a řadiče do jednoho prvku - tzv. presenteru.
  *
+ * Model-view-presenter (MVP) - aktivní mód
+ * Moderní widgety též podporují data binding, což pomáhá velmi snadno synchronizovat pohled s modelem.
+ * V MVC má každý widget na obrazovce pohledem a má svůj řadič. V případě MVP je pohled sloučením několika widgetů.
+ * Pohled tak sbírá vstupy od uživatele a předává je presenteru. Hlavním úkolem pohledu je tak zobrazení dat z modelu.
+ * Jakmile presenter modifikuje model, je pohled aktualizován.
  */
 public class Uvod extends Application {
     @Override
