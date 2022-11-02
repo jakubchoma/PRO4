@@ -1,7 +1,7 @@
 package cz.spsmb.ctvrtak.d_maturitni_okruhy.k_enum;
 
 public enum Planet {
-    // K výčtu můžeme přidat i parametr konstruktoru. Potom co výčet, to objekt,
+    // K výčtu můžeme v závorkách přidat i parametr konstruktoru. Potom co výčet, to objekt,
     // resp. instance "Třídy Planet"
     MERCURY (3.303e+23, 2.4397e6),
     VENUS   (4.869e+24, 6.0518e6),
@@ -12,6 +12,7 @@ public enum Planet {
     URANUS  (8.686e+25, 2.5559e7),
     NEPTUNE (1.024e+26, 2.4746e7),
     PLUTO   (1.27e+22,  1.137e6);
+    // Středník výše je povinný, pokud pokračujeme dále
 
     // členské proměnné pro jednotlivé instance (výčty)
     private final double mass;   // in kilograms
