@@ -53,6 +53,7 @@ public class Uvod extends Application {
         //TODO: Vybereme všechny obrázky z classpath pomocí reflexe
         List<String> pathImageList = new ArrayList<>();
         pathImageList.add("a_mvc_process.svg");
+        pathImageList.add("b_mvc_process2a.svg");
         pathImageList.add("b_mvc_process2.png");
         pathImageList.add("c_mvp_process_passive.svg");
         pathImageList.add("d_mvp_process_active.svg");

@@ -112,7 +112,7 @@ public class BMySQLEx {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Statement stmt;
-        // Connection string pro DB sqlite a uložení DB v relativní cestě moje.db
+        // Connection string pro DB mysql, server vydb1.spsmb.cz, port 3306 a DB mojedb
         String url = "jdbc:mysql://vydb1.spsmb.cz:3306/mojedb";
         Connection conn = DriverManager.getConnection(url, "mojejmeno", "mojeheslo");
 
