@@ -4,8 +4,9 @@ public class Main {
 
     public static void main(String[] args) {
         Singleton singleton = Singleton.getInstance();
+        //Nelze
+        //Singleton mujSin = new Singleton();
         singleton.doSomething();
         System.out.println(singleton.getName());
     }
-
 }

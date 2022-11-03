@@ -8,6 +8,7 @@ package cz.spsmb.ctvrtak.d_maturitni_okruhy.l_navrhove_vzory.d_navrhove_vzory_ge
 public class Singleton {
     // Statická proměnná singleton obsahuje jedinou instanci třídy Singleton
     private static Singleton singleton = new Singleton();
+    // znemožnění vytvoření instance klasickým způsobem pomocí operátoru new
     private Singleton() {}
 
     private String name = "Foo";
