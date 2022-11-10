@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Person {
 	// An enum for age categories
 	public enum AgeCategory {
-		BABY, CHILD, TEEN, ADULT, SENIOR, UNKNOWN
+		BABY, CHILD, TEEN, ADULT, SENIOR, DEAD, UNKNOWN
 	};
 
 	private final ReadOnlyIntegerWrapper personId =
@@ -157,8 +157,11 @@ public class Person {
 		else if (years > 19 && years <= 50) {
 			return AgeCategory.ADULT;
 		} 
-		else if (years > 50) {
+		else if (years > 50 && years <= 130) {
 			return AgeCategory.SENIOR;
+		}
+		else if (years > 130) {
+			return AgeCategory.DEAD;
 		} else {
 			return AgeCategory.UNKNOWN;
 		}

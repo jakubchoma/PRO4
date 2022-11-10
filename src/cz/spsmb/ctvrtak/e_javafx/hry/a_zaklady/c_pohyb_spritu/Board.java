@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
 
@@ -34,6 +35,12 @@ public class Board extends AnimationTimer {
             @Override
             public void handle(KeyEvent keyEvent) {
                 spaceShip.keyReleased(keyEvent);
+            }
+        });
+        canvas.setOnMouseMoved(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                spaceShip.mouseMoved(mouseEvent);
             }
         });
         //addKeyListener(new TAdapter());

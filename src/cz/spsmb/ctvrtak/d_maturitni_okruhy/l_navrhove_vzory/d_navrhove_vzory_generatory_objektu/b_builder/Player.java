@@ -4,7 +4,8 @@ package cz.spsmb.ctvrtak.d_maturitni_okruhy.l_navrhove_vzory.d_navrhove_vzory_ge
  * Mějme třídu Player s vlastnostmi name, hp, man a dmg. Návrhový vzor builder umožňuje jednoduše přebít výchozí hodnoty
  * těchto vlastností ještě před vlastním vytvořením objektu.
  * Základem je statická vnořená třída (nested class). Statická proto, aby bylo možné vytvářet instanci vnořené třídy
- * Build bez vytvoření instance vnější třídy Player.
+ * Build bez vytvoření instance vnější třídy Player. Konstruktor třídy Player je private, aby builder byla jediná možnost,
+ * jak vytvořit instanci třídy Player.
  */
 public class Player {
 
@@ -12,7 +13,11 @@ public class Player {
     private double hp;
     private double mana;
     private double dmg;
-
+    /*
+    TAKHLE NE
+    public Player() {
+        this("Steve", 100,100,2);
+    }*/
     private Player(String name, double hp, double mana, double dmg) {
         this.name = name;
         this.hp = hp;

@@ -25,7 +25,7 @@ public class PersonApp extends Application {
 		// Must set the scene before creating the presenter that uses 
 		// the scene to listen for the focus change
 		Scene scene = new Scene(view);
-
+		scene.getStylesheets().add("button_hover.css");
 		PersonPresenter presenter = new PersonPresenter(model, view);
 		view.setStyle("-fx-padding: 10;" + 
 		              "-fx-border-style: solid inside;" + 

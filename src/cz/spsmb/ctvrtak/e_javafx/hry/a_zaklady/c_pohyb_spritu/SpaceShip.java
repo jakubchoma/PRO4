@@ -4,6 +4,7 @@ package cz.spsmb.ctvrtak.e_javafx.hry.a_zaklady.c_pohyb_spritu;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 import static javafx.scene.input.KeyEvent.KEY_PRESSED;
 
@@ -91,5 +92,12 @@ public class SpaceShip {
         if (key == KeyCode.DOWN) {
             dy = 0;
         }
+    }
+    public void mouseMoved(MouseEvent mys) {
+
+        x = (int)mys.getX();
+        y = (int)mys.getY();
+
+
     }
 }

@@ -46,6 +46,7 @@ public class PersonView extends GridPane {
 		layoutForm();
 		initFieldData();
 		bindFieldsToModel();
+		this.saveBtn.setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
 	}
 
 	private void initFieldData() {
