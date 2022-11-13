@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.util.*;
 
 /***
+ * [https://www.rascasone.com/cs/blog/architektura-mvc-struktura-frameworky]
  * GUI aplikace zajištuje 3 úkoly:
  * - Akceptace vstupů od uživatele,
  * - vlastní zpracování vstupů,
@@ -28,15 +29,17 @@ import java.util.*;
  *
  * Model-view-controller (MVC) návrhový vzor (pattern) je jeden z nejstarších a nejoblíbenějších návrhových
  * vzorů. Skládá se z těchto částí:
- * - model (doménový kód) - modelování reálného problému zpracování a uložení dat.
+ * - model (doménový kód) - modelování reálného problému zpracování a uložení dat. Představuje tak data a aplikační
+ *   (business) logiku aplikace. Může obsahovat propojení s DB a má na starosti veškré výpočty, či vyhodnocování
+ *   pravdivosti. Např v e-shopové aplikaci zajišťuje přihlášení k už. účtu a vkládání zboží do košíku.
  * - pohled a řadič (view, controller) - prezentační kód, kde řadič (controller) akceptuje data od uživatele
  *   a rozhodne se, co s nimi udělá. Pohled (view) pak zobrazí výstup na obrazovku. Každý pohled má svůj řadič
  *   a naopak. Každý zobrazený objekt (např. tlačítka, návěští, grafy, ...) na obrazovce, tzv. widget je pohled,
  *   který má svůj řadič. U GUI aplikace je běžné, že používá více párů pohled-řadič.
  *
  *   Model není potřeba nijak přizpůsobovat pohledu a řadiči, naopak však ano. Řadič posílá modelu data,
- *   pro modifikaci stavu modelu. Pohled by měl být vždy sesynchronizován s modelem tak, že model informuje
- *   pohled o změnách jeho stavu tak, aby vždy zobrazoval aktuální data (návrhový vzor observer).
+ *   pro modifikaci stavu modelu. Pohled by měl být vždy sesynchronizován s modelem tak, že pohled si vyzvedává
+ *   data o změnách stavu modelu tak, aby vždy zobrazoval aktuální data (návrhový vzor observer).
  *
  * Model-view-presenter (MVP) - pasivní mód
  * Dnes moderní operační systémy kombinují funkci pohledu a řadiče do jednoho prvku - tzv. presenteru.
