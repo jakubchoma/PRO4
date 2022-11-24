@@ -1,12 +1,10 @@
 package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune;
 
-import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.DB;
 import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.WofModel;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Random;
