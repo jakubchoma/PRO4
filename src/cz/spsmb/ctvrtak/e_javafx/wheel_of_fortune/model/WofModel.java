@@ -8,6 +8,7 @@ public class WofModel {
         Map<Integer, String> out = null;
         try {
             //DB.fillStudents();
+            DB.fillBStudents();
             out = DB.getAllStudents();
         } catch (SQLException e) {
             System.err.format("Unable to read students from DB:%s", e.getMessage());

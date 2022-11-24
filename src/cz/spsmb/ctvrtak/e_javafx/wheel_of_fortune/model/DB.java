@@ -45,6 +45,27 @@ public class DB {
             pstmt.executeUpdate();
         }
     }
+    public static void fillBStudents() throws SQLException {
+        String sql =
+                "INSERT INTO S_Student (S_FirstName, S_LastName) VALUES ('Lukáš', 'Haken')," +
+                        "('Vojtěch', 'Černý')," +
+                        "('Michal', 'Kraušner')," +
+                        "('Ondřej', 'Merhaut')," +
+                        "('Ondřej', 'Žárský')," +
+                        "('Jakub', 'Chomanič')," +
+                        "('Robin', 'Krouský')," +
+                        "('Michal', 'Skalický')," +
+                        "('Vojtěch', 'Zajíček')," +
+                        "('Pavel', 'Šípek')," +
+                        "('Tadeáš', 'Karban')," +
+                        "('Ondřej', 'Janošík')," +
+                        "('Zdenek', 'Stanke')," +
+                        "('Pavel', 'Štemberk')," +
+                        "('Josef', 'Matoušek');";
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(sql);
+
+    }
     public static Map<Integer, String> getAllStudents() throws SQLException {
         HashMap<Integer, String> students = new HashMap<>();
         Statement stmt = DB.conn.createStatement();
