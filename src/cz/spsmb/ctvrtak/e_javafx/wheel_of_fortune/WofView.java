@@ -16,11 +16,20 @@ import javafx.scene.transform.*;
 import java.util.LinkedList;
 import java.util.Map;
 
+class TogglesInfo {
+    public final int nToggles;
+    public final int maxTextWidth;
+    public final double maxWidth;
+    public TogglesInfo(int nToggles, int maxTextWidth, double maxWidth) {
+        this.nToggles = nToggles;
+        this.maxTextWidth = maxTextWidth;
+        this.maxWidth = maxWidth;
+    }
+}
 public class WofView extends Group {
-    private int nStudentsInWheel = 0;
     private WofPresenter presenter;
     private double radiusInner = 30;
-    private Map<Integer, String> students;
+    private Map<Integer, String> students, topics;
     private Button fireBtn;
     private VBox vbox;
     private LinkedList<Button> buttons = new LinkedList<>();
@@ -31,10 +40,6 @@ public class WofView extends Group {
         this.vbox = new VBox();
         this.vbox.layoutYProperty().bind(this.fireBtn.heightProperty());
         this.getChildren().addAll(this.fireBtn, this.vbox);
-    }
-
-    public int getnStudentsInWheel() {
-        return nStudentsInWheel;
     }
 
     public double getRadiusInner() {
@@ -63,14 +68,15 @@ public class WofView extends Group {
 
     public void init(){
         this.students = presenter.getAllStudents();
+        this.topics = presenter.getAllTopics();
         this.generateStudentToggles();
 
     }
     public void redrawWheel(){
         int cnt=0;
         for (Button b: this.buttons) {
-            double ang = (this.presenter.getAngle()+cnt*360/this.nStudentsInWheel) % 360;
-            if(ang < 360/this.nStudentsInWheel/2 || ang > 360 -360/this.nStudentsInWheel/2){
+            double ang = (this.presenter.getAngle()+cnt*360/this.buttons.size()) % 360;
+            if(ang < 360/this.buttons.size()/2 || ang > 360 -360/this.buttons.size()/2){
                 b.requestFocus();
                 //b.setVisible(false);
             } else {
@@ -97,25 +103,53 @@ public class WofView extends Group {
             this.vbox.getChildren().add(b);
         }
     }
-    public void generateWheel(){
-        for(Node n:this.vbox.getChildren()){
+    public void generateTopicToggles(){
+        for(Integer i:this.topics.keySet()) {
+            ToggleButton b = new ToggleButton(this.topics.get(i));
+            b.setUserData(Integer.valueOf(i));
+            this.vbox.getChildren().add(b);
+        }
+    }
+    public TogglesInfo getUnselectedTogglesInfo(VBox from){
+        int out = 0;
+        int maxTextWidth = 0;
+        double maxWidth = 0;
+        for(Node n:from.getChildren()){
             if(! ((ToggleButton)n).isSelected() ){
-                this.nStudentsInWheel++;
+                out++;
+            }
+            int len = ((ToggleButton)n).getText().length();
+            if(len > maxTextWidth){
+                maxTextWidth = len;
+            }
+            double width =((ToggleButton) n).getWidth();
+            if(width > maxWidth){
+                maxWidth = width;
             }
         }
-        int i=0;
-        for(Node n:this.vbox.getChildren()){
+        return new TogglesInfo(out, maxTextWidth, maxWidth);
+    }
+    public void generateWheel(VBox from){
+        int i = 0;
+        TogglesInfo ti = this.getUnselectedTogglesInfo(from);
+        for (Button b:this.buttons) {
+            b.setVisible(false);
+        }
+        this.buttons.clear();
+        //String format = String.format("%%%ds", ti.maxTextWidth);
+        for(Node n:from.getChildren()){
             ToggleButton tb = (ToggleButton) n;
             if(tb.isSelected()){
                 continue;
             }
             Button b = new Button(tb.getText());
+            b.setPrefWidth(ti.maxWidth);
             b.layoutXProperty().bind(this.getScene().widthProperty().divide(2));
             b.layoutYProperty().bind(this.getScene().heightProperty().divide(2));
             this.getChildren().add(b);
             Rotate r = new Rotate();
             //r.setPivotY(-b.getHeight()/2);
-            r.setAngle(this.presenter.getAngle()+i*360/this.nStudentsInWheel);
+            r.setAngle(this.presenter.getAngle()+i*360/ti.nToggles);
             b.getTransforms().addAll(
                     //new Affine(0, b.getHeight()/2, 0,0,0,0),
                     //new Translate( 0, -b.getHeight()/2),

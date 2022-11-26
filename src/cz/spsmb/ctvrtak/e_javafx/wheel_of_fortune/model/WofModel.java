@@ -8,8 +8,20 @@ public class WofModel {
         Map<Integer, String> out = null;
         try {
             //DB.fillStudents();
-            DB.fillAStudents();
+            //DB.fillAStudents();
+            //DB.fillTopics();
             out = DB.getAllStudents();
+        } catch (SQLException e) {
+            System.err.format("Unable to read students from DB:%s", e.getMessage());
+            e.printStackTrace();
+        } finally {
+            return out;
+        }
+    }
+    public Map<Integer, String> getAllTopics() {
+        Map<Integer, String> out = null;
+        try {
+            out = DB.getAllTopics();
         } catch (SQLException e) {
             System.err.format("Unable to read students from DB:%s", e.getMessage());
             e.printStackTrace();

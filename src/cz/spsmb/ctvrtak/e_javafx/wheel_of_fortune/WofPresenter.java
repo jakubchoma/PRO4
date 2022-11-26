@@ -10,19 +10,20 @@ import java.util.Map;
 import java.util.Random;
 
 enum State {
-    INIT,
-    STARTED,
+    STUDENTS_SELECTION,
+    STUDENT_DRAW,
     STOPPED,
+    TICKET_DRAW,
     DONE
 }
 public class WofPresenter {
-    private final int MAX_DEGREES_REMAINING = 20*360;
+    private final int MAX_DEGREES_REMAINING = 2*360;
     private final WofModel model;
     private final WofView view;
     private final Random rnd;
-    private int angleSpeed = 4;
+    private int angleSpeed = 16;
     private double angle = 0;
-    private State state = State.INIT;
+    private State state = State.STUDENTS_SELECTION;
     private int degreesRemaining;
 
 
@@ -38,6 +39,9 @@ public class WofPresenter {
     public Map<Integer, String> getAllStudents() {
         return this.model.getAllStudents();
     }
+    public Map<Integer, String> getAllTopics() {
+        return this.model.getAllTopics();
+    }
     public double getAngle() {
         return angle;
     }
@@ -49,15 +53,27 @@ public class WofPresenter {
                 angle -= 360;
             }
             view.redrawWheel();
-            if(WofPresenter.this.state == State.STARTED){
-                if(degreesRemaining < MAX_DEGREES_REMAINING*0.4){
+            if(WofPresenter.this.state == State.STUDENT_DRAW || WofPresenter.this.state == State.TICKET_DRAW){
+                if(angleSpeed == 16 && degreesRemaining < MAX_DEGREES_REMAINING*0.8 + WofPresenter.this.rnd.nextInt(102)) {
+                    angleSpeed = 8;
+                } else if(angleSpeed == 8 && degreesRemaining < MAX_DEGREES_REMAINING*0.6 + WofPresenter.this.rnd.nextInt(102)){
+                    angleSpeed = 4;
+                } else if(angleSpeed == 4 && degreesRemaining < MAX_DEGREES_REMAINING*0.4 + WofPresenter.this.rnd.nextInt(102)){
                     angleSpeed = 2;
-                } else if (degreesRemaining < MAX_DEGREES_REMAINING*0.1){
+                } else if (angleSpeed == 2 && degreesRemaining < MAX_DEGREES_REMAINING*0.4){
                     angleSpeed = 1;
                 }
                 if((degreesRemaining-=angleSpeed) < 0){
                     this.stop();
-                    state = State.DONE;
+                    if(WofPresenter.this.state == State.STUDENT_DRAW) {
+                        state = State.STOPPED;
+                        WofPresenter.this.view.getFireBtn().setText("Ticket draw");
+                        WofPresenter.this.view.getFireBtn().setDisable(false);
+                        WofPresenter.this.view.getVbox().getChildren().clear();
+                        WofPresenter.this.view.generateTopicToggles();
+                    } else {
+                        WofPresenter.this.view.getFireBtn().setText("Done");
+                    }
                 }
 
             }
@@ -69,18 +85,19 @@ public class WofPresenter {
         this.view.getFireBtn().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                switch(WofPresenter.this.state) {
-                    case INIT -> {
-                        WofPresenter.this.view.generateWheel();
-                        WofPresenter.this.view.redrawWheel();
-                        WofPresenter.this.animationTimer.start();
-                        WofPresenter.this.state=State.STARTED;
-                        WofPresenter.this.view.getFireBtn().setText("stop wheel");
-                        WofPresenter.this.degreesRemaining = new Random().nextInt(360*20);
+                if(WofPresenter.this.state == State.STOPPED || WofPresenter.this.state == State.STUDENTS_SELECTION) {
+                    if(WofPresenter.this.state == State.STUDENTS_SELECTION){
+                        WofPresenter.this.view.getFireBtn().setText("Drawing ...");
+                        WofPresenter.this.view.getFireBtn().setDisable(true);
+                        WofPresenter.this.state=State.STUDENT_DRAW;
+                    } else {
+                        WofPresenter.this.state=State.TICKET_DRAW;
                     }
-                    case STARTED -> {
-
-                    }
+                    WofPresenter.this.view.generateWheel(WofPresenter.this.view.getVbox());
+                    WofPresenter.this.view.redrawWheel();
+                    WofPresenter.this.angleSpeed = 16;
+                    WofPresenter.this.degreesRemaining = WofPresenter.this.MAX_DEGREES_REMAINING / 2 + WofPresenter.this.rnd.nextInt(WofPresenter.this.MAX_DEGREES_REMAINING / 2);
+                    WofPresenter.this.animationTimer.start();
                 }
             }
         });

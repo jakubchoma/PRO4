@@ -18,9 +18,11 @@ public class DB {
                 " M_Mark TINYINT NOT NULL," +
                 " M_Date DATE NOT NULL," +
                 " M_Weight DECIMAL(3,2) NOT NULL);" +
-                "CREATE TABLE IF NOT EXISTS GT_Graduate_Topic " +
-                "(S_Id INTEGER PRIMARY KEY," +
-                " GT_Topic VARCHAR(25) NOT NULL);";
+                "CREATE TABLE IF NOT EXISTS GT_GraduateTopic " +
+                "(GT_Id INTEGER PRIMARY KEY," +
+                " GT_Topic VARCHAR(25) NOT NULL," +
+                " GT_Description VARCHAR(1024)," +
+                " GT_Difficulty DECIMAL(3,2));";
         // vytvoření tabulky ((C)RUD - Create)
         Statement stmt = null;
         try {
@@ -90,7 +92,7 @@ public class DB {
     }
     public static void fillTopics() throws SQLException {
         String sql =
-                "INSERT INTO GT_Graduate_Topic (GT_Topic) VALUES ('1','Algoritmizace a programování')," +
+                "INSERT INTO GT_GraduateTopic (GT_Id, GT_Topic) VALUES ('1','Algoritmizace a programování')," +
                         "('2','Vývojové prostředí a obecná znalost')," +
                         "('3', 'Rozdíly mezi Javou a JavaScriptem')," +
                         "('4', 'Proměnné a paměťové oblasti')," +
@@ -104,16 +106,16 @@ public class DB {
                         "('12', 'Návrhové vzory')," +
                         "('13', 'Datum a čas')," +
                         "('14', 'Práce se soubory')," +
-                        "('15', 'Kolekce');"+
-                        "('16', 'Výjimky a ladění');"+
-                        "('17', 'Komentáře, konvence');"+
-                        "('18', 'JavaFX');"+
-                        "('19', 'Vstupy');"+
-                        "('20', 'Práce s grafikou');"+
-                        "('21', 'Animace');"+
-                        "('22', 'Práce s databází');"+
-                        "('23', 'Základy 2D her');"+
-                        "('24', 'Build systémy');"+
+                        "('15', 'Kolekce'),"+
+                        "('16', 'Výjimky a ladění'),"+
+                        "('17', 'Komentáře, konvence'),"+
+                        "('18', 'JavaFX'),"+
+                        "('19', 'Vstupy'),"+
+                        "('20', 'Práce s grafikou'),"+
+                        "('21', 'Animace'),"+
+                        "('22', 'Práce s databází'),"+
+                        "('23', 'Základy 2D her'),"+
+                        "('24', 'Build systémy'),"+
                         "('25', 'Vlákna');";
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
@@ -137,11 +139,11 @@ public class DB {
     public static Map<Integer, String> getAllTopics() throws SQLException {
         HashMap<Integer, String> topics = new HashMap<>();
         Statement stmt = cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.DB.conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM GT_Graduate_Topic;");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM GT_GraduateTopic;");
         //String format = "%3s|%20s\n";
         //System.out.format(format, "id", "name");
         while(rs.next()){
-            topics.put(rs.getInt("S_Id"), rs.getString("GT_Topic"));
+            topics.put(rs.getInt("GT_Id"), rs.getString("GT_Topic"));
         }
         return topics;
     }
