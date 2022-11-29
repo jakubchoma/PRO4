@@ -8,8 +8,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.TriangleMesh;
@@ -45,9 +47,7 @@ public class WofView extends Group {
         fireBtn = new Button("Make wheel of fortune");
         this.studentsVbox = new VBox();
         this.topicsVbox = new VBox();
-        this.table = new TableView<>();
         this.studentsVbox.layoutYProperty().bind(this.fireBtn.heightProperty());
-        this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table);
     }
 
     public double getRadiusInner() {
@@ -70,6 +70,10 @@ public class WofView extends Group {
         return topicsVbox;
     }
 
+    public TableView<Mark> getTable() {
+        return table;
+    }
+
     public LinkedList<Button> getButtons() {
         return buttons;
     }
@@ -81,15 +85,38 @@ public class WofView extends Group {
     public void init(){
         this.topicsVbox.layoutXProperty().bind(this.getScene().widthProperty().subtract(this.topicsVbox.widthProperty()));
         //this.table.setLayoutY(60);
-        this.table.setLayoutX(60);
-        this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
+        //this.table.setLayoutX(60);
         this.students = presenter.getAllStudents();
         this.topics = presenter.getAllTopics();
         this.generateStudentToggles();
+        this.table = new TableView<>(this.presenter.getMarks(0));
+        this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
+        this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
+        this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table);
+        this.prepareMarkTableView();
     }
     public void initOnShown(){
         this.fixTogglesWidth(this.studentsVbox);
     }
+
+    /*
+        private final IntegerProperty id;
+    private final IntegerProperty mark;
+    private final StringProperty date;
+    private final FloatProperty weight;
+     */
+    private void prepareMarkTableView(){
+        TableColumn<Mark, Integer> idCol = new TableColumn<>("Id");
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Mark, Integer> markCol = new TableColumn<>("Mark");
+        markCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
+        TableColumn<Mark, String> dateCol = new TableColumn<>("Date");
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        TableColumn<Mark, Integer> weightCol = new TableColumn<>("Weight");
+        weightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
+        this.table.getColumns().addAll(idCol, markCol, dateCol, weightCol);
+    }
+
     public void redrawWheel(){
         int cnt=0;
         for (Button b: this.buttons) {

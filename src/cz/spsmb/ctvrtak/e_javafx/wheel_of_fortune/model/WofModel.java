@@ -1,5 +1,7 @@
 package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model;
 
+import javafx.collections.ObservableList;
+
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -28,5 +30,8 @@ public class WofModel {
         } finally {
             return out;
         }
+    }
+    public ObservableList<Mark> getMarks(int studentId){
+            return DB.getMarks(studentId);
     }
 }

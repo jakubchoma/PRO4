@@ -1,11 +1,17 @@
 package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DB {
-    private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
+    //private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
+    private static String url = "jdbc:sqlite:wof.db";
     private static Connection conn = null;
     static{
         String sql = "CREATE TABLE IF NOT EXISTS S_Student " +
@@ -140,7 +146,7 @@ public class DB {
     }
     public static Map<Integer, String> getAllStudents() throws SQLException {
         HashMap<Integer, String> students = new HashMap<>();
-        Statement stmt = cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.DB.conn.createStatement();
+        Statement stmt = DB.conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM S_Student;");
 
         //String format = "%3s|%20s\n";
@@ -155,7 +161,7 @@ public class DB {
 
     public static Map<Integer, String> getAllTopics() throws SQLException {
         HashMap<Integer, String> topics = new HashMap<>();
-        Statement stmt = cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.DB.conn.createStatement();
+        Statement stmt = DB.conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM GT_GraduateTopic;");
         //String format = "%3s|%20s\n";
         //System.out.format(format, "id", "name");
@@ -163,5 +169,29 @@ public class DB {
             topics.put(rs.getInt("GT_Id"), rs.getString("GT_Topic"));
         }
         return topics;
+    }
+    public static ObservableList<Mark> getMarks(int studentId) {
+        /*
+        "(M_Id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " M_S_Id INTEGER NOT NULL," +
+                " M_Mark TINYINT NOT NULL," +
+                " M_Date DATE NOT NULL," +
+                " M_Weight DECIMAL(3,2) NOT NULL);" +
+         */
+        ObservableList<Mark> out = FXCollections.<Mark>emptyObservableList();
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.conn.prepareStatement(
+                    "SELECT M_Id, M_Mark, M_Date, M_Weight FROM M_Marking WHERE M_S_Id = ?");
+            pstmt.setInt(1, studentId);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                out.add(new Mark(rs.getInt("M_Id"), rs.getByte("M_Mark"),
+                        LocalDate.parse(rs.getString("M_Date")), rs.getFloat("M_Weight")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
     }
 }

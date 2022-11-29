@@ -1,9 +1,14 @@
 package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune;
 
+import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.DB;
+import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.Mark;
 import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.WofModel;
 import javafx.animation.AnimationTimer;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -36,15 +41,20 @@ public class WofPresenter {
         this.view.setPresenter(this);
         this.attachEvents();
     }
+
     public Map<Integer, String> getAllStudents() {
         return this.model.getAllStudents();
     }
     public Map<Integer, String> getAllTopics() {
         return this.model.getAllTopics();
     }
+    public ObservableList<Mark> getMarks(int studentId){
+        return this.model.getMarks(studentId);
+    }
     public double getAngle() {
         return angle;
     }
+
 
     private AnimationTimer animationTimer = new AnimationTimer() {
         @Override
