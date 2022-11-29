@@ -2,8 +2,10 @@ package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune;
 
 import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.WofModel;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class WofApp extends Application {
@@ -15,6 +17,12 @@ public class WofApp extends Application {
 
         Scene scene = new Scene(rootView, 300, 300);
         stage.setScene(scene);
+        stage.setOnShown(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent windowEvent) {
+                rootView.initOnShown();
+            }
+        });
         rootView.init();
         stage.show();
     }

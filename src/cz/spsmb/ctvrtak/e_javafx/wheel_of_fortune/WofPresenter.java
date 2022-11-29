@@ -60,17 +60,18 @@ public class WofPresenter {
                     angleSpeed = 4;
                 } else if(angleSpeed == 4 && degreesRemaining < MAX_DEGREES_REMAINING*0.4 + WofPresenter.this.rnd.nextInt(102)){
                     angleSpeed = 2;
-                } else if (angleSpeed == 2 && degreesRemaining < MAX_DEGREES_REMAINING*0.4){
+                } else if (angleSpeed == 2 && degreesRemaining < MAX_DEGREES_REMAINING*0.2){
                     angleSpeed = 1;
                 }
                 if((degreesRemaining-=angleSpeed) < 0){
                     this.stop();
                     if(WofPresenter.this.state == State.STUDENT_DRAW) {
                         state = State.STOPPED;
-                        WofPresenter.this.view.getFireBtn().setText("Ticket draw");
+                        WofPresenter.this.view.getFireBtn().setText("Topic draw");
                         WofPresenter.this.view.getFireBtn().setDisable(false);
-                        WofPresenter.this.view.getVbox().getChildren().clear();
+                        //WofPresenter.this.view.getVbox().getChildren().clear();
                         WofPresenter.this.view.generateTopicToggles();
+                        //WofPresenter.this.view.fixTogglesWidth(WofPresenter.this.view.getTopicsVbox());
                     } else {
                         WofPresenter.this.view.getFireBtn().setText("Done");
                     }
@@ -90,10 +91,12 @@ public class WofPresenter {
                         WofPresenter.this.view.getFireBtn().setText("Drawing ...");
                         WofPresenter.this.view.getFireBtn().setDisable(true);
                         WofPresenter.this.state=State.STUDENT_DRAW;
+                        WofPresenter.this.view.generateWheel(WofPresenter.this.view.getStudentsVbox());
                     } else {
                         WofPresenter.this.state=State.TICKET_DRAW;
+                        WofPresenter.this.view.generateWheel(WofPresenter.this.view.getTopicsVbox());
                     }
-                    WofPresenter.this.view.generateWheel(WofPresenter.this.view.getVbox());
+
                     WofPresenter.this.view.redrawWheel();
                     WofPresenter.this.angleSpeed = 16;
                     WofPresenter.this.degreesRemaining = WofPresenter.this.MAX_DEGREES_REMAINING / 2 + WofPresenter.this.rnd.nextInt(WofPresenter.this.MAX_DEGREES_REMAINING / 2);
