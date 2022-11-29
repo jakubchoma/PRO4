@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DB {
-    private static String url = "jdbc:sqlite:wof.db";
+    private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
     private static Connection conn = null;
     static{
         String sql = "CREATE TABLE IF NOT EXISTS S_Student " +
@@ -68,6 +68,23 @@ public class DB {
                         "('Zdenek', 'Stanke')," +
                         "('Pavel', 'Štemberk')," +
                         "('Josef', 'Matoušek');";
+        Statement stmt = conn.createStatement();
+        stmt.executeUpdate(sql);
+
+    }
+
+    public static void fillBStudentsOfEvil() throws SQLException {
+        String sql =
+                "INSERT INTO S_Student (S_FirstName, S_LastName) VALUES " +
+                        "('Michal', 'Skalický');"+
+                        "('Ondřej', 'Žárský')," +
+                        "('Lukáš', 'Haken')," +
+                        "('Josef', 'Matoušek'),"+
+                        "('Tadeáš', 'Karban')," +
+                        "('Josef', 'Matoušek'),"+
+                        "('Pavel', 'Šípek')," +
+                        "('Josef', 'Matoušek'),"+
+                        "('Ondřej', 'Merhaut');";
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
 

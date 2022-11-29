@@ -17,7 +17,7 @@ enum State {
     DONE
 }
 public class WofPresenter {
-    private final int MAX_DEGREES_REMAINING = 2*360;
+    private final int MAX_DEGREES_REMAINING = 5*360;
     private final WofModel model;
     private final WofView view;
     private final Random rnd;
