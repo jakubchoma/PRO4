@@ -178,7 +178,7 @@ public class DB {
                 " M_Date DATE NOT NULL," +
                 " M_Weight DECIMAL(3,2) NOT NULL);" +
          */
-        ObservableList<Mark> out = FXCollections.<Mark>emptyObservableList();
+        ObservableList<Mark> out = FXCollections.<Mark>observableArrayList();
         PreparedStatement pstmt = null;
         try {
             pstmt = DB.conn.prepareStatement(
@@ -186,12 +186,30 @@ public class DB {
             pstmt.setInt(1, studentId);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
-                out.add(new Mark(rs.getInt("M_Id"), rs.getByte("M_Mark"),
-                        LocalDate.parse(rs.getString("M_Date")), rs.getFloat("M_Weight")));
+                out.add(new Mark(
+                                rs.getInt("M_Id"), rs.getByte("M_Mark"),
+                                LocalDate.now(), rs.getFloat("M_Weight")
+                        )
+                );
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return out;
+    }
+    public static void addMark(int studentId, Mark mark){
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.conn.prepareStatement(
+                    "INSERT INTO M_Marking (M_S_Id, M_Mark, M_Date, M_Weight) VALUES (?, ?, ?, ?)");
+            pstmt.setInt(1, studentId);
+            pstmt.setInt(2, mark.getMark());
+            pstmt.setString(3, mark.getDate());
+            pstmt.setFloat(4, mark.getWeight());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

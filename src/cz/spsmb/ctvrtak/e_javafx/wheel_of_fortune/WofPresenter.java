@@ -7,8 +7,11 @@ import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -39,6 +42,8 @@ public class WofPresenter {
         this.rnd = new Random();
         this.rnd.setSeed(LocalDateTime.now().getNano());
         this.view.setPresenter(this);
+    }
+    public void initOnShown(){
         this.attachEvents();
     }
 
@@ -114,5 +119,37 @@ public class WofPresenter {
                 }
             }
         });
+        // select student for the table fill
+        for(Node n:WofPresenter.this.view.getStudentsVbox().getChildren()) {
+            ToggleButton b = (ToggleButton) n;
+            b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ToggleButton tbSelected = ((ToggleButton) mouseEvent.getSource());
+                    WofPresenter.this.view.getlSelectedStudent().setText(tbSelected.getText());
+                    Integer studentId = (Integer) tbSelected.getUserData();
+                    WofPresenter.this.view.getlSelectedStudent().setUserData(studentId);
+                    WofPresenter.this.view.getTable().getItems().clear();
+                    WofPresenter.this.view.getTable().getItems().addAll(WofPresenter.this.getMarks(studentId));
+                }
+            });
+        }
+        // add row button
+        WofPresenter.this.view.getBtnAdd().setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Mark mark = new Mark(
+                        0, Byte.parseByte(WofPresenter.this.view.getTfMark().getText()),
+                        WofPresenter.this.view.getDpDate().getValue(),
+                        Float.parseFloat(WofPresenter.this.view.getTfWeight().getText())
+                );
+                Integer studentId = (Integer) WofPresenter.this.view.getlSelectedStudent().getUserData();
+                WofPresenter.this.model.addMark(studentId, mark);
+                WofPresenter.this.view.getTable().getItems().clear();
+                WofPresenter.this.view.getTable().getItems().addAll(WofPresenter.this.getMarks(studentId));
+                int a =8;
+            }
+        });
+
     }
 }

@@ -21,6 +21,7 @@ public class WofApp extends Application {
             @Override
             public void handle(WindowEvent windowEvent) {
                 rootView.initOnShown();
+                presenter.initOnShown();
             }
         });
         rootView.init();

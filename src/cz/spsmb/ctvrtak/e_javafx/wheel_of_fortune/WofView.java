@@ -3,21 +3,23 @@ package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune;
 import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.WofModel;
 import cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model.Mark;
 import javafx.animation.AnimationTimer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.TriangleMesh;
 import javafx.scene.transform.*;
 
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -41,6 +43,11 @@ public class WofView extends Group {
     private VBox studentsVbox, topicsVbox;
     private TableView<Mark> table;
     private LinkedList<Button> buttons = new LinkedList<>();
+    private HBox hbox;
+    private Label lSelectedStudent = new Label();
+    private TextField tfMark, tfWeight;
+    private DatePicker dpDate;
+    private Button btnAdd = new Button("+");
 
     public WofView(){
         //this.presenter = presenter;
@@ -48,6 +55,32 @@ public class WofView extends Group {
         this.studentsVbox = new VBox();
         this.topicsVbox = new VBox();
         this.studentsVbox.layoutYProperty().bind(this.fireBtn.heightProperty());
+        this.tfMark = new TextField();
+        this.tfWeight = new TextField();
+        this.tfWeight.setText("1");
+        this.dpDate = new DatePicker();
+        this.dpDate.setValue(LocalDate.now());
+
+        this.hbox = new HBox( this.lSelectedStudent,
+                new Label(" známka:"), this.tfMark, new Label(" váha:"),
+                this.tfWeight, new Label(" datum:"), this.dpDate, this.btnAdd
+        );
+    }
+
+    public TextField getTfMark() {
+        return tfMark;
+    }
+
+    public TextField getTfWeight() {
+        return tfWeight;
+    }
+
+    public DatePicker getDpDate() {
+        return dpDate;
+    }
+
+    public Button getBtnAdd() {
+        return btnAdd;
     }
 
     public double getRadiusInner() {
@@ -82,6 +115,17 @@ public class WofView extends Group {
         this.presenter = presenter;
     }
 
+    public Label getlSelectedStudent() {
+        return lSelectedStudent;
+    }
+    public static ObservableList<Mark> getPersonList() {
+        Mark p1 = new Mark(1, (byte)1, LocalDate.of(2012, 10, 11),1f);
+        Mark p2 = new Mark(2, (byte)2, LocalDate.of(2012, 10, 11), 1f);
+        Mark p3 = new Mark(3, (byte)1, LocalDate.of(2011, 12, 16), 1f);
+        Mark p4 = new Mark(4, (byte)1, LocalDate.of(2003, 4, 20), 1f);
+        Mark p5 = new Mark(5, (byte)3, LocalDate.of(1980, 1, 10), 1f);
+        return FXCollections.<Mark>observableArrayList(p1, p2, p3, p4, p5);
+    }
     public void init(){
         this.topicsVbox.layoutXProperty().bind(this.getScene().widthProperty().subtract(this.topicsVbox.widthProperty()));
         //this.table.setLayoutY(60);
@@ -89,11 +133,14 @@ public class WofView extends Group {
         this.students = presenter.getAllStudents();
         this.topics = presenter.getAllTopics();
         this.generateStudentToggles();
-        this.table = new TableView<>(this.presenter.getMarks(0));
+        //this.table = new TableView<>(this.presenter.getMarks(0));
+        this.table = new TableView<>(getPersonList());
         this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
-        this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
-        this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table);
+        //this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
+        this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table, this.hbox);
         this.prepareMarkTableView();
+        //this.hbox.setLayoutY(40);
+        this.hbox.layoutXProperty().bind(this.table.layoutXProperty().add(this.table.widthProperty()));
     }
     public void initOnShown(){
         this.fixTogglesWidth(this.studentsVbox);

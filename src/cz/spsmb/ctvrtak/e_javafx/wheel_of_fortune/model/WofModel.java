@@ -34,4 +34,7 @@ public class WofModel {
     public ObservableList<Mark> getMarks(int studentId){
             return DB.getMarks(studentId);
     }
+    public void addMark(int studentId, Mark mark){
+        DB.addMark(studentId, mark);
+    }
 }
