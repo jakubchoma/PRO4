@@ -85,7 +85,7 @@ public class WofPresenter {
                         WofPresenter.this.view.getFireBtn().setText("Topic draw");
                         WofPresenter.this.view.getFireBtn().setDisable(false);
                         //WofPresenter.this.view.getVbox().getChildren().clear();
-                        WofPresenter.this.view.generateTopicToggles();
+                        //WofPresenter.this.view.generateTopicToggles();
                         //WofPresenter.this.view.fixTogglesWidth(WofPresenter.this.view.getTopicsVbox());
                     } else {
                         WofPresenter.this.view.getFireBtn().setText("Done");
@@ -134,12 +134,26 @@ public class WofPresenter {
                 }
             });
         }
+        // assign selected topic to lSelectedTopic's userdata
+        for(Node n:WofPresenter.this.view.getTopicsVbox().getChildren()) {
+            ToggleButton b = (ToggleButton) n;
+            b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    ToggleButton tbSelected = ((ToggleButton) mouseEvent.getSource());
+                    WofPresenter.this.view.getlSelectedTopic().setText(tbSelected.getText());
+                    WofPresenter.this.view.getlSelectedTopic().setUserData(tbSelected.getUserData());
+                }
+            });
+        }
         // add row button
         WofPresenter.this.view.getBtnAdd().setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 Mark mark = new Mark(
-                        0, Byte.parseByte(WofPresenter.this.view.getTfMark().getText()),
+                        0,
+                        (Integer)WofPresenter.this.view.getlSelectedTopic().getUserData(),
+                        Float.parseFloat(WofPresenter.this.view.getTfMark().getText()),
                         WofPresenter.this.view.getDpDate().getValue(),
                         Float.parseFloat(WofPresenter.this.view.getTfWeight().getText())
                 );

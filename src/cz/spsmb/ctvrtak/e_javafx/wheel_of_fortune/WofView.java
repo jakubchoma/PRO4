@@ -45,6 +45,7 @@ public class WofView extends Group {
     private LinkedList<Button> buttons = new LinkedList<>();
     private HBox hbox;
     private Label lSelectedStudent = new Label();
+    private Label lSelectedTopic = new Label();
     private TextField tfMark, tfWeight;
     private DatePicker dpDate;
     private Button btnAdd = new Button("+");
@@ -63,8 +64,12 @@ public class WofView extends Group {
 
         this.hbox = new HBox( this.lSelectedStudent,
                 new Label(" známka:"), this.tfMark, new Label(" váha:"),
-                this.tfWeight, new Label(" datum:"), this.dpDate, this.btnAdd
+                this.tfWeight, new Label(" datum:"), this.dpDate, this.lSelectedTopic, this.btnAdd
         );
+    }
+
+    public Label getlSelectedTopic() {
+        return lSelectedTopic;
     }
 
     public TextField getTfMark() {
@@ -119,11 +124,11 @@ public class WofView extends Group {
         return lSelectedStudent;
     }
     public static ObservableList<Mark> getPersonList() {
-        Mark p1 = new Mark(1, (byte)1, LocalDate.of(2012, 10, 11),1f);
-        Mark p2 = new Mark(2, (byte)2, LocalDate.of(2012, 10, 11), 1f);
-        Mark p3 = new Mark(3, (byte)1, LocalDate.of(2011, 12, 16), 1f);
-        Mark p4 = new Mark(4, (byte)1, LocalDate.of(2003, 4, 20), 1f);
-        Mark p5 = new Mark(5, (byte)3, LocalDate.of(1980, 1, 10), 1f);
+        Mark p1 = new Mark(1, 1,  (byte)1,  LocalDate.of(2012, 10, 11),1f);
+        Mark p2 = new Mark(2, 1, (byte)2, LocalDate.of(2012, 10, 11), 1f);
+        Mark p3 = new Mark(3, 1, (byte)1, LocalDate.of(2011, 12, 16), 1f);
+        Mark p4 = new Mark(4, 1, (byte)1, LocalDate.of(2003, 4, 20), 1f);
+        Mark p5 = new Mark(5, 1, (byte)3, LocalDate.of(1980, 1, 10), 1f);
         return FXCollections.<Mark>observableArrayList(p1, p2, p3, p4, p5);
     }
     public void init(){
@@ -133,6 +138,7 @@ public class WofView extends Group {
         this.students = presenter.getAllStudents();
         this.topics = presenter.getAllTopics();
         this.generateStudentToggles();
+        this.generateTopicToggles();
         //this.table = new TableView<>(this.presenter.getMarks(0));
         this.table = new TableView<>(getPersonList());
         this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
@@ -140,10 +146,12 @@ public class WofView extends Group {
         this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table, this.hbox);
         this.prepareMarkTableView();
         //this.hbox.setLayoutY(40);
-        this.hbox.layoutXProperty().bind(this.table.layoutXProperty().add(this.table.widthProperty()));
+        //this.hbox.layoutYProperty().bind(this.fireBtn.heightProperty().add(this.studentsVbox.heightProperty().add(this.hbox.heightProperty())));
+        this.hbox.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.hbox.heightProperty()));
     }
     public void initOnShown(){
         this.fixTogglesWidth(this.studentsVbox);
+        this.fixTogglesWidth(this.topicsVbox);
     }
 
     /*
@@ -155,13 +163,15 @@ public class WofView extends Group {
     private void prepareMarkTableView(){
         TableColumn<Mark, Integer> idCol = new TableColumn<>("Id");
         idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Mark, Integer> graduateTopicIdCol = new TableColumn<>("GT_Id");
+        graduateTopicIdCol.setCellValueFactory(new PropertyValueFactory<>("graduateTopicId"));
         TableColumn<Mark, Integer> markCol = new TableColumn<>("Mark");
         markCol.setCellValueFactory(new PropertyValueFactory<>("mark"));
         TableColumn<Mark, String> dateCol = new TableColumn<>("Date");
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         TableColumn<Mark, Integer> weightCol = new TableColumn<>("Weight");
         weightCol.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        this.table.getColumns().addAll(idCol, markCol, dateCol, weightCol);
+        this.table.getColumns().addAll(idCol, graduateTopicIdCol, markCol, dateCol, weightCol);
     }
 
     public void redrawWheel(){
@@ -200,7 +210,7 @@ public class WofView extends Group {
     }
     public void generateTopicToggles(){
         for(Integer i:this.topics.keySet()) {
-            ToggleButton b = new ToggleButton(this.topics.get(i));
+            ToggleButton b = new ToggleButton(String.format("%02d-%s", i, this.topics.get(i)));
             b.setUserData(Integer.valueOf(i));
             this.topicsVbox.getChildren().add(b);
         }

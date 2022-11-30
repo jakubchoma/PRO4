@@ -13,15 +13,29 @@ import java.time.LocalDate;
  */
 public class Mark {
     private final IntegerProperty id;
-    private final IntegerProperty mark;
+    private final IntegerProperty graduateTopicId;
+    private final FloatProperty mark;
     private final StringProperty date;
     private final FloatProperty weight;
 
-    public Mark(int id, byte mark, LocalDate date, float weight) {
+    public Mark(int id, int graduateTopicId, float mark, LocalDate date, float weight) {
         this.id = new SimpleIntegerProperty(this, "id",id);
-        this.mark = new SimpleIntegerProperty(this, "mark", mark);
+        this.graduateTopicId = new SimpleIntegerProperty(this, "graduateTopicId", graduateTopicId);
+        this.mark = new SimpleFloatProperty(this, "mark", mark);
         this.date = new SimpleStringProperty(this, "date", date.toString());
         this.weight = new SimpleFloatProperty(this, "weight", weight);
+    }
+
+    public int getGraduateTopicId() {
+        return graduateTopicId.get();
+    }
+
+    public IntegerProperty graduateTopicIdProperty() {
+        return graduateTopicId;
+    }
+
+    public void setGraduateTopicId(int graduateTopicId) {
+        this.graduateTopicId.set(graduateTopicId);
     }
 
     public int getId() {
@@ -36,15 +50,15 @@ public class Mark {
         this.id.set(id);
     }
 
-    public int getMark() {
+    public float getMark() {
         return mark.get();
     }
 
-    public IntegerProperty markProperty() {
+    public FloatProperty markProperty() {
         return mark;
     }
 
-    public void setMark(int mark) {
+    public void setMark(float mark) {
         this.mark.set(mark);
     }
 

@@ -21,7 +21,8 @@ public class DB {
                 " CREATE TABLE IF NOT EXISTS M_Marking " +
                 "(M_Id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " M_S_Id INTEGER NOT NULL," +
-                " M_Mark TINYINT NOT NULL," +
+                " M_GT_Id INTEGER NOT NULL," +
+                " M_Mark DECIMAL(2,1) NOT NULL," +
                 " M_Date DATE NOT NULL," +
                 " M_Weight DECIMAL(3,2) NOT NULL);" +
                 "CREATE TABLE IF NOT EXISTS GT_GraduateTopic " +
@@ -182,12 +183,13 @@ public class DB {
         PreparedStatement pstmt = null;
         try {
             pstmt = DB.conn.prepareStatement(
-                    "SELECT M_Id, M_Mark, M_Date, M_Weight FROM M_Marking WHERE M_S_Id = ?");
+                    "SELECT M_Id, M_GT_Id,  M_Mark, M_Date, M_Weight FROM M_Marking WHERE M_S_Id = ?");
             pstmt.setInt(1, studentId);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
                 out.add(new Mark(
-                                rs.getInt("M_Id"), rs.getByte("M_Mark"),
+                                rs.getInt("M_Id"), rs.getInt("M_GT_Id"),
+                                rs.getByte("M_Mark"),
                                 LocalDate.now(), rs.getFloat("M_Weight")
                         )
                 );
@@ -202,11 +204,12 @@ public class DB {
         PreparedStatement pstmt = null;
         try {
             pstmt = DB.conn.prepareStatement(
-                    "INSERT INTO M_Marking (M_S_Id, M_Mark, M_Date, M_Weight) VALUES (?, ?, ?, ?)");
+                    "INSERT INTO M_Marking (M_S_Id, M_GT_Id, M_Mark, M_Date, M_Weight) VALUES (?, ?, ?, ?, ?)");
             pstmt.setInt(1, studentId);
-            pstmt.setInt(2, mark.getMark());
-            pstmt.setString(3, mark.getDate());
-            pstmt.setFloat(4, mark.getWeight());
+            pstmt.setInt(2, mark.getGraduateTopicId());
+            pstmt.setFloat(3, mark.getMark());
+            pstmt.setString(4, mark.getDate());
+            pstmt.setFloat(5, mark.getWeight());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
