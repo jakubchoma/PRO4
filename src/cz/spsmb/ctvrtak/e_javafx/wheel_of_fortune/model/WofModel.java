@@ -12,7 +12,8 @@ public class WofModel {
             //DB.fillTopics();
             //DB.fillBStudents();
             //DB.fillAStudents();
-            DB.removeMark(12);
+            //DB.removeMark(14);
+            //DB.customStmt("UPDATE M_Marking SET M_Weight = 0.5 WHERE M_Id IN (19, 20, 21);");
             out = DB.getAllStudents();
         } catch (SQLException e) {
             System.err.format("Unable to read students from DB:%s", e.getMessage());

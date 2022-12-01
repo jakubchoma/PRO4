@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class DB {
     //private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
-    private static String url = "jdbc:sqlite:wofb.db";
+    private static String url = "jdbc:sqlite:wofa.db";
     private static Connection conn = null;
     static{
         String sql = "CREATE TABLE IF NOT EXISTS S_Student " +
@@ -180,16 +180,18 @@ public class DB {
                 " M_Weight DECIMAL(3,2) NOT NULL);" +
          */
         ObservableList<Mark> out = FXCollections.<Mark>observableArrayList();
-        PreparedStatement pstmt = null;
         try {
-            pstmt = DB.conn.prepareStatement(
+            PreparedStatement pstmt = DB.conn.prepareStatement(
                     "SELECT M_Id, M_GT_Id,  M_Mark, M_Date, M_Weight FROM M_Marking WHERE M_S_Id = ?");
             pstmt.setInt(1, studentId);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
+                System.out.println(rs.getInt("M_Id"));
+                System.out.println(rs.getFloat("M_Mark"));
+                System.out.println(rs.getFloat("M_Weight"));
                 out.add(new Mark(
                                 rs.getInt("M_Id"), rs.getInt("M_GT_Id"),
-                                rs.getByte("M_Mark"),
+                                rs.getFloat("M_Mark"),
                                 LocalDate.parse(rs.getString("M_Date")), rs.getFloat("M_Weight")
                         )
                 );
@@ -201,9 +203,8 @@ public class DB {
         return out;
     }
     public static void addMark(int studentId, Mark mark){
-        PreparedStatement pstmt = null;
         try {
-            pstmt = DB.conn.prepareStatement(
+            PreparedStatement pstmt = DB.conn.prepareStatement(
                     "INSERT INTO M_Marking (M_S_Id, M_GT_Id, M_Mark, M_Date, M_Weight) VALUES (?, ?, ?, ?, ?)");
             pstmt.setInt(1, studentId);
             pstmt.setInt(2, mark.getGraduateTopicId());
@@ -216,14 +217,22 @@ public class DB {
         }
     }
     public static void removeMark(int markId){
-        PreparedStatement pstmt = null;
         try {
-            pstmt = DB.conn.prepareStatement(
+            PreparedStatement pstmt = DB.conn.prepareStatement(
                     "DELETE FROM M_Marking WHERE M_Id=?");
             pstmt.setInt(1, markId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static void customStmt(String sql){
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
