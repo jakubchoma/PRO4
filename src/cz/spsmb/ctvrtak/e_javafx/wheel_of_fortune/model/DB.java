@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class DB {
     //private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
-    private static String url = "jdbc:sqlite:wof.db";
+    private static String url = "jdbc:sqlite:wofb.db";
     private static Connection conn = null;
     static{
         String sql = "CREATE TABLE IF NOT EXISTS S_Student " +
@@ -190,7 +190,7 @@ public class DB {
                 out.add(new Mark(
                                 rs.getInt("M_Id"), rs.getInt("M_GT_Id"),
                                 rs.getByte("M_Mark"),
-                                LocalDate.now(), rs.getFloat("M_Weight")
+                                LocalDate.parse(rs.getString("M_Date")), rs.getFloat("M_Weight")
                         )
                 );
 
@@ -210,6 +210,17 @@ public class DB {
             pstmt.setFloat(3, mark.getMark());
             pstmt.setString(4, mark.getDate());
             pstmt.setFloat(5, mark.getWeight());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void removeMark(int markId){
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = DB.conn.prepareStatement(
+                    "DELETE FROM M_Marking WHERE M_Id=?");
+            pstmt.setInt(1, markId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

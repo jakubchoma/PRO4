@@ -12,6 +12,7 @@ public class WofModel {
             //DB.fillTopics();
             //DB.fillBStudents();
             //DB.fillAStudents();
+            DB.removeMark(12);
             out = DB.getAllStudents();
         } catch (SQLException e) {
             System.err.format("Unable to read students from DB:%s", e.getMessage());
