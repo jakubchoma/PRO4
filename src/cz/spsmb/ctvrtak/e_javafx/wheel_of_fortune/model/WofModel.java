@@ -3,6 +3,7 @@ package cz.spsmb.ctvrtak.e_javafx.wheel_of_fortune.model;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 public class WofModel {
@@ -11,6 +12,7 @@ public class WofModel {
         try {
             //DB.fillTopics();
             //DB.fillBStudents();
+            //DB.fillBStudentsOfEvil();
             //DB.fillAStudents();
             //DB.removeMark(14);
             //DB.customStmt("UPDATE M_Marking SET M_Weight = 0.5 WHERE M_Id IN (19, 20, 21);");
@@ -38,5 +40,14 @@ public class WofModel {
     }
     public void addMark(int studentId, Mark mark){
         DB.addMark(studentId, mark);
+    }
+    public List<Integer> getAlreadyTestedStudentIdList(int nDays){
+        return DB.getAlreadyTestedIdList(true, nDays, 0, 1);
+    }
+    public List<Integer> getAlreadyTestedStudentIdList(int nDays, float weightFrom, float weightTo){
+        return DB.getAlreadyTestedIdList(true, nDays, weightFrom, weightTo);
+    }
+    public List<Integer> getAlreadyTestedTopicIdList(int nDays, float weightFrom, float weightTo){
+        return DB.getAlreadyTestedIdList(false, nDays, weightFrom, weightTo);
     }
 }

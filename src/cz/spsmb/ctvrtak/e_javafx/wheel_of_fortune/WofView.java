@@ -140,7 +140,7 @@ public class WofView extends Group {
         this.generateStudentToggles();
         this.generateTopicToggles();
         //this.table = new TableView<>(this.presenter.getMarks(0));
-        this.table = new TableView<>(getPersonList());
+        this.table = new TableView<>();
         this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
         //this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
         this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table, this.hbox);

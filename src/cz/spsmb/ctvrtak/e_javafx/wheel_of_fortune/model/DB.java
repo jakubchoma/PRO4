@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -83,14 +84,7 @@ public class DB {
     public static void fillBStudentsOfEvil() throws SQLException {
         String sql =
                 "INSERT INTO S_Student (S_FirstName, S_LastName) VALUES " +
-                        "('Michal', 'Skalický');"+
-                        "('Ondřej', 'Žárský')," +
-                        "('Lukáš', 'Haken')," +
-                        "('Josef', 'Matoušek'),"+
-                        "('Tadeáš', 'Karban')," +
-                        "('Josef', 'Matoušek'),"+
-                        "('Pavel', 'Šípek')," +
-                        "('Josef', 'Matoušek'),"+
+                        "('Vít', 'Štemberk'),"+
                         "('Ondřej', 'Merhaut');";
         Statement stmt = conn.createStatement();
         stmt.executeUpdate(sql);
@@ -233,6 +227,33 @@ public class DB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    public static List getAlreadyTestedIdList(boolean studentTopic, int nDays, float weightFrom, float weightTo){
+        PreparedStatement pstmt = null;
+        List<Integer> out = new ArrayList<>();
+        try {
+//            pstmt = DB.conn.prepareStatement(
+//                    "SELECT S_Id FROM S_Student JOIN M_Marking ON M_S_Id = S_Id " +
+//                            "WHERE M_Date > CURDATE() - INTERVAL ? DAY;");
 
+            //SQLite nepodporuje mat. operace nad typem DECIMAL, je potřeba použít CAST
+            pstmt = DB.conn.prepareStatement(
+                    "SELECT S_Id, M_GT_Id FROM S_Student JOIN M_Marking ON M_S_Id = S_Id " +
+                            "WHERE M_Date > DATE('now', ?) AND CAST(M_Weight AS REAL) BETWEEN ? AND  ? ;");
+            pstmt.setString(1, String.format("-%d days", nDays));
+            pstmt.setFloat(2, weightFrom);
+            pstmt.setFloat(3, weightTo);
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()){
+                    if(studentTopic) {
+                        out.add(rs.getInt("S_Id"));
+                    } else {
+                        out.add(rs.getInt("M_GT_Id"));
+                    }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
     }
 }

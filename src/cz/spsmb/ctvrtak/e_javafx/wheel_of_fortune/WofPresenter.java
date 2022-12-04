@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -25,6 +26,7 @@ enum State {
     DONE
 }
 public class WofPresenter {
+    private final int N_ALREADY_TESTED_DAYS = 30;
     private final int MAX_DEGREES_REMAINING = 5*360;
     private final WofModel model;
     private final WofView view;
@@ -119,9 +121,11 @@ public class WofPresenter {
                 }
             }
         });
-        // select student for the table fill
+        // select students for the toggles preselect
+        List<Integer> atsl = this.model.getAlreadyTestedStudentIdList(N_ALREADY_TESTED_DAYS, 1, 1);
         for(Node n:WofPresenter.this.view.getStudentsVbox().getChildren()) {
             ToggleButton b = (ToggleButton) n;
+            b.setSelected(atsl.contains((Integer) b.getUserData()));
             b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -134,9 +138,12 @@ public class WofPresenter {
                 }
             });
         }
+        // select topics for the toggles preselect
+        List<Integer> attl = this.model.getAlreadyTestedTopicIdList(N_ALREADY_TESTED_DAYS, 1, 1);
         // assign selected topic to lSelectedTopic's userdata
         for(Node n:WofPresenter.this.view.getTopicsVbox().getChildren()) {
             ToggleButton b = (ToggleButton) n;
+            b.setSelected(attl.contains((Integer) b.getUserData()));
             b.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
