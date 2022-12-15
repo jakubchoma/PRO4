@@ -28,11 +28,15 @@ class TogglesInfo {
     public final int nUnselectedToggles;
     public final int maxTextWidth;
     public final double maxWidth;
-    public TogglesInfo(int nUnselectedToggles, int maxTextWidth, double maxWidth) {
+    public final int n;
+
+    public TogglesInfo(int nUnselectedToggles, int maxTextWidth, double maxWidth, int n) {
         this.nUnselectedToggles = nUnselectedToggles;
         this.maxTextWidth = maxTextWidth;
         this.maxWidth = maxWidth;
+        this.n = n;
     }
+
 }
 
 public class WofView extends Group {
@@ -46,6 +50,7 @@ public class WofView extends Group {
     private HBox hbox;
     private Label lSelectedStudent = new Label();
     private Label lSelectedTopic = new Label();
+    private Label lTopicCounter = new Label("0");
     private TextField tfMark, tfWeight;
     private DatePicker dpDate;
     private Button btnAdd = new Button("+");
@@ -133,6 +138,8 @@ public class WofView extends Group {
     }
     public void init(){
         this.topicsVbox.layoutXProperty().bind(this.getScene().widthProperty().subtract(this.topicsVbox.widthProperty()));
+        lTopicCounter.layoutXProperty().bind(topicsVbox.layoutXProperty());
+        lTopicCounter.layoutYProperty().bind(topicsVbox.heightProperty().add(lTopicCounter.heightProperty()));
         //this.table.setLayoutY(60);
         //this.table.setLayoutX(60);
         this.students = presenter.getAllStudents();
@@ -141,9 +148,10 @@ public class WofView extends Group {
         this.generateTopicToggles();
         //this.table = new TableView<>(this.presenter.getMarks(0));
         this.table = new TableView<>();
-        this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
+        //this.table.layoutXProperty().bind(this.fireBtn.widthProperty());
+        this.table.layoutXProperty().bind(this.studentsVbox.widthProperty());
         //this.table.layoutYProperty().bind(this.getScene().heightProperty().subtract(this.table.prefHeightProperty()));
-        this.getChildren().addAll(this.fireBtn, this.studentsVbox, this.topicsVbox, this.table, this.hbox);
+        this.getChildren().addAll(this.fireBtn,this.lTopicCounter, this.studentsVbox, this.topicsVbox, this.table, this.hbox);
         this.prepareMarkTableView();
         //this.hbox.setLayoutY(40);
         //this.hbox.layoutYProperty().bind(this.fireBtn.heightProperty().add(this.studentsVbox.heightProperty().add(this.hbox.heightProperty())));
@@ -225,20 +233,22 @@ public class WofView extends Group {
         int nUnselected = 0;
         int maxTextWidth = 0;
         double maxWidth = 0;
-        for(Node n:from.getChildren()){
-            if(! ((ToggleButton)n).isSelected() ){
+        int n = 0;
+        for(Node node:from.getChildren()){
+            n++;
+            if(! ((ToggleButton)node).isSelected() ){
                 nUnselected++;
             }
-            int len = ((ToggleButton)n).getText().length();
+            int len = ((ToggleButton)node).getText().length();
             if(len > maxTextWidth){
                 maxTextWidth = len;
             }
-            double width =((ToggleButton) n).getWidth();
+            double width =((ToggleButton) node).getWidth();
             if(width > maxWidth){
                 maxWidth = width;
             }
         }
-        return new TogglesInfo(nUnselected, maxTextWidth, maxWidth);
+        return new TogglesInfo(nUnselected, maxTextWidth, maxWidth,n);
     }
     public void generateWheel(VBox from){
         int i = 0;
