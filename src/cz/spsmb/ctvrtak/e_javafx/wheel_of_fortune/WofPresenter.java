@@ -140,8 +140,7 @@ public class WofPresenter {
         }
         // select topics for the toggles preselect
         List<Integer> attl = this.model.getAlreadyTestedTopicIdList(N_ALREADY_TESTED_DAYS, 1, 1);
-        TogglesInfo tiTopic = WofPresenter.this.view.getTogglesInfo(WofPresenter.this.view.getTopicsVbox());
-        WofPresenter.this.view.getlTopicCounter().setText(String.format("%d",tiTopic.n-tiTopic.nUnselectedToggles));
+
         // assign selected topic to lSelectedTopic's userdata
         for(Node n:WofPresenter.this.view.getTopicsVbox().getChildren()) {
             ToggleButton b = (ToggleButton) n;
@@ -152,9 +151,11 @@ public class WofPresenter {
                     ToggleButton tbSelected = ((ToggleButton) mouseEvent.getSource());
                     WofPresenter.this.view.getlSelectedTopic().setText(tbSelected.getText());
                     WofPresenter.this.view.getlSelectedTopic().setUserData(tbSelected.getUserData());
+                    WofPresenter.this.view.actualizeTopics();
                 }
             });
         }
+        this.view.actualizeTopics();
         // add row button
         WofPresenter.this.view.getBtnAdd().setOnAction(new EventHandler<ActionEvent>() {
             @Override

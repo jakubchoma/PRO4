@@ -165,6 +165,10 @@ public class WofView extends Group {
         this.fixTogglesWidth(this.topicsVbox);
     }
 
+    public void actualizeTopics(){
+        TogglesInfo tiTopic = this.getTogglesInfo(this.getTopicsVbox());
+        this.getlTopicCounter().setText(String.format("%d",tiTopic.n-tiTopic.nUnselectedToggles));
+    }
     /*
         private final IntegerProperty id;
     private final IntegerProperty mark;
@@ -267,13 +271,17 @@ public class WofView extends Group {
                 continue;
             }
             Button b = new Button(tb.getText());
+            double angle = this.presenter.getAngle()+i*360/ti.nUnselectedToggles;
+            int tmp = (int) (Math.tan(angle/2) * ti.maxWidth);
+            b.setStyle(String.format("-fx-shape: \"M 0 200 L %1$d %2$d L %1$d %3$d L 0 400 L 0 200 Z\"",
+                    (int)ti.maxWidth, 200-tmp, 200+tmp));
             b.setPrefWidth(ti.maxWidth);
             b.layoutXProperty().bind(this.getScene().widthProperty().divide(2));
             b.layoutYProperty().bind(this.getScene().heightProperty().divide(2));
             this.getChildren().add(b);
             Rotate r = new Rotate();
             //r.setPivotY(-b.getHeight()/2);
-            r.setAngle(this.presenter.getAngle()+i*360/ti.nUnselectedToggles);
+            r.setAngle(angle);
             b.getTransforms().addAll(
                     //new Affine(0, b.getHeight()/2, 0,0,0,0),
                     //new Translate( 0, -b.getHeight()/2),
