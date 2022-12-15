@@ -36,7 +36,6 @@ class TogglesInfo {
         this.maxWidth = maxWidth;
         this.n = n;
     }
-
 }
 
 public class WofView extends Group {
@@ -71,6 +70,10 @@ public class WofView extends Group {
                 new Label(" známka:"), this.tfMark, new Label(" váha:"),
                 this.tfWeight, new Label(" datum:"), this.dpDate, this.lSelectedTopic, this.btnAdd
         );
+    }
+
+    public Label getlTopicCounter() {
+        return lTopicCounter;
     }
 
     public Label getlSelectedTopic() {
