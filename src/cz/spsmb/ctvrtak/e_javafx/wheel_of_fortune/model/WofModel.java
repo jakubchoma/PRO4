@@ -14,7 +14,7 @@ public class WofModel {
             //DB.fillBStudents();
             //DB.fillBStudentsOfEvil();
             //DB.fillAStudents();
-            //DB.removeMark(14);
+            DB.removeMark(21);
             //DB.customStmt("UPDATE M_Marking SET M_Weight = 0.5 WHERE M_Id IN (19, 20, 21);");
             out = DB.getAllStudents();
         } catch (SQLException e) {
