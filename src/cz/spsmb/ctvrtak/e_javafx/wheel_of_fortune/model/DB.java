@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DB {
-    private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofa.db";
+    private static String url = "jdbc:sqlite:Y:\\stemberk\\verejne_zaci\\wofb.db";
     //private static String url = "jdbc:sqlite:wofa.db";
     private static Connection conn = null;
     static{
