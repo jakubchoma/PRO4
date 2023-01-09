@@ -48,7 +48,7 @@ Maturitní okruhy PRO 2022/2023
 
 8. Pole
 8.1. Definice pole
-8.2. Jednorozměrné a dvourozměrné pole
+ 8.2. Jednorozměrné a dvourozměrné pole
 8.3. Index
 8.4. Zjištění délky pole
 8.5. Procházení pole
