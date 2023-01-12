@@ -1,4 +1,4 @@
-package cz.spsmb.ctvrtak.f_pop.a_birthdate_reminder;
+package cz.spsmb.ctvrtak.f_pop.a_mvp_based.a_birthdate_reminder;
 
 /**
  * Vytvořte aplikaci v JavaFX s návrhovým vzorem Model-View-Presenter (MVP), která umožní:
