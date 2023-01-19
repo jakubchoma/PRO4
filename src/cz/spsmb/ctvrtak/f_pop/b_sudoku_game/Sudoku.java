@@ -11,36 +11,39 @@ public class Sudoku {
         // Pole seznamů:
         HashSet<Integer>[] columns = new HashSet[this.plocha.length];
         HashSet<Integer>[] wins = new HashSet[this.plocha.length];
+        int i=0,j=0;
         loop1:
-       // actualRow.contains(cislo) || columns[j].contains(cislo)
-        for (int i = 0; i < this.plocha.length; i++){
-            if(i == 0){
-                for (int j = 0; j < this.plocha.length; j++) {
-                    columns[j] = new HashSet<>();
-                    wins[j] = new HashSet<>();
+        do {
+            for (int j1 = 0; j1 < this.plocha.length; j1++) {
+                columns[j1] = new HashSet<>();
+                wins[j1] = new HashSet<>();
+                for (int k1 = 0; k1 < this.plocha.length; k1++) {
+                    this.plocha[j1][k1] = 0;
                 }
             }
-            HashSet<Integer> actualRow = new HashSet<>();
-            for (int j = 0; j < this.plocha[0].length; j++) {
-                int cislo;
-                HashSet<Integer> docasna = new HashSet<>(actualRow);
-                docasna.addAll(columns[j]);
-                docasna.addAll( wins[3*(j/3) + i/3]);
-                if(docasna.size() == plocha.length){
-                    continue loop1;
-                }
-                do{
-                    cislo = rnd.nextInt(9) + 1;
 
-                } while (docasna.contains(cislo));
-                actualRow.add(cislo);
-                columns[j].add(cislo);
-                wins[3*(j/3) + i/3].add(cislo);
-                this.plocha[i][j] = cislo;
+            for (i = 0; i < this.plocha.length; i++) {
+                HashSet<Integer> actualRow = new HashSet<>();
+                for (j = 0; j < this.plocha[0].length; j++) {
+                    int cislo;
+                    HashSet<Integer> docasna = new HashSet<>(actualRow);
+                    docasna.addAll(columns[j]);
+                    docasna.addAll(wins[3 * (j / 3) + i / 3]);
+                    if (docasna.size() == plocha.length) {
+                        continue loop1;
+                    }
+                    do {
+                        cislo = rnd.nextInt(9) + 1;
+                    } while (docasna.contains(cislo));
+                    actualRow.add(cislo);
+                    columns[j].add(cislo);
+                    wins[3 * (j / 3) + i / 3].add(cislo);
+                    this.plocha[i][j] = cislo;
+                }
+                //System.out.println("Generuji " + i + "radek");
+                //System.out.println(this);
             }
-            /*System.out.println("Generuji " + i + "radek");
-            System.out.println(this);*/
-        }
+        }while(i < plocha.length && j < plocha.length);
     }
     public String toString(){
         StringBuffer tmp = new StringBuffer();
@@ -106,12 +109,12 @@ public class Sudoku {
         Sudoku sudoku = new Sudoku();
         int cnt = 0;
         do {
-           // do {
-                cnt++;
-                sudoku.randomFill();
-                System.out.print("\rPočet pokusů: " + cnt);
-           // } while (!sudoku.checkCols() || !sudoku.checkRows());
-        }         while ( !sudoku.checkWins());
+            cnt++;
+            sudoku.randomFill();
+            //System.out.println(sudoku);
+            //System.out.print("\rPočet pokusů: " + cnt);
+            //System.out.print("\rPočet pokusů: " + cnt);
+       } while (!sudoku.checkCols() || !sudoku.checkRows() || !sudoku.checkWins());
         System.out.println(sudoku.checkWins());
         System.out.println(sudoku);
         System.out.println("Počet pokusů: " + cnt);

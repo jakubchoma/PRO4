@@ -26,7 +26,7 @@ enum State {
     DONE
 }
 public class WofPresenter {
-    private final int N_ALREADY_TESTED_DAYS = 45;
+    private final int N_ALREADY_TESTED_DAYS = 60;
     private final int MAX_DEGREES_REMAINING = 5*360;
     private final WofModel model;
     private final WofView view;
