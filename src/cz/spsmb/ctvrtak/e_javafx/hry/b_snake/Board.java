@@ -1,24 +1,24 @@
 package cz.spsmb.ctvrtak.e_javafx.hry.b_snake;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.util.Duration;
 
-public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 300;
-    private final int B_HEIGHT = 300;
+public class Board extends Group {
+
+    private static final int B_WIDTH = 300;
+    private static final int B_HEIGHT = 300;
     private final int DOT_SIZE = 10;
     private final int ALL_DOTS = 900;
     private final int RAND_POS = 29;
@@ -37,37 +37,47 @@ public class Board extends JPanel implements ActionListener {
     private boolean downDirection = false;
     private boolean inGame = true;
 
-    private Timer timer;
+    private Canvas canvas;
+    private Timeline timeline;
+    private long frameDuration = 250;
     private Image ball;
     private Image apple;
     private Image head;
 
     public Board() {
-
         initBoard();
     }
 
     private void initBoard() {
+        canvas = new Canvas(this.B_WIDTH, this.B_HEIGHT);
 
-        addKeyListener(new TAdapter());
+        this.getChildren().add(this.canvas);
+        GraphicsContext gc = this.canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+        //canvas.setOnKeyPressed(this::keyPressed);
+        this.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                System.out.println("tl");
+                keyPressed(keyEvent);
+            }
+        });
+        //canvas.requestFocus();
+        /*addKeyListener(new TAdapter());
         setBackground(Color.black);
         setFocusable(true);
 
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+*/
         loadImages();
         initGame();
     }
 
     private void loadImages() {
-
-        ImageIcon iid = new ImageIcon(getClass().getClassLoader().getResource("dot.png"));
-        ball = iid.getImage();
-
-        ImageIcon iia = new ImageIcon(getClass().getClassLoader().getResource("apple.png"));
-        apple = iia.getImage();
-
-        ImageIcon iih = new ImageIcon(getClass().getClassLoader().getResource("head.png"));
-        head = iih.getImage();
+        this.ball = new Image("dot.png");
+        this.apple = new Image("apple.png");
+        this.head = new Image("head.png");
     }
 
     private void initGame() {
@@ -80,49 +90,45 @@ public class Board extends JPanel implements ActionListener {
         }
 
         locateApple();
+        /*this.timeline = new Timeline(new KeyFrame(Duration.millis(this.frameDuration), new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
 
-        timer = new Timer(DELAY, this);
-        timer.start();
+            }
+        }));*/
+        this.timeline = new Timeline(new KeyFrame(Duration.millis(this.frameDuration), this::actionPerformed));
+        this.timeline.setCycleCount(Timeline.INDEFINITE);
+        this.timeline.play();
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        doDrawing(g);
-    }
-
-    private void doDrawing(Graphics g) {
-
+    private void doDrawing() {
+        GraphicsContext gc = this.canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
         if (inGame) {
-
-            g.drawImage(apple, apple_x, apple_y, this);
-
+            gc.drawImage(apple, apple_x, apple_y);
             for (int z = 0; z < dots; z++) {
                 if (z == 0) {
-                    g.drawImage(head, x[z], y[z], this);
+                    gc.drawImage(head, x[z], y[z]);
                 } else {
-                    g.drawImage(ball, x[z], y[z], this);
+                    gc.drawImage(ball, x[z], y[z]);
                 }
             }
-
-            Toolkit.getDefaultToolkit().sync();
-
         } else {
-
-            gameOver(g);
+            gameOver();
         }
     }
 
-    private void gameOver(Graphics g) {
-
+    private void gameOver() {
+        GraphicsContext gc = this.canvas.getGraphicsContext2D();
         String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics metr = getFontMetrics(small);
+        //Font small = new Font("Helvetica", Font.BOLD, 14);
+        //FontMetrics metr = getFontMetrics(small);
+        //TODO: vypocet sirky zpravy v pixelech
 
-        g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        gc.setStroke(Color.WHITE);
+        //gc.setFont(Font.font("small"));
+        gc.strokeText(msg, 10, B_HEIGHT / 2);
     }
 
     private void checkApple() {
@@ -184,7 +190,7 @@ public class Board extends JPanel implements ActionListener {
         }
 
         if (!inGame) {
-            timer.stop();
+            this.timeline.stop();
         }
     }
 
@@ -197,49 +203,41 @@ public class Board extends JPanel implements ActionListener {
         apple_y = ((r * DOT_SIZE));
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
-
         if (inGame) {
-
             checkApple();
+
             checkCollision();
             move();
+            this.doDrawing();
         }
-
-        repaint();
     }
 
-    private class TAdapter extends KeyAdapter {
+    public void keyPressed(KeyEvent e) {
+        KeyCode key = e.getCode();
 
-        @Override
-        public void keyPressed(KeyEvent e) {
+        if ((key == KeyCode.LEFT) && (!rightDirection)) {
+            leftDirection = true;
+            upDirection = false;
+            downDirection = false;
+        }
 
-            int key = e.getKeyCode();
+        if ((key == KeyCode.RIGHT) && (!leftDirection)) {
+            rightDirection = true;
+            upDirection = false;
+            downDirection = false;
+        }
 
-            if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-                leftDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
+        if ((key == KeyCode.UP) && (!downDirection)) {
+            upDirection = true;
+            rightDirection = false;
+            leftDirection = false;
+        }
 
-            if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-                rightDirection = true;
-                upDirection = false;
-                downDirection = false;
-            }
-
-            if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-                upDirection = true;
-                rightDirection = false;
-                leftDirection = false;
-            }
-
-            if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-                downDirection = true;
-                rightDirection = false;
-                leftDirection = false;
-            }
+        if ((key == KeyCode.DOWN) && (!upDirection)) {
+            downDirection = true;
+            rightDirection = false;
+            leftDirection = false;
         }
     }
 }
