@@ -1,31 +1,45 @@
 package cz.spsmb.ctvrtak.f_pop.b_sudoku_game;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Sudoku {
     private int[][] plocha = new int[9][9];
-
     public void randomFill(){
         Random rnd = new Random();
         // Pole seznamů:
-        ArrayList<Integer>[] columns = new ArrayList[this.plocha.length];
-        for (int i = 0; i < this.plocha.length; i++) {
-            columns[i] = new ArrayList<>();
-        }
+        HashSet<Integer>[] columns = new HashSet[this.plocha.length];
+        HashSet<Integer>[] wins = new HashSet[this.plocha.length];
+        loop1:
+       // actualRow.contains(cislo) || columns[j].contains(cislo)
         for (int i = 0; i < this.plocha.length; i++){
-            ArrayList<Integer> actualRow = new ArrayList<>();
+            if(i == 0){
+                for (int j = 0; j < this.plocha.length; j++) {
+                    columns[j] = new HashSet<>();
+                    wins[j] = new HashSet<>();
+                }
+            }
+            HashSet<Integer> actualRow = new HashSet<>();
             for (int j = 0; j < this.plocha[0].length; j++) {
                 int cislo;
+                HashSet<Integer> docasna = new HashSet<>(actualRow);
+                docasna.addAll(columns[j]);
+                docasna.addAll( wins[3*(j/3) + i/3]);
+                if(docasna.size() == plocha.length){
+                    continue loop1;
+                }
                 do{
                     cislo = rnd.nextInt(9) + 1;
-                } while (actualRow.contains(cislo) || columns[j].contains(cislo));
+
+                } while (docasna.contains(cislo));
                 actualRow.add(cislo);
                 columns[j].add(cislo);
+                wins[3*(j/3) + i/3].add(cislo);
                 this.plocha[i][j] = cislo;
             }
-            System.out.println("Generuji " + i + "radek");
-            System.out.println(this);
+            /*System.out.println("Generuji " + i + "radek");
+            System.out.println(this);*/
         }
     }
     public String toString(){
@@ -64,7 +78,7 @@ public class Sudoku {
         }
         return true;
     }
-    public void checkWins(){
+    public boolean checkWins(){
         ArrayList<Integer>[] plocha2 = new ArrayList[9];
         for (int i = 0; i < 9; i++) {
             plocha2[i] = new ArrayList<>();
@@ -76,21 +90,29 @@ public class Sudoku {
             }
         }
         //dodělat
-        for (ArrayList<Integer> row : plocha2) {
-            for (int cislo : row) {
-                System.out.print(cislo+",");
+        for (int rowIdx = 0; rowIdx < plocha2.length; rowIdx++) {
+            for (int i = 0; i < plocha2[rowIdx].size(); i++) {
+                int cislo = plocha2[rowIdx].get(i);
+                for (int j = i + 1; j < plocha2[rowIdx].size(); j++) {
+                    if (cislo == plocha2[rowIdx].get(j)) {
+                        return false;
+                    }
+                }
             }
-            System.out.println();
         }
+        return true;
     }
     public static void main(String[] args) {
         Sudoku sudoku = new Sudoku();
         int cnt = 0;
         do {
-          cnt++;
-          sudoku.randomFill();
-          System.out.print("\rPočet pokusů: " + cnt);
-        } while( !sudoku.checkCols());
+           // do {
+                cnt++;
+                sudoku.randomFill();
+                System.out.print("\rPočet pokusů: " + cnt);
+           // } while (!sudoku.checkCols() || !sudoku.checkRows());
+        }         while ( !sudoku.checkWins());
+        System.out.println(sudoku.checkWins());
         System.out.println(sudoku);
         System.out.println("Počet pokusů: " + cnt);
     }
