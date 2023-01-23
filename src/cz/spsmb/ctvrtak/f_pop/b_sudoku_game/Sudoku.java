@@ -6,6 +6,11 @@ import java.util.Random;
 
 public class Sudoku {
     private int[][] plocha = new int[9][9];
+
+    public int[][] getPlocha() {
+        return plocha;
+    }
+
     public void randomFill(){
         Random rnd = new Random();
         // Pole seznamů:
