@@ -13,11 +13,13 @@ public class Gui extends Application {
     public void start(Stage stage) throws Exception {
         GridPane grid = new GridPane();
         Sudoku sudoku = new Sudoku();
-        int[][] plocha = sudoku.getPlocha();
         sudoku.randomFill();
+        sudoku.prepareForLevel(0);
+        int[][] plocha = sudoku.getPlocha();
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                TextField tf = new TextField(Integer.toString(plocha[row][col]));
+                TextField tf = new TextField(plocha[row][col]==0?"":Integer.toString(plocha[row][col]));
                 tf.setPrefWidth(100);
                 tf.setPrefHeight(100);
                 tf.setStyle("-fx-font-size:30px");

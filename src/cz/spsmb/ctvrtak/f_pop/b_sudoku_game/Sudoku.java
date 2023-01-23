@@ -50,6 +50,17 @@ public class Sudoku {
             }
         }while(i < plocha.length && j < plocha.length);
     }
+    public void prepareForLevel(int level){
+        Random rnd = new Random();
+        for (int i = 0; i < this.plocha.length; i++) {
+            for (int j = 0; j < this.plocha[0].length; j++) {
+                if (rnd.nextInt(9) <= level){
+                    this.plocha[i][j] = 0;
+                }
+            }
+
+        }
+    }
     public String toString(){
         StringBuffer tmp = new StringBuffer();
         for (int[] row : this.plocha) {
