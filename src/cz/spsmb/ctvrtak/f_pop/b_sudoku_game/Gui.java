@@ -34,6 +34,7 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         GridPane grid = new GridPane();
+        grid.setStyle("-fx-border-color: black");
         Button checkRows = new Button("kontrola řádků");
         Button checkCols = new Button("kontrola sloupců");
         Button checkWins = new Button("kontrola oken");
@@ -44,12 +45,24 @@ public class Gui extends Application {
         sudoku.prepareForLevel(0);
         int[][] plocha = sudoku.getPlocha();
 
+
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
-                TextField tf = new TextField(plocha[row][col]==0?"":Integer.toString(plocha[row][col]));
+                TextField tf = new TextField();
+                String style = "-fx-font-size:30px";
+                if(plocha[row][col]==0){
+                    style += "; -fx-text-fill: green";
+                }else{
+                    tf.setText(Integer.toString(plocha[row][col]));
+                }
+                int winIdx = (col/3)*3 + row/3;
+                if (winIdx %2 == 0){
+                    style+="; -fx-border-color: black";
+
+                }
                 tf.setPrefWidth(100);
                 tf.setPrefHeight(100);
-                tf.setStyle("-fx-font-size:30px");
+                tf.setStyle(style);
                 tf.setAlignment(Pos.CENTER);
                 tf.setUserData(new TfInfo(row,col));
                 tf.setOnKeyTyped(new EventHandler<KeyEvent>() {
