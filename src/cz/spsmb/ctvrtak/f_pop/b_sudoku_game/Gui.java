@@ -7,11 +7,28 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+
+class TfInfo {
+    public final int row;
+    public final int column;
+
+    public TfInfo(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
+
+
+
+}
 
 public class Gui extends Application {
     @Override
@@ -24,7 +41,7 @@ public class Gui extends Application {
         VBox vbox = new VBox(hbox,grid);
         Sudoku sudoku = new Sudoku();
         sudoku.randomFill();
-        sudoku.prepareForLevel(7);
+        sudoku.prepareForLevel(0);
         int[][] plocha = sudoku.getPlocha();
 
         for (int row = 0; row < 9; row++) {
@@ -34,6 +51,27 @@ public class Gui extends Application {
                 tf.setPrefHeight(100);
                 tf.setStyle("-fx-font-size:30px");
                 tf.setAlignment(Pos.CENTER);
+                tf.setUserData(new TfInfo(row,col));
+                tf.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                    @Override
+                    public void handle(KeyEvent keyEvent) {
+                        System.out.println("Zadali jste: "+keyEvent.getCharacter());
+                        ArrayList<String> kontrola = new ArrayList<>();
+                        TextField currentTf = (TextField) keyEvent.getSource();
+                        for (int i = 1; i < 10; i++) {
+                            kontrola.add(Integer.toString(i));
+                        }
+                        if(kontrola.contains(keyEvent.getCharacter())){
+                            System.out.println("ok");
+                            vbox.requestFocus();
+                            TfInfo ti = (TfInfo) currentTf.getUserData();
+                            sudoku.getPlocha()[ti.row][ti.column] = Integer.valueOf(keyEvent.getCharacter());
+                        }else{
+                            System.out.println("neni ok");
+                            currentTf.setText("");
+                        };
+                    }
+                });
                 grid.add(tf, col, row);
             }
         }
