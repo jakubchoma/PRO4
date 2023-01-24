@@ -54,6 +54,7 @@ public class Sudoku {
         Random rnd = new Random();
         for (int i = 0; i < this.plocha.length; i++) {
             for (int j = 0; j < this.plocha[0].length; j++) {
+                //hážu kostkou s 8 stranami
                 if (rnd.nextInt(9) <= level){
                     this.plocha[i][j] = 0;
                 }
