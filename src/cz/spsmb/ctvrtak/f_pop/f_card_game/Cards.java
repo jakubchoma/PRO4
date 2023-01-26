@@ -6,6 +6,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Transform;
 
 
 public enum Cards {
@@ -32,22 +34,35 @@ public enum Cards {
         this.type=type;
     }
     public Pane getCard(){
+        //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
-        gc.setFill(Color.BLACK);
+        gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
         gc.strokeText("A", 10 , 85);
-        SVGPath svg = new SVGPath();
-        svg.setContent(Cards.PATH[this.type-1]);
-        svg.setScaleX(0.3);
-        svg.setScaleY(0.3);
-        svg.setTranslateY(20);
-        svg.setTranslateX(20);
         //r.getChildren().add(svg);
-        gc.setFill(svg.getFill());
-        //gc.appendSVGPath(svg.getContent());
+        //gc.setFill(svg.getFill());
+        //gc.moveTo(10,60);
+        //gc.transform(1,1,0,1,1,0);
+
+        gc.appendSVGPath(Cards.PATH[this.type-1]);
+        gc.moveTo(Cards.width - 20, Cards.height - 20);
+        Affine a1 = new Affine();
+        a1.appendScale(0.3, 0.3);
+        gc.transform(a1);
+        if(true) {
+            //gc.moveTo(Cards.width - 20, Cards.height - 20);
+            gc.appendSVGPath(Cards.PATH[this.type - 1]);
+            if(false) {
+                Affine a2 = new Affine();
+                a2.appendScale(1.9, 1.9);
+                gc.moveTo(Cards.width / 2, Cards.height / 2);
+                gc.transform(a2);
+                gc.appendSVGPath(Cards.PATH[this.type - 1]);
+            }
+        }
         gc.fill();
         gc.stroke();
         return r;
