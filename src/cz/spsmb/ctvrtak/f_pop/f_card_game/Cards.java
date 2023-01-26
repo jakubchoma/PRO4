@@ -43,8 +43,11 @@ public enum Cards {
         svg.setContent(Cards.PATH[this.type-1]);
         svg.setScaleX(0.3);
         svg.setScaleY(0.3);
-        gc.appendSVGPath(svg.getContent());
-        System.out.println(svg.toString());
+        svg.setTranslateY(20);
+        svg.setTranslateX(20);
+        //r.getChildren().add(svg);
+        gc.setFill(svg.getFill());
+        //gc.appendSVGPath(svg.getContent());
         gc.fill();
         gc.stroke();
         return r;
