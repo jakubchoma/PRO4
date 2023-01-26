@@ -34,18 +34,16 @@ public enum Cards {
     public Pane getCard(){
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
-        r.setLayoutX(20);
-        r.setLayoutY(20);
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
         gc.setFill(Color.BLACK);
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
         gc.strokeText("A", 10 , 85);
         SVGPath svg = new SVGPath();
-        svg.setContent(Cards.PATH[this.type+1]);
+        svg.setContent(Cards.PATH[this.type-1]);
         svg.setScaleX(0.3);
         svg.setScaleY(0.3);
-        gc.appendSVGPath(svg.toString());
+        gc.appendSVGPath(svg.getContent());
         System.out.println(svg.toString());
         gc.fill();
         gc.stroke();
