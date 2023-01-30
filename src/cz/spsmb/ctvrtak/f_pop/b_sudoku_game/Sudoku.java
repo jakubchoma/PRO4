@@ -62,6 +62,16 @@ public class Sudoku {
 
         }
     }
+    public boolean isZero() {
+        for (int i = 0; i < this.getPlocha().length; i++) {
+            for (int j = 0; j < this.getPlocha()[0].length; j++) {
+                if (this.getPlocha()[i][j] == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public String toString(){
         StringBuffer tmp = new StringBuffer();
         for (int[] row : this.plocha) {
