@@ -1,7 +1,10 @@
 package cz.spsmb.ctvrtak.f_pop.f_card_game;
 
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -91,6 +94,30 @@ public enum Cards {
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
+        r.setOnDragEntered(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("entered");
+            }
+        });
+        r.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("detected");
+            }
+        });
+        r.setOnDragExited(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("exited");
+            }
+        });
+        r.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("dropped");
+            }
+        });
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
