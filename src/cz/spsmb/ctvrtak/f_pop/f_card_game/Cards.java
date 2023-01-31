@@ -22,6 +22,9 @@ public enum Cards {
     HEA_8 (8,1),
     HEA_9 (9,1),
     HEA_10 (10,1),
+    HEA_11 (11,1),
+    HEA_12 (12,1),
+    HEA_13 (13,1),
     DIA_A (1,2),
     DIA_2 (2,2),
     DIA_3 (3,2),
@@ -32,6 +35,9 @@ public enum Cards {
     DIA_8 (8,2),
     DIA_9 (9,2),
     DIA_10 (10,2),
+    DIA_11 (11,2),
+    DIA_12 (12,2),
+    DIA_13 (13,2),
     SPA_A (1,3),
     SPA_2 (2,3),
     SPA_3 (3,3),
@@ -42,6 +48,9 @@ public enum Cards {
     SPA_8 (8,3),
     SPA_9 (9,3),
     SPA_10 (10,3),
+    SPA_11 (11,3),
+    SPA_12 (12,3),
+    SPA_13 (13,3),
     CLU_A (1,4),
     CLU_2 (2,4),
     CLU_3 (3,4),
@@ -51,7 +60,10 @@ public enum Cards {
     CLU_7 (7,4),
     CLU_8 (8,4),
     CLU_9 (9,4),
-    CLU_10 (10,4);
+    CLU_10 (10,4),
+    CLU_11 (11,4),
+    CLU_12 (12,4),
+    CLU_13 (13,4);
     public int num;
     public int type;
     static double width = 50;
@@ -82,9 +94,12 @@ public enum Cards {
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
+
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
+        gc.setStroke(this.type>2 ?Color.BLACK:Color.RED);
 
         gc.strokeText(this.getSymbol(), 3 , 15);
+        gc.strokeText("ꓯ", 37 , 95);
         //r.getChildren().add(svg);
         //gc.setFill(svg.getFill());
         //gc.moveTo(10,60);
@@ -93,7 +108,7 @@ public enum Cards {
         Affine a0 = new Affine();
         //a0.appendTranslation(-19,-19);
         //a0.appendRotation(45);
-        a0.appendTranslation(5,Cards.height-45);
+        a0.appendTranslation(5,Cards.height-65);
         gc.transform(a0);
         gc.appendSVGPath(Cards.PATH[this.type-1]);
         gc.moveTo(Cards.width - 20, Cards.height - 20);
@@ -103,10 +118,16 @@ public enum Cards {
             e.printStackTrace();
         }
         Affine a1 = new Affine();
-        gc.moveTo(2,20);
+        gc.moveTo(19,5);
         a1.appendScale(0.3, 0.3);
         gc.transform(a1);
         //gc.moveTo(Cards.width - 20, Cards.height - 20);
+        gc.appendSVGPath(Cards.PATH[this.type - 1]);
+
+        Affine a2 = new Affine();
+        a2.appendRotation(180);
+        gc.moveTo(120,320);
+        gc.transform(a2);
         gc.appendSVGPath(Cards.PATH[this.type - 1]);
 
         gc.fill();
