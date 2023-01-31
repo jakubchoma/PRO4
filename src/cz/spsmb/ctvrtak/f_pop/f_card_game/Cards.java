@@ -34,6 +34,15 @@ public enum Cards {
         this.num=num;
         this.type=type;
     }
+    private String getSymbol(){
+        switch(this.num){
+            case 1 -> {return "A";}
+            case 11 -> {return "J";}
+            case 12 -> {return "Q";}
+            case 13 -> {return "K";}
+            default -> {return Integer.toString(this.num);}
+        }
+    }
     public Pane getCard(){
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
@@ -42,7 +51,8 @@ public enum Cards {
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
-        gc.strokeText("A", 3 , 15);
+
+        gc.strokeText(this.getSymbol(), 3 , 15);
         //r.getChildren().add(svg);
         //gc.setFill(svg.getFill());
         //gc.moveTo(10,60);
