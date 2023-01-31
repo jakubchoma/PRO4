@@ -37,7 +37,7 @@ class TfInfo {
 
 class Win {
     public Stage Win(Stage winW) {
-        winW.getIcons().add(new Image("logo.png"));
+        //winW.getIcons().add(new Image("logo.png"));
         winW.setTitle("Win");
         Label label = new Label("You win!! \n");
         label.setFont(new Font(24));

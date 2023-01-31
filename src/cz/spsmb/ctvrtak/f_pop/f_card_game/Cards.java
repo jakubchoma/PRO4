@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.scene.transform.Affine;
+import javafx.scene.transform.NonInvertibleTransformException;
 import javafx.scene.transform.Transform;
 
 
@@ -41,28 +42,31 @@ public enum Cards {
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
-        gc.strokeText("A", 10 , 85);
+        gc.strokeText("A", 3 , 15);
         //r.getChildren().add(svg);
         //gc.setFill(svg.getFill());
         //gc.moveTo(10,60);
         //gc.transform(1,1,0,1,1,0);
-
+        //gc.moveTo(-19,-19);
+        Affine a0 = new Affine();
+        //a0.appendTranslation(-19,-19);
+        //a0.appendRotation(45);
+        a0.appendTranslation(5,Cards.height-45);
+        gc.transform(a0);
         gc.appendSVGPath(Cards.PATH[this.type-1]);
         gc.moveTo(Cards.width - 20, Cards.height - 20);
+        try {
+            gc.transform(a0.createInverse());
+        } catch (NonInvertibleTransformException e) {
+            e.printStackTrace();
+        }
         Affine a1 = new Affine();
+        gc.moveTo(2,20);
         a1.appendScale(0.3, 0.3);
         gc.transform(a1);
-        if(true) {
-            //gc.moveTo(Cards.width - 20, Cards.height - 20);
-            gc.appendSVGPath(Cards.PATH[this.type - 1]);
-            if(false) {
-                Affine a2 = new Affine();
-                a2.appendScale(1.9, 1.9);
-                gc.moveTo(Cards.width / 2, Cards.height / 2);
-                gc.transform(a2);
-                gc.appendSVGPath(Cards.PATH[this.type - 1]);
-            }
-        }
+        //gc.moveTo(Cards.width - 20, Cards.height - 20);
+        gc.appendSVGPath(Cards.PATH[this.type - 1]);
+
         gc.fill();
         gc.stroke();
         return r;
