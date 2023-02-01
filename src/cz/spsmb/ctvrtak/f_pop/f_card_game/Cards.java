@@ -3,8 +3,7 @@ package cz.spsmb.ctvrtak.f_pop.f_card_game;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -94,24 +93,52 @@ public enum Cards {
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
-        r.setOnDragEntered(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("entered");
-            }
-        });
-        r.setOnDragDetected(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("detected");
-            }
-        });
-        r.setOnDragExited(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("exited");
-            }
-        });
+        //RED
+        if(this.type>2) {
+            r.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    System.out.println("detected");
+                    Dragboard db = r.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString("DRAG");
+                    db.setContent(content);
+                    mouseEvent.consume();
+                }
+            });
+            //BLACK
+        } else {
+            r.setOnDragOver(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragEntered(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        r.setOpacity(0.5);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragExited(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        r.setOpacity(1);
+                        Pane p = (Pane) dragEvent.getGestureSource();
+                        p.setLayoutX(r.getLayoutX());
+                        p.setLayoutY(r.getLayoutY());
+                    }
+                }
+            });
+        }
+
         r.setOnDragDropped(new EventHandler<DragEvent>() {
             @Override
             public void handle(DragEvent dragEvent) {
