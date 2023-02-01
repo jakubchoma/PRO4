@@ -93,8 +93,10 @@ public enum Cards {
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
+        //https://docs.oracle.com/javafx/2/drag_drop/jfxpub-drag_drop.htm
         //RED
         if(this.type>2) {
+            // vlastní detekce drag-and-drop (táhni a pusť) na zdrojové kartičce
             r.setOnDragDetected(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -106,8 +108,17 @@ public enum Cards {
                     mouseEvent.consume();
                 }
             });
+            // úspěšné dokončení drag-and-drop na zdrojové kartičce
+            r.setOnDragDone(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    //r.setOpacity(1);
+                    System.out.println("dad konec");
+                }
+            });
             //BLACK
         } else {
+            // umožnění drag-and-drop na cílové kartičce
             r.setOnDragOver(new EventHandler<DragEvent>() {
                 @Override
                 public void handle(DragEvent dragEvent) {
@@ -131,6 +142,15 @@ public enum Cards {
                 public void handle(DragEvent dragEvent) {
                     if(dragEvent.getGestureSource() != r){
                         r.setOpacity(1);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        r.setOpacity(1);
                         Pane p = (Pane) dragEvent.getGestureSource();
                         p.setLayoutX(r.getLayoutX());
                         p.setLayoutY(r.getLayoutY());
@@ -138,13 +158,6 @@ public enum Cards {
                 }
             });
         }
-
-        r.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("dropped");
-            }
-        });
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
