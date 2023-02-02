@@ -1,7 +1,10 @@
 package cz.spsmb.ctvrtak.f_pop.f_card_game;
 
+import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -91,12 +94,39 @@ public enum Cards {
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
+        r.setOnDragEntered(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("entered");
+            }
+        });
+        r.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("detected");
+            }
+        });
+        r.setOnDragExited(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("exited");
+            }
+        });
+        r.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                System.out.println("dropped");
+            }
+        });
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
         gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
+
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
+        gc.setStroke(this.type>2 ?Color.BLACK:Color.RED);
 
         gc.strokeText(this.getSymbol(), 3 , 15);
+        gc.strokeText("ꓯ", 37 , 95);
         //r.getChildren().add(svg);
         //gc.setFill(svg.getFill());
         //gc.moveTo(10,60);
@@ -105,7 +135,7 @@ public enum Cards {
         Affine a0 = new Affine();
         //a0.appendTranslation(-19,-19);
         //a0.appendRotation(45);
-        a0.appendTranslation(5,Cards.height-45);
+        a0.appendTranslation(5,Cards.height-65);
         gc.transform(a0);
         gc.appendSVGPath(Cards.PATH[this.type-1]);
         gc.moveTo(Cards.width - 20, Cards.height - 20);
@@ -115,10 +145,16 @@ public enum Cards {
             e.printStackTrace();
         }
         Affine a1 = new Affine();
-        gc.moveTo(2,20);
+        gc.moveTo(19,5);
         a1.appendScale(0.3, 0.3);
         gc.transform(a1);
         //gc.moveTo(Cards.width - 20, Cards.height - 20);
+        gc.appendSVGPath(Cards.PATH[this.type - 1]);
+
+        Affine a2 = new Affine();
+        a2.appendRotation(180);
+        gc.moveTo(120,320);
+        gc.transform(a2);
         gc.appendSVGPath(Cards.PATH[this.type - 1]);
 
         gc.fill();
