@@ -17,6 +17,7 @@ package cz.spsmb.ctvrtak.f_pop.f_card_game;
  *                                      - stejné druhy
  *
  * - další možnost je pohyb kamenu v dámě
+ *
  * Černý Vojtěch (3)	- 4, ses, stej barvy
  * Haken Lukáš (5)	 	- 4, vzes, stej druhy
  * Chomanič Jakub (6)	- šachový pěšák
@@ -31,6 +32,23 @@ package cz.spsmb.ctvrtak.f_pop.f_card_game;
  * Šípek Pavel (23)     - 4, vzes., střídání barev
  * Zajíček Vojtěch (29) - 4, ses, střídání barev
  * Žárský Ondřej (31)   - 4, vzestupně, stej. barva
+ *
+ *
+ *
+ *
+ * Bílek Daniel (1)      - šachová dáma
+ * Fiala Marek (2)       - 8, ses., stejná barva
+ * Hofman Jan (3)        - šachový střelec
+ * Hojný Martin (4)      - dáma (základ)
+ * Jiránek Jiří (7)
+ * Kargl Tomáš (8)       - šachový král
+ * Novák Adam (15)       - 8, vzes., stejné barvy
+ * Novák Štěpán (16)     - 8, vzes., střídání barev
+ * Odstrčil Vojtěch (17) - 8, vzes., stejný druh
+ * Škrabánek Lukáš (23)  - 8, ses.,  střídání barev
+ * Tondl Tadeáš (25)     - šachový běžec
+ * Vítek Jan (27)        - šachová věž
+ * Zralý Matěj (29)      - šachový kůň
  *
  *
  *

@@ -30,9 +30,6 @@ class TfInfo {
         this.row = row;
         this.column = column;
     }
-
-
-
 }
 
 class Win {

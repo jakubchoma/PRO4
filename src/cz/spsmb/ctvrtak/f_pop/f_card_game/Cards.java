@@ -3,8 +3,7 @@ package cz.spsmb.ctvrtak.f_pop.f_card_game;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -90,43 +89,106 @@ public enum Cards {
             default -> {return Integer.toString(this.num);}
         }
     }
+    private String getSymbol2(){
+        switch(this.num){
+            case 1 -> {return "∀";}
+            case 2 -> {return "↊";}
+            case 3 -> {return "↋";}
+            case 4 -> {return "ߤ";}
+            case 5 -> {return "ϛ";}
+            case 6 -> {return "9";}
+            case 7 -> {return "ㄥ";}
+            case 8 -> {return "8";}
+            case 9 -> {return "6";}
+            case 10 -> {return "0⇂";}
+            case 11 -> {return "ɾ";}
+            case 12 -> {return "Ꝺ";}
+            case 13 -> {return "ꓘ";}
+            default -> {return Integer.toString(this.num);}
+        }
+    }
     public Pane getCard(){
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
-        r.setOnDragEntered(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("entered");
-            }
-        });
-        r.setOnDragDetected(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("detected");
-            }
-        });
-        r.setOnDragExited(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("exited");
-            }
-        });
-        r.setOnDragDropped(new EventHandler<DragEvent>() {
-            @Override
-            public void handle(DragEvent dragEvent) {
-                System.out.println("dropped");
-            }
-        });
+        //cílové kartičky
+        if(this.type>2) {
+            // umožnění drag-and-drop na cílové kartičce
+            r.setOnDragOver(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    Dragboard db = dragEvent.getDragboard();
+                    if(dragEvent.getGestureSource() != r){
+                        dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragEntered(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        r.setOpacity(0.5);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragExited(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    if(dragEvent.getGestureSource() != r){
+                        r.setOpacity(1);
+                    }
+                    dragEvent.consume();
+                }
+            });
+            r.setOnDragDropped(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    Pane source = (Pane) dragEvent.getGestureSource();
+                    source.setLayoutX(r.getLayoutX());
+                    source.setLayoutY(r.getLayoutY());
+                    //source.set
+                    dragEvent.consume();
+                }
+            });
+            //zdrojové kartičky
+        } else {
+            // vlastní detekce drag-and-drop (táhni a pusť) na zdrojové kartičce
+            r.setOnDragDetected(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    System.out.println("detected");
+                    Dragboard db = r.startDragAndDrop(TransferMode.ANY);
+                    ClipboardContent content = new ClipboardContent();
+                    content.putString("DRAG");
+                    db.setContent(content);
+                    mouseEvent.consume();
+                }
+            });
+            // úspěšné dokončení drag-and-drop na zdrojové kartičce
+            r.setOnDragDone(new EventHandler<DragEvent>() {
+                @Override
+                public void handle(DragEvent dragEvent) {
+                    // dáme zdrojovou kartu do popředí (můžeme i v setOnDragDropped())
+                    r.toFront();
+                    dragEvent.consume();
+                }
+            });
+        }
+
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
-        gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
-
+        gc.setStroke(Color.BLACK);
+        gc.setFill(Color.WHITE);
+        gc.fillRoundRect(0,0,Cards.width,Cards.height,10,10);
         gc.strokeRoundRect(0,0,Cards.width,Cards.height,10,10);
+
+        gc.setFill(this.type>2 ?Color.BLACK:Color.RED);
         gc.setStroke(this.type>2 ?Color.BLACK:Color.RED);
 
         gc.strokeText(this.getSymbol(), 3 , 15);
-        gc.strokeText("ꓯ", 37 , 95);
+        gc.strokeText(this.getSymbol2(), 37 , 95);
         //r.getChildren().add(svg);
         //gc.setFill(svg.getFill());
         //gc.moveTo(10,60);
