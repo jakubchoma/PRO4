@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
+	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd">
+
+<context:component-scan base-package="cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.spring" />
+
+<lang:groovy id="groovyloginScript"
+             refresh-check-delay="5000"
+             script-source="classpath:scripts/groovylogin.groovy">
+    <lang:property name="username" value="john@email.com"/>
+    <lang:property name="password" value="doe"/>
+</lang:groovy>
+
+<lang:groovy id="groovyloginInline">
+    <lang:inline-script>
+        import cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.java.service.Login
+
+        class GroovyLoginService implements Login {
+
+        String username
+        String password
+
+        boolean isAuthorized(String email, String pass) {
+        if(username==email &amp;&amp; password==pass)
+        return true
+        return false
+        }
+
+        }
+    </lang:inline-script>
+    <lang:property name="username" value="john@email.com"/>
+    <lang:property name="password" value="doe"/>
+</lang:groovy>
+<!--
+<lang:jruby id="jrubyloginInline" script-interfaces="cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.spring.service.Login">
+    <lang:inline-script>
+        class GroovyLoginService
+
+        def setUsername(email)
+        @username = email
+        end
+        def setPassword(pass)
+        @password = pass
+        end
+
+        def isAuthorized(email,pass)
+        if @username == email and @password == pass
+        return true
+        else
+        return false
+        end
+        end
+        end
+    </lang:inline-script>
+    <lang:property name="username" value="john@email.com"/>
+    <lang:property name="password" value="doe"/>
+</lang:jruby>
+
+<lang:bsh id="bshloginInline" script-interfaces="cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.spring.service.Login">
+    <lang:inline-script>
+        String username;
+        String password;
+
+        void setUsername(String _username){
+        username = _username;
+        }
+
+        void setPassword(String _password){
+        password = _password;
+        }
+
+        boolean isAuthorized(String email,String pass){
+        if(username.equals(email) &amp;&amp; password.equals(pass))
+        return true;
+        return false;
+        }
+    </lang:inline-script>
+    <lang:property name="username" value="john@email.com"/>
+    <lang:property name="password" value="doe"/>
+</lang:bsh>
+
+-->
+<bean id="security" class="cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.spring.service.SecurityServiceFacade">
+    <property name="login" ref="groovyloginInline"/>
+</bean>
+
+
+<!-- JDBC -->
+<jdbc:embedded-database id="dataSource">
+    <jdbc:script location="classpath:/data/schema.sql" />
+    <jdbc:script location="classpath:/data/data.sql" />
+</jdbc:embedded-database>
+
+<bean id="sql" class="java.util.HashMap">
+    <constructor-arg>
+        <map>
+            <entry key="query">
+                <value>
+                    select d.documentId, d.name, d.location, d.description as doc_desc,
+                    d.typeId, d.created, d.modified,
+                    t.name as type_name, t.description as type_desc, t.extension from
+                    documents d
+                    join types t
+                    on d.typeId = t.typeId
+                </value>
+            </entry>
+            <entry key="find">
+                <value>
+                    select d.documentId, d.name, d.location, d.description as doc_desc,
+                    d.typeId, d.created, d.modified,
+                    t.name as type_name, t.description as type_desc, t.extension from
+                    documents d
+                    join types t
+                    on d.typeId = t.typeId
+                    where d.documentId = ?
+                </value>
+            </entry>
+            <entry key="type-name">
+                <value>
+                    select d.documentId, d.name, d.location, d.description as doc_desc,
+                    d.typeId, d.created, d.modified,
+                    t.name as type_name, t.description as type_desc, t.extension from
+                    documents d
+                    join types t
+                    on d.typeId = t.typeId
+                    where t.name = ?
+                </value>
+            </entry>
+            <entry key="insert">
+                <value>
+                    insert into documents (documentId,name,location,description, typeId,
+                    created, modified)
+                    values (?,?,?,?,?,?,?)
+                </value>
+            </entry>
+            <entry key="update">
+                <value>
+                    update documents set name = ?, location = ?, description = ?, typeId =
+                    ?,modified = ?
+                    where documentId = ?
+                </value>
+            </entry>
+            <entry key="delete">
+                <value>
+                    delete from documents
+                    where documentId = ?
+                </value>
+            </entry>
+        </map>
+    </constructor-arg>
+</bean>
+
+</beans>
