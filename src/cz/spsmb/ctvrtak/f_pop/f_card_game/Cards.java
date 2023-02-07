@@ -66,10 +66,10 @@ public enum Cards {
     CLU_11 (11,4),
     CLU_12 (12,4),
     CLU_13 (13,4);
-    public int num;
-    public int type;
-    static double width = 50;
-    static double height = 100;
+    public final int num;
+    public final int type;
+    static final double width = 50;
+    static final double height = 100;
     private final static String [] PATH = {
             "m20 10c0.97-5 2.911-10 9.702-10 6.792 0 12.128 5 9.703 15-2.426 10-13.584 15-19.405 25-5.821-10-16.979-15-19.405-25-2.4254-10 2.9109-15 9.703-15 6.791 0 8.732 5 9.702 10z",
             "m20-3.5527e-15c4 11 9 16 20 20-11 4-16 9-20 20-4-11-9-16-20-20 11-4 16-9 20-20z",
@@ -111,71 +111,74 @@ public enum Cards {
         //https://edencoding.com/javafx-canvas/
         Canvas c = new Canvas(Cards.width, Cards.height);
         Pane r = new Pane(c);
+        r.setUserData(this);
         //cílové kartičky
-        if(this.type>2) {
+
             // umožnění drag-and-drop na cílové kartičce
-            r.setOnDragOver(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(DragEvent dragEvent) {
-                    Dragboard db = dragEvent.getDragboard();
-                    if(dragEvent.getGestureSource() != r){
-                        dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
-                    }
-                    dragEvent.consume();
+        r.setOnDragOver(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                Dragboard db = dragEvent.getDragboard();
+                Cards cs=(Cards) ((Pane)dragEvent.getGestureSource()).getUserData();
+                Cards cd=(Cards) r.getUserData();
+                if(dragEvent.getGestureSource() != r && cs.num == cd.num +1){
+                    dragEvent.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                 }
-            });
-            r.setOnDragEntered(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(DragEvent dragEvent) {
-                    if(dragEvent.getGestureSource() != r){
-                        r.setOpacity(0.5);
-                    }
-                    dragEvent.consume();
+                dragEvent.consume();
+            }
+        });
+        r.setOnDragEntered(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                if(dragEvent.getGestureSource() != r){
+                    r.setOpacity(0.5);
                 }
-            });
-            r.setOnDragExited(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(DragEvent dragEvent) {
-                    if(dragEvent.getGestureSource() != r){
-                        r.setOpacity(1);
-                    }
-                    dragEvent.consume();
+                dragEvent.consume();
+            }
+        });
+        r.setOnDragExited(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                if(dragEvent.getGestureSource() != r){
+                    r.setOpacity(1);
                 }
-            });
-            r.setOnDragDropped(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(DragEvent dragEvent) {
-                    Pane source = (Pane) dragEvent.getGestureSource();
-                    source.setLayoutX(r.getLayoutX());
-                    source.setLayoutY(r.getLayoutY());
-                    //source.set
-                    dragEvent.consume();
-                }
-            });
-            //zdrojové kartičky
-        } else {
-            // vlastní detekce drag-and-drop (táhni a pusť) na zdrojové kartičce
-            r.setOnDragDetected(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    System.out.println("detected");
-                    Dragboard db = r.startDragAndDrop(TransferMode.ANY);
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString("DRAG");
-                    db.setContent(content);
-                    mouseEvent.consume();
-                }
-            });
-            // úspěšné dokončení drag-and-drop na zdrojové kartičce
-            r.setOnDragDone(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(DragEvent dragEvent) {
-                    // dáme zdrojovou kartu do popředí (můžeme i v setOnDragDropped())
-                    r.toFront();
-                    dragEvent.consume();
-                }
-            });
-        }
+                dragEvent.consume();
+            }
+        });
+        r.setOnDragDropped(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                Pane source = (Pane) dragEvent.getGestureSource();
+                source.setLayoutX(r.getLayoutX());
+                source.setLayoutY(r.getLayoutY());
+                //source.set
+                dragEvent.consume();
+            }
+        });
+        //zdrojové kartičky
+
+        // vlastní detekce drag-and-drop (táhni a pusť) na zdrojové kartičce
+        r.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("detected");
+                Dragboard db = r.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent content = new ClipboardContent();
+                content.putString("DRAG");
+                db.setContent(content);
+                mouseEvent.consume();
+            }
+        });
+        // úspěšné dokončení drag-and-drop na zdrojové kartičce
+        r.setOnDragDone(new EventHandler<DragEvent>() {
+            @Override
+            public void handle(DragEvent dragEvent) {
+                // dáme zdrojovou kartu do popředí (můžeme i v setOnDragDropped())
+                r.toFront();
+                dragEvent.consume();
+            }
+        });
+
 
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setLineWidth(2.0);
