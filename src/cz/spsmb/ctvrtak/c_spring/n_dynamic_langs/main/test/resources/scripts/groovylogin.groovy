@@ -11,7 +11,7 @@ class GroovyLoginService implements Login {
 
     boolean isAuthorized(String email, String pass) {
         if(username==email && password==pass)
-            return true
+            return false
         return false
     }
 

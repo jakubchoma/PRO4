@@ -18,6 +18,13 @@
     <lang:property name="password" value="doe"/>
 </lang:groovy>
 
+<lang:groovy id="groovyloginScriptOutside"
+             refresh-check-delay="5000"
+             script-source="file:groovylogin.groovy">
+    <lang:property name="username" value="john@email.com"/>
+    <lang:property name="password" value="doe"/>
+</lang:groovy>
+
 <lang:groovy id="groovyloginInline">
     <lang:inline-script>
         import cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.java.service.Login
@@ -88,7 +95,7 @@
 
 -->
 <bean id="security" class="cz.spsmb.ctvrtak.c_spring.n_dynamic_langs.main.spring.service.SecurityServiceFacade">
-    <property name="login" ref="groovyloginInline"/>
+    <property name="login" ref="groovyloginScriptOutside"/>
 </bean>
 
 

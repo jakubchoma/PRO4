@@ -43,8 +43,9 @@ public class MyDocumentsTest {
     public void testGroovy(){
         log.debug("Testing Groovy...");
         Assertions.assertNotNull(security);
-
-        Assertions.assertTrue(security.areCredentialsValid(EMAIL,PASSWORD));
+        boolean res = security.areCredentialsValid(EMAIL,PASSWORD);
+        System.out.println(res);
+        Assertions.assertTrue(res);
     }
 /*
     @Test
