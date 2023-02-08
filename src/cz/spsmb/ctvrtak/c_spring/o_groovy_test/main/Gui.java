@@ -3,6 +3,7 @@ package cz.spsmb.ctvrtak.c_spring.o_groovy_test.main;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -23,12 +24,28 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalField;
 
 public class Gui extends Application {
     public static final int N_FREE_TRIES = 3;
 
     static{
+        Path file = Paths.get(MainTest.FILENAME_CODE_PATH);
+
         try {
+            BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
+            if(bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300){
+                System.out.println("PODVOD!!");
+                System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
+                Platform.exit();
+            }
             MainTest.createGroovyTemplateFile(MainTest.initGroovyCode);
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,7 +53,7 @@ public class Gui extends Application {
     }
 
     private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-    private MainTest test = context.getBean("test", MainTest.class);
+    private MainTest test = context.getBean("testCollection", TestCollection.class).getRandomTest();
 
 
     private int freeTries = Gui.N_FREE_TRIES;
@@ -91,7 +108,8 @@ public class Gui extends Application {
                 try {
                     MainTest.createGroovyTemplateFile(taCode.getText());
                     //context = new ClassPathXmlApplicationContext("context.xml");
-                    test = context.getBean("test", MainTest.class);
+                    //test = context.getBean("test", MainTest.class);
+                    Thread.sleep(800);
                     Gui.this.lOutput.setText(test.check());
                     if(Gui.this.test.isValid()){
                         Gui.this.stopTest();
