@@ -6,7 +6,13 @@ import javafx.scene.text.TextFlow;
 import java.util.List;
 
 public class WelcomeScreen extends TextFlow {
-    List<String> messages;
+    private List<String> messages;
+    private int fontSize;
+    public void setFontSize(int fontSize) {
+        this.fontSize = fontSize;
+    }
+
+
     public void setMessages(List<String> messages) {
         this.messages = messages;
     }
@@ -15,7 +21,7 @@ public class WelcomeScreen extends TextFlow {
     public void initScreen() {
         for (String message:messages) {
             Text t = new Text("\n"+message);
-            t.setStyle("-fx-font-size:80");
+            t.setStyle("-fx-font-size:"+Integer.toString(this.fontSize));
             this.getChildren().add(t);
         }
     }

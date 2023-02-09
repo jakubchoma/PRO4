@@ -45,13 +45,31 @@
 </list>
 </property>
 </bean>
-  <bean id="welcomeScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
+  <bean id="cheatingWarningScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
     <property name="messages">
     <list>
       <value> Máš za 5. </value>
       <value> Příště nepodvádět !!!</value>
-      <value> To bylo naposledy !!!" </value>
+      <value> To bylo naposledy !!! </value>
     </list>
+    </property>
+    <property name="fontSize">
+    <value>110</value>
+    </property>
+  </bean>
+  <bean id="welcomeScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
+    <property name="messages">
+      <list>
+        <value> Vítej v Groovy Simple Testu ! </value>
+        <value> Pravidla:</value>
+        <value> - řeší se vždy otázka zadaná nahoře pomocí editovatelného okna uprostřed, </value>
+        <value> - čas na známku 4 je max. 300 sekund, </value>
+        <value> - máš 3 volné pokusy, ostatní jsou "zpoplatněny" 10 sekundami každý, </value>
+        <value> - test je ukončen ulpynutím časovače (známka 5), nebo úspěšným vyřešením </value>
+      </list>
+    </property>
+    <property name="fontSize">
+      <value>20</value>
     </property>
   </bean>
 </beans>

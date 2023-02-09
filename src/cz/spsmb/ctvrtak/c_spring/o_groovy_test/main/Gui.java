@@ -69,48 +69,53 @@ public class Gui extends Application {
     private int[] markLimits={210, 140, 70 };
     private int seconds = 300;
 
-    private Scene scene;
+    private Scene scene, sawScene;
     private Timeline timeline = new Timeline();
-    private TextArea taCode = new TextArea(MainTest.initGroovyCode);
+    private TextArea taCode;
     private Label lTimer = new Label(Integer.toString(seconds));
     private Label lMark = new Label("1");
     private Button bSubmit = new Button("submit");
     private Label lFreeTries = new Label();
-    private TextFlow tfwEntry = new TextFlow(
-            new Text(test.getEntry()),
-            new Text("\nvstup (in):\n"), new Text(test.getIn()),
-            new Text("\npředp. výstup:\n"), new Text(test.getOut())
-    );
+    private TextFlow tfwEntry;
     private Label lOutput = new Label();
     private VBox rightVBox = new VBox(lMark, lTimer, bSubmit, new Label("Zbývá volných "), lFreeTries);
     @Override
     public void start(Stage stage) throws Exception {
-        if(Gui.isCheat){
-            WelcomeScreen root = Gui.context.getBean("welcomeScreen", WelcomeScreen.class);
-            root.initScreen();
-            scene = new Scene(root);
 
-        } else {
-            BorderPane root = new BorderPane();
-            root.setTop(this.tfwEntry);
-            root.setCenter(this.taCode);
-            root.setBottom(this.lOutput);
-            root.setRight(this.rightVBox);
-            this.init_app();
-            this.addHandlers();
-            scene = new Scene(root);
-        }
+        WelcomeScreen root2 = Gui.context.getBean(Gui.isCheat? "cheatingWarningScreen":"welcomeScreen", WelcomeScreen.class);
+        root2.initScreen();
+        sawScene = new Scene(root2);
 
+        BorderPane root = new BorderPane();
+        root.setTop(this.tfwEntry);
+        root.setCenter(this.taCode);
+        root.setBottom(this.lOutput);
+        root.setRight(this.rightVBox);
+        this.init_app();
+
+        scene = new Scene(root);
         stage.setScene(scene);
-
         stage.show();
+        Stage stage2 = new Stage();
+        stage2.setScene(sawScene);
+        stage2.showAndWait();
+        if(!Gui.isCheat) this.addHandlers();
     }
     private void init_app(){
         lMark.setStyle("-fx-font-size:40");
-        tfwEntry.setMinSize(500,150);
-        taCode.setMinSize(500, 400);
+
         lOutput.setMinSize(500,150);
         this.refreshFreeTries();
+        if(!Gui.isCheat){
+            tfwEntry = new TextFlow(
+                    new Text(test.getEntry()),
+                    new Text("\nvstup (in):\n"), new Text(test.getIn()),
+                    new Text("\npředp. výstup:\n"), new Text(test.getOut())
+            );
+            taCode = new TextArea(MainTest.initGroovyCode);
+            tfwEntry.setMinSize(500,150);
+            taCode.setMinSize(500, 400);
+        }
 
     }
     private void addHandlers(){
