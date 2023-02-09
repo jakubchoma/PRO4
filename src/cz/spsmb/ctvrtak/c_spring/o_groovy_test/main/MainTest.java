@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class MainTest {
-    public static final String FILENAME_CODE_PATH = "groovytest.groovy";
+    public static final String FILENAME_CODE_PATH = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH")+"\\groovytest.groovy";
     public static final    String initGroovyCode =
         "import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.Testable;\n" +
         "class GroovyScriptTest implements Testable {\n" +

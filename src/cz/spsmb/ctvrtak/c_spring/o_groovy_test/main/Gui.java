@@ -70,6 +70,7 @@ public class Gui extends Application {
     private int seconds = 300;
 
     private Scene scene, sawScene;
+    private BorderPane root;
     private Timeline timeline = new Timeline();
     private TextArea taCode;
     private Label lTimer = new Label(Integer.toString(seconds));
@@ -86,12 +87,10 @@ public class Gui extends Application {
         root2.initScreen();
         sawScene = new Scene(root2);
 
-        BorderPane root = new BorderPane();
-        root.setTop(this.tfwEntry);
-        root.setCenter(this.taCode);
+        root = new BorderPane();
+        root.setMinSize(800,600);
         root.setBottom(this.lOutput);
         root.setRight(this.rightVBox);
-        this.init_app();
 
         scene = new Scene(root);
         stage.setScene(scene);
@@ -99,13 +98,14 @@ public class Gui extends Application {
         Stage stage2 = new Stage();
         stage2.setScene(sawScene);
         stage2.showAndWait();
+        this.init_app();
         if(!Gui.isCheat) this.addHandlers();
     }
     private void init_app(){
         lMark.setStyle("-fx-font-size:40");
-
         lOutput.setMinSize(500,150);
         this.refreshFreeTries();
+        System.out.println(test.getEntry());
         if(!Gui.isCheat){
             tfwEntry = new TextFlow(
                     new Text(test.getEntry()),
@@ -115,6 +115,8 @@ public class Gui extends Application {
             taCode = new TextArea(MainTest.initGroovyCode);
             tfwEntry.setMinSize(500,150);
             taCode.setMinSize(500, 400);
+            root.setTop(this.tfwEntry);
+            root.setCenter(this.taCode);
         }
 
     }
