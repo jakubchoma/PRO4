@@ -45,4 +45,13 @@
 </list>
 </property>
 </bean>
+  <bean id="welcomeScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
+    <property name="messages">
+    <list>
+      <value> Máš za 5. </value>
+      <value> Příště nepodvádět !!!</value>
+      <value> To bylo naposledy !!!" </value>
+    </list>
+    </property>
+  </bean>
 </beans>

@@ -35,6 +35,8 @@ import java.time.temporal.TemporalField;
 
 public class Gui extends Application {
     public static final int N_FREE_TRIES = 3;
+    private static ClassPathXmlApplicationContext context;
+    private static boolean isCheat;
 
     static{
         Path file = Paths.get(MainTest.FILENAME_CODE_PATH);
@@ -44,15 +46,19 @@ public class Gui extends Application {
             if(bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300){
                 System.out.println("PODVOD!!");
                 System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
-                Platform.exit();
+                Gui.isCheat = true;
             }
             MainTest.createGroovyTemplateFile(MainTest.initGroovyCode);
+            Gui.context = new ClassPathXmlApplicationContext("context.xml");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+    public static ClassPathXmlApplicationContext getContext() {
+        return context;
+    }
+
     private MainTest test = context.getBean("testCollection", TestCollection.class).getRandomTest();
 
 
@@ -60,6 +66,7 @@ public class Gui extends Application {
     private int[] markLimits={210, 140, 70 };
     private int seconds = 300;
 
+    private Scene scene;
     private Timeline timeline = new Timeline();
     private TextArea taCode = new TextArea(MainTest.initGroovyCode);
     private Label lTimer = new Label(Integer.toString(seconds));
@@ -68,23 +75,31 @@ public class Gui extends Application {
     private Label lFreeTries = new Label();
     private TextFlow tfwEntry = new TextFlow(
             new Text(test.getEntry()),
-            new Text("\nin: "), new Text(test.getIn()),
-            new Text("\npředp. výstup: "), new Text(test.getOut())
+            new Text("\nvstup (in):\n"), new Text(test.getIn()),
+            new Text("\npředp. výstup:\n"), new Text(test.getOut())
     );
     private Label lOutput = new Label();
     private VBox rightVBox = new VBox(lMark, lTimer, bSubmit, new Label("Zbývá volných "), lFreeTries);
     @Override
     public void start(Stage stage) throws Exception {
-        BorderPane root = new BorderPane();
-        root.setTop(this.tfwEntry);
-        root.setCenter(this.taCode);
-        root.setBottom(this.lOutput);
-        root.setRight(this.rightVBox);
+        if(Gui.isCheat){
+            WelcomeScreen root = Gui.context.getBean("welcomeScreen", WelcomeScreen.class);
+            root.initScreen();
+            scene = new Scene(root);
 
-        Scene scene = new Scene(root);
+        } else {
+            BorderPane root = new BorderPane();
+            root.setTop(this.tfwEntry);
+            root.setCenter(this.taCode);
+            root.setBottom(this.lOutput);
+            root.setRight(this.rightVBox);
+            this.init_app();
+            this.addHandlers();
+            scene = new Scene(root);
+        }
+
         stage.setScene(scene);
-        this.init_app();
-        this.addHandlers();
+
         stage.show();
     }
     private void init_app(){
