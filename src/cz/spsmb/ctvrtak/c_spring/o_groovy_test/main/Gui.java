@@ -42,11 +42,14 @@ public class Gui extends Application {
         Path file = Paths.get(MainTest.FILENAME_CODE_PATH);
 
         try {
-            BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
-            if(bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300){
-                System.out.println("PODVOD!!");
-                System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
-                Gui.isCheat = true;
+            try {
+                BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
+                if (bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300) {
+                    System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
+                    Gui.isCheat = true;
+                }
+            } catch (IOException ex) {
+
             }
             MainTest.createGroovyTemplateFile(MainTest.initGroovyCode);
             Gui.context = new ClassPathXmlApplicationContext("context.xml");
