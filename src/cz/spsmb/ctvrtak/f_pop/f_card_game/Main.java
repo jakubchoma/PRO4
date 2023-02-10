@@ -22,10 +22,11 @@ public class Main extends Application {
             root.getChildren().add(crd);
             cnt++;
         }
+        Pack p = new Pack();
+        root.getChildren().add(p);
         Scene scena = new Scene(root);
         stage.setScene(scena);
         stage.show();
-
     }
 
     public static void main(String[] args) {

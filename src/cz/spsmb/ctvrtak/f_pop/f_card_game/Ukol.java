@@ -40,7 +40,7 @@ package cz.spsmb.ctvrtak.f_pop.f_card_game;
  * Fiala Marek (2)       - 8, ses., stejná barva
  * Hofman Jan (3)        - šachový střelec
  * Hojný Martin (4)      - dáma (základ)
- * Jiránek Jiří (7)
+ * Jiránek Jiří (7)      -
  * Kargl Tomáš (8)       - šachový král
  * Novák Adam (15)       - 8, vzes., stejné barvy
  * Novák Štěpán (16)     - 8, vzes., střídání barev
