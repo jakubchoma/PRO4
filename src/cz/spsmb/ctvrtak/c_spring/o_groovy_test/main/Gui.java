@@ -93,6 +93,7 @@ public class Gui extends Application {
         root.setRight(this.rightVBox);
 
         scene = new Scene(root);
+        scene.getStylesheets().add("gst.css");
         stage.setScene(scene);
         stage.show();
         Stage stage2 = new Stage();
