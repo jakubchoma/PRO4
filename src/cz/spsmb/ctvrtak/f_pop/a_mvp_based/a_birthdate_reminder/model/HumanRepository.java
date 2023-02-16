@@ -18,16 +18,8 @@ public class HumanRepository {
     private JdbcTemplate jdbcTemplate;
     private DataSource dataSource;
     private String query;
-    private Resource schema;
-    private Resource data;
-
-    public void setSchema(Resource schema) {
-        this.schema = schema;
-    }
-
-    public void setData(Resource data) {
-        this.data = data;
-    }
+    //private Resource schema;
+    //private Resource data;
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -41,64 +33,5 @@ public class HumanRepository {
     public List<Human> getAll(){
         return jdbcTemplate.query(query, new HumanRowMapper());
     }
-    public void initialize() {
-        try {
-            InputStream stream = schema.getInputStream();
-            Scanner scanner = new Scanner(stream);
-            StringBuilder sql = new StringBuilder();
-            while (scanner.hasNext()) {
-                sql.append(scanner.nextLine());
-                sql.append("\n");
-            }
-            scanner.close();
-            stream.close();
-            Connection connection = null;
-            Statement statement = null;
-            try {
-                connection = dataSource.getConnection();
-                statement = connection.createStatement();
-                statement.execute(sql.toString());
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                throw new RuntimeException(ex);
-            } finally {
-                if (null != connection) {
-                    try {
-                        connection.close();
-                    } catch (SQLException ex) {
-                    }
-                }
-            }
 
-            stream = data.getInputStream();
-            scanner = new Scanner(stream);
-            sql = new StringBuilder();
-            while (scanner.hasNext()) {
-                sql.append(scanner.nextLine());
-                sql.append("\n");
-            }
-            scanner.close();
-            stream.close();
-            connection = null;
-            statement = null;
-            try {
-                connection = dataSource.getConnection();
-                statement = connection.createStatement();
-                statement.executeUpdate(sql.toString());
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-                throw new RuntimeException(ex);
-            } finally {
-                if (null != connection) {
-                    try {
-                        connection.close();
-                    } catch (SQLException ex) {
-                    }
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
