@@ -35,10 +35,23 @@ public class BrView extends Application {
         this.mainBp.setTop(this.dp);
         this.mainBp.setCenter(this.tf);
         //this.customizeDp();
-        for (Human h:model.getAll()) {
-            this.tf.getChildren().add(new Text(h.getFirstName()+" "+h.getSecondName()+String.format("(%s)", h.getBirthdate())));
-            this.tf.getChildren().add(new Text("\n"));
-        }
+        //for (Human h:model.getAll()) {
+            for (int i = 0; i < 7; i++) {
+                LocalDate tmp = this.date.plusDays(i);
+                this.tf.getChildren().add(new Text("\n" + tmp));
+                for (Human h: model.getAll()) {
+                    if(h.getBirthdate().getDayOfYear()== tmp.getDayOfYear()) {
+                        int age = this.date.getYear() - h.getBirthdate().getYear();
+                        this.tf.getChildren().add(new Text(" "+ h.getFirstName()+" "+h.getSecondName() + "(" + age + ")"));
+                    }
+                }
+
+                /*this.tf.getChildren().add(new Text(String.format("(%s)", h.getBirthdate()) + h.getFirstName()+" "+h.getSecondName()));*/
+
+            }
+
+
+        //}
 
         stage.setScene(this.scene);
         stage.show();
