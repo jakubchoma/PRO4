@@ -7,6 +7,16 @@ import java.util.Random;
 
 public class TestCollection {
     private List<MainTest> testCollection;
+    private double difficulty;
+
+    public double getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(double difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public void setTestCollection(List<MainTest> testCollection) {
         this.testCollection = testCollection;
     }
