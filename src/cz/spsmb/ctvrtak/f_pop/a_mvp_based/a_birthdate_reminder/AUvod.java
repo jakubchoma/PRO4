@@ -6,6 +6,9 @@ package cz.spsmb.ctvrtak.f_pop.a_mvp_based.a_birthdate_reminder;
  * - vypsat všechny zadané osoby (nejlépe pomocí komponenty TableView)
  * - aplikace bude vždy zobrazovat pro aktuální týden 7 dní s případnými zadanými
  *   jmény pro aktuální datum. Aktuální datum přitom půjde změnit za libovolný jiný.
+ *
+ *   Domácí úkol:
+ *   - vytvořte komponentu Cal, potomek GridPane, který zobrazí vlastní kalendář
  */
 public class AUvod {
 }

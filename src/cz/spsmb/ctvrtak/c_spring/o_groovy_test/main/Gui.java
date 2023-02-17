@@ -46,7 +46,7 @@ public class Gui extends Application {
                 BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
                 if (bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300) {
                     System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
-                    Gui.isCheat = true;
+                    //Gui.isCheat = true;
                 }
             } catch (IOException ex) {
 
