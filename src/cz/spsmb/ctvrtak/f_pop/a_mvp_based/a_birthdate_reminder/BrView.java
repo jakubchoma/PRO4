@@ -32,7 +32,7 @@ public class BrView extends Application {
         this.mainBp.setMinSize(500, 700);
         this.date = LocalDate.now();
         this.dp.setValue(this.date);
-        this.mainBp.setTop(this.dp);
+        this.mainBp.setTop(new MonthlyCal(2019, 2));
         this.mainBp.setCenter(this.tf);
         //this.customizeDp();
         //for (Human h:model.getAll()) {
