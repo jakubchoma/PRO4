@@ -8,6 +8,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Screen;
@@ -32,7 +33,11 @@ public class BrView extends Application {
         this.mainBp.setMinSize(500, 700);
         this.date = LocalDate.now();
         this.dp.setValue(this.date);
-        this.mainBp.setTop(new MonthlyCal(2019, 2));
+        this.mainBp.setTop(new VBox(
+                new MonthlyCal(2023, 1),
+                new MonthlyCal(2023, 2),
+                new MonthlyCal(2023, 3)
+                ));
         this.mainBp.setCenter(this.tf);
         //this.customizeDp();
         //for (Human h:model.getAll()) {

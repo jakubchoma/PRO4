@@ -20,6 +20,7 @@ public class MonthlyCal extends GridPane {
         LocalDate ld = LocalDate.of(year, month, 1);
         int rowCount = 1;
         int weekCount = isFirstWeekZero(year)?0:1;
+        if(month>1) weekCount += (LocalDate.of(year, 1, 1).getDayOfWeek().getValue()-1+ ld.getDayOfYear())/7;
         while(ld.getMonth().getValue()==month) {
             Label l = new Label(Integer.toString(ld.getDayOfMonth())+" ");
             l.setStyle("-fx-font-size: 26;");
