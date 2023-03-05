@@ -19,7 +19,9 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.commons.io.FileUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericGroovyApplicationContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,7 +37,8 @@ import java.time.temporal.TemporalField;
 
 public class Gui extends Application {
     public static final int N_FREE_TRIES = 3;
-    private static ClassPathXmlApplicationContext context;
+    //private static ClassPathXmlApplicationContext context;
+    private static ApplicationContext context;
     private static boolean isCheat;
 
     static{
@@ -52,13 +55,14 @@ public class Gui extends Application {
 
             }
             MainTest.createGroovyTemplateFile(MainTest.initGroovyCode);
-            Gui.context = new ClassPathXmlApplicationContext("context.xml");
+            //Gui.context = new ClassPathXmlApplicationContext("context.xml");
+            Gui.context = new GenericGroovyApplicationContext("context.groovy");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static ClassPathXmlApplicationContext getContext() {
+    public static ApplicationContext getContext() {
         return context;
     }
 
@@ -80,6 +84,7 @@ public class Gui extends Application {
     private TextFlow tfwEntry;
     private Label lOutput = new Label();
     private VBox rightVBox = new VBox(lMark, lTimer, bSubmit, new Label("Zbývá volných "), lFreeTries);
+    private VBox leftVBox = new VBox();
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -91,6 +96,7 @@ public class Gui extends Application {
         root.setMinSize(800,600);
         root.setBottom(this.lOutput);
         root.setRight(this.rightVBox);
+        root.setLeft(this.leftVBox);
 
         scene = new Scene(root);
         scene.getStylesheets().add("gst.css");
@@ -110,10 +116,11 @@ public class Gui extends Application {
         if(!Gui.isCheat){
             tfwEntry = new TextFlow(
                     new Text(test.getEntry()),
-                    new Text("\nvstup (in):\n"), new Text(test.getIn()),
+                    new Text("\nvstup (in):\n"), new Text(test.getInp()),
                     new Text("\npředp. výstup:\n"), new Text(test.getOut())
             );
-            taCode = new TextArea(MainTest.initGroovyCode);
+            taCode = new MyTextArea(MainTest.initGroovyCode);
+
             tfwEntry.setMinSize(500,150);
             taCode.setMinSize(500, 400);
             root.setTop(this.tfwEntry);

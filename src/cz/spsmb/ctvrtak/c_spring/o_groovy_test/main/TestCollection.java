@@ -26,5 +26,6 @@ public class TestCollection {
         Random rnd = new Random();
         rnd.setSeed(LocalTime.now().toNanoOfDay());
         return testCollection.get(rnd.nextInt(testCollection.size()));
+        //return testCollection.get(6);
     }
 }
