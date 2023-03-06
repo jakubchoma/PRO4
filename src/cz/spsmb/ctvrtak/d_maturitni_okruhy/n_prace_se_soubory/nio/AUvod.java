@@ -1,8 +1,10 @@
 package cz.spsmb.ctvrtak.d_maturitni_okruhy.n_prace_se_soubory.nio;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Scanner;
 
 /**
  * Java NIO (Non-blocking IO) je pokračováním Java IO API, které pracuje s proudy bytů (byte streams)
@@ -20,6 +22,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 public class AUvod {
     public static void main(String[] args) throws IOException {
+        String content;
         // Rozhraní Path reprezentuje cestu ve souborovém systému. Může tak odkazovat absolutní, či relativní cestou na
         // soubor, či adresář.
         // Pro vytvoření instance využijeme tovární metodu get:
@@ -36,8 +39,12 @@ public class AUvod {
         BasicFileAttributes bfa = Files.readAttributes(path, BasicFileAttributes.class);
 
         //Možnost načtení souboru do Stringu pomocí Files.readAllBytes (https://www.digitalocean.com/community/tutorials/java-read-file-to-string)
-        String content = new String(Files.readAllBytes(path));
+        content = new String(Files.readAllBytes(path));
 
+        // Totéž pomocí třídy Scanner
+        Scanner scanner = new Scanner(path, StandardCharsets.UTF_8.name());
+        content = scanner.useDelimiter("\\A").next();
+        scanner.close();
 
     }
 }
