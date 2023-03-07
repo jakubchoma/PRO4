@@ -67,16 +67,31 @@ beans {
     }
     t2_2(MainTest) {
         id = 2
-        entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním největším prvkem ve vstupním poli arr."
+        //entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním největším prvkem ve vstupním poli arr."
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí největší prvek ve vstupním poli arr."
         inp = "1 2 3 4 555 6 7 8 9 10"
         out = "555"
     }
     t2_3(MainTest) {
         id = 3
-        entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním nejmenším prvkem ve vstupním poli arr."
+        //entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním nejmenším prvkem ve vstupním poli arr."
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí nejmenší prvek ve vstupním poli arr."
         inp = "1 2 3 4 5 6 7 -8 9 10"
         out = "-8"
     }
+    t2_4(MainTest) {
+        id = 4
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí v pořadí druhý největší prvek ve vstupním poli arr."
+        inp = "1 2 3 44 555 6 7 8 9 10"
+        out = "44"
+    }
+    t2_5(MainTest) {
+        id = 5
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí v pořadí druhý nejmenší prvek ve vstupním poli arr."
+        inp = "1 2 -73 4 5 6 7 -8 9 -9"
+        out = "-9"
+    }
+
 
     welcomeScreen(WelcomeScreen){
         messages = [
