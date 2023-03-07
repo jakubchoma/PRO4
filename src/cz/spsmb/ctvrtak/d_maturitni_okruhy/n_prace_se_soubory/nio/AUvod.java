@@ -22,6 +22,7 @@ import java.util.Scanner;
  */
 public class AUvod {
     public static void main(String[] args) throws IOException {
+        String str = "Hello";
         String content;
         // Rozhraní Path reprezentuje cestu ve souborovém systému. Může tak odkazovat absolutní, či relativní cestou na
         // soubor, či adresář.
@@ -45,6 +46,9 @@ public class AUvod {
         Scanner scanner = new Scanner(path, StandardCharsets.UTF_8.name());
         content = scanner.useDelimiter("\\A").next();
         scanner.close();
+
+        //Zápis:
+        Files.write(Paths.get("w.txt"), str.getBytes());
 
     }
 }

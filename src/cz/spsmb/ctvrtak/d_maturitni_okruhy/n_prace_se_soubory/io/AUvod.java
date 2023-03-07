@@ -1,9 +1,6 @@
 package cz.spsmb.ctvrtak.d_maturitni_okruhy.n_prace_se_soubory.io;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -13,6 +10,7 @@ import java.util.Scanner;
 public class AUvod {
     public static void main(String[] args) throws IOException {
         String fileName = "a.txt";
+        String str = "Hello";
         String content;
 
         // možnost načtení souboru do Stringu pomocí BufferedReader:
@@ -47,5 +45,26 @@ public class AUvod {
         content = scanner.useDelimiter("\\A").next();
         scanner.close();
         System.out.println(content);
+
+        // Zápis:
+
+        // možnost záisu Stringu do souboru pomocí třídy BufferedWriter:
+        BufferedWriter writer = new BufferedWriter(new FileWriter("w.txt"));
+        writer.write(str);
+        writer.close();
+
+        // možnost záisu Stringu do souboru pomocí třídy PrintWriter:
+        PrintWriter printWriter = new PrintWriter(new FileWriter("w.txt"));
+        printWriter.print(str);
+        //printWriter.printf("Product name is %s and its price is %d $", "iPhone", 1000);
+        printWriter.close();
+
+        //Další možnosti:
+
+        //FileOutputStream
+        //DataOutputStream
+        //RansdomAccessFile
+        //FileChanell
+
     }
 }
