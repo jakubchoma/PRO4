@@ -9,64 +9,93 @@
 	    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	    http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd">
 
-<context:component-scan base-package="cz.spsmb.ctvrtak.c_spring.o_groovy_test" />
+<context:component-scan base-package="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main" />
   <!--           script-source="file:C:\Users\stemb\groovytest.groovy">-->
 <lang:groovy id="groovyScriptTestOutside"
              refresh-check-delay="500"
              script-source="file:#{systemEnvironment['HOMEDRIVE']}#{systemEnvironment['HOMEPATH']}\groovytest.groovy">
 </lang:groovy>
-<bean id="testCollection" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection">
-<property name="testCollection">
-<list>
-<bean id="0" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
-  <property name="test" ref="groovyScriptTestOutside"/>
-  <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní sudými indexy vstupního pole arr."/>
-  <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
-  <property name="out" value="1 3 5 7 9"/>
-</bean>
-<bean id="1" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
-  <property name="test" ref="groovyScriptTestOutside"/>
-  <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní lichými indexy vstupního pole arr."/>
-  <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
-  <property name="out" value="2 4 6 8 10"/>
-</bean>
-<bean id="2" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
-  <property name="test" ref="groovyScriptTestOutside"/>
-  <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a každým 3. indexem  vstupního pole arr."/>
-  <property name="in" value="1 2 3 4 555 6 7 8 9 10"/>
-  <property name="out" value="1 4 7 10"/>
-</bean>
-<bean id="3" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
-  <property name="test" ref="groovyScriptTestOutside"/>
-  <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a každým 4. prvkem ve vstupním poli arr."/>
-  <property name="in" value="1 2 3 4 5 6 7 -8 9 10"/>
-  <property name="out" value="1 5 9"/>
-</bean>
-</list>
-</property>
-</bean>
-  <bean id="testCollection2" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection">
+  <bean id="testCollection" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection">
+    <property name = "difficulty">
+      <value> 1.0 </value>
+    </property>
+
     <property name="testCollection">
       <list>
         <bean id="0" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>0</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým, pátým a devátým prvkem vstupního pole arr."/>
+          <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
+          <property name="out" value="1 6 10"/>
+        </bean>
+        <bean id="1" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>1</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní posledními 3 prvky vstupního pole arr od zadu."/>
+          <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
+          <property name="out" value="10 9 8"/>
+        </bean>
+        <bean id="2" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>2</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a každým 3. indexem  vstupního pole arr."/>
+          <property name="in" value="1 2 3 4 555 6 7 8 9 10"/>
+          <property name="out" value="1 4 7 10"/>
+        </bean>
+        <bean id="3" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>3</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a každým 4. prvkem ve vstupním poli arr."/>
+          <property name="in" value="1 2 3 4 5 6 7 -8 9 10"/>
+          <property name="out" value="1 5 9"/>
+        </bean>
+        <bean id="4" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>4</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a pak každým 2. prvkem ve vstupním poli arr od zadu."/>
+          <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
+          <property name="out" value="10 8 6 4 2"/>
+        </bean>
+        <bean id="5" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>5</value></property>
+          <property name="test" ref="groovyScriptTestOutside"/>
+          <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní nultým a pak každým 4. prvkem ve vstupním poli arr od zadu."/>
+          <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
+          <property name="out" value="10 6 2"/>
+        </bean>
+      </list>
+    </property>
+  </bean>
+  <bean id="testCollection2" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection">
+    <property name = "difficulty">
+      <value> 1.0 </value>
+    </property>
+    <property name="testCollection">
+      <list>
+        <bean id="0" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>0</value></property>
           <property name="test" ref="groovyScriptTestOutside"/>
           <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní sudými čísly vstupního pole arr."/>
           <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
           <property name="out" value="2 4 8 10"/>
         </bean>
         <bean id="1" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>1</value></property>
           <property name="test" ref="groovyScriptTestOutside"/>
           <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní lichými čísly vstupního pole arr."/>
           <property name="in" value="1 2 3 4 5 6 7 8 9 10"/>
           <property name="out" value="1 3 5 7 9"/>
         </bean>
         <bean id="2" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>2</value></property>
           <property name="test" ref="groovyScriptTestOutside"/>
           <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním největším prvkem ve vstupním poli arr."/>
           <property name="in" value="1 2 3 4 555 6 7 8 9 10"/>
           <property name="out" value="555"/>
         </bean>
         <bean id="3" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest">
+          <property name="id"><value>3</value></property>
           <property name="test" ref="groovyScriptTestOutside"/>
           <property name="entry" value="Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním nejmenším prvkem ve vstupním poli arr."/>
           <property name="in" value="1 2 3 4 5 6 7 -8 9 10"/>
@@ -77,14 +106,14 @@
   </bean>
   <bean id="cheatingWarningScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
     <property name="messages">
-    <list>
-      <value> Máš za 5. </value>
-      <value> Příště nepodvádět !!!</value>
-      <value> To bylo naposledy !!! </value>
-    </list>
+      <list>
+        <value> Máš za 5. </value>
+        <value> Příště nepodvádět !!!</value>
+        <value> To bylo naposledy !!! </value>
+      </list>
     </property>
     <property name="fontSize">
-    <value>110</value>
+      <value>110</value>
     </property>
   </bean>
   <bean id="welcomeScreen" class="cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen">
@@ -93,9 +122,9 @@
         <value> Vítej v Groovy Simple Testu ! </value>
         <value> Pravidla:</value>
         <value> - řeší se vždy otázka zadaná nahoře pomocí editovatelného okna uprostřed, </value>
-        <value> - vstupem je String, který se pomocí metody .split(" ") rozdělí na pole Stringů, </value>
+        <value> - vstupem je String, který se pomocí metody split rozdělí na pole Stringů, </value>
         <value> - výstup se ukládá do seznamu, který se pak pomocí metody .join(" ") převádí na string, který se porovnává,</value>
-        <value> - pro přidání prvku do výstupního seznamu slouží al.add(x) - zapiš si !,</value>
+        <value> - pro přidání prvku do výstupního pole slouží al.add(x) - zapiš si !,</value>
         <value> - v poli Stringů jsou čísla, které je možné převést na int pomocí Integer.valueOf(arr[i]) - zapiš si!, </value>
         <value> - naopak, pokud mám int a potřebuji ho převést na int (nutné pro výstup), použiji Integer.toString(x) - zapiš si!, </value>
         <value> - čas na známku 4 je max. 300 sekund, limity na ost. známky (zbývající čas): {210, 140, 70 }, </value>

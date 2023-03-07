@@ -61,7 +61,7 @@ public class Gui extends Application {
         VBox vbox = new VBox(hbox,grid);
         Sudoku sudoku = new Sudoku();
         sudoku.randomFill();
-        sudoku.prepareForLevel(0);
+        sudoku.prepareForLevel(6);
         int[][] plocha = sudoku.getPlocha();
 
 
