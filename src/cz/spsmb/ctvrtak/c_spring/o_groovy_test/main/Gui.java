@@ -45,29 +45,24 @@ public class Gui extends Application {
         Path file = Paths.get(MainTest.FILENAME_CODE_PATH);
 
         try {
-            try {
-                BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
-                if (bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300) {
-                    System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
-                    //Gui.isCheat = true;
-                }
-            } catch (IOException ex) {
-
+            BasicFileAttributes bfa = Files.readAttributes(file, BasicFileAttributes.class);
+            if (bfa.isRegularFile() && Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond() < 300) {
+                System.out.println(Instant.now().minusSeconds(bfa.lastModifiedTime().toInstant().getEpochSecond()).getEpochSecond());
+                //Gui.isCheat = true;
             }
-            MainTest.createGroovyTemplateFile(MainTest.initGroovyCode);
-            //Gui.context = new ClassPathXmlApplicationContext("context.xml");
-            Gui.context = new GenericGroovyApplicationContext("context.groovy");
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ex) {
+
         }
+        //Gui.context = new ClassPathXmlApplicationContext("context.xml");
+        Gui.context = new GenericGroovyApplicationContext("context.groovy");
     }
 
     public static ApplicationContext getContext() {
         return context;
     }
 
-    private MainTest test = context.getBean("testCollection", TestCollection.class).getRandomTest();
-
+    private TestCollection testCollection = context.getBean("testCollection", TestCollection.class);
+    private MainTest test = testCollection.getRandomTest();
 
     private int freeTries = Gui.N_FREE_TRIES;
     private int[] markLimits={210, 140, 70 };
@@ -106,7 +101,10 @@ public class Gui extends Application {
         stage2.setScene(sawScene);
         stage2.showAndWait();
         this.init_app();
-        if(!Gui.isCheat) this.addHandlers();
+        if(!Gui.isCheat) {
+            MainTest.createGroovyTemplateFile(this.testCollection.getInitGroovyCode());
+            this.addHandlers();
+        }
     }
     private void init_app(){
         lMark.setStyle("-fx-font-size:40");
@@ -119,7 +117,7 @@ public class Gui extends Application {
                     new Text("\nvstup (in):\n"), new Text(test.getInp()),
                     new Text("\npředp. výstup:\n"), new Text(test.getOut())
             );
-            taCode = new MyTextArea(MainTest.initGroovyCode);
+            taCode = new MyTextArea(this.testCollection.getInitGroovyCode());
 
             tfwEntry.setMinSize(500,150);
             taCode.setMinSize(500, 400);

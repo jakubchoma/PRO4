@@ -19,20 +19,7 @@ public class MainTest {
     public static final String FILENAME_CODE_DIR = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH");
     public static final String FILENAME_CODE_FILE_NAME = "groovytest.groovy";
     public static final String FILENAME_CODE_PATH = MainTest.FILENAME_CODE_DIR + "\\" + MainTest.FILENAME_CODE_FILE_NAME;
-    public static final    String initGroovyCode =
-        "import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.Testable;\n" +
-        "class GroovyScriptTest implements Testable {\n" +
-        "    String check(String in) {\n" +
-        "        ArrayList<String> al =  new ArrayList()\n" +
-        "        String[] arr=in.split(\" \")\n" +
-        "\n" +
-        "\n" +
-        "//      zde doplňte kód\n " +
-        "\n" +
-        "\n" +
-        "        return al.join(\" \")\n" +
-        "    }\n" +
-        "}\n";
+
     public static void createGroovyTemplateFile(String code) throws IOException {
         FileUtils.writeStringToFile(new File(MainTest.FILENAME_CODE_PATH), code, Charset.forName("UTF-8").toString());
     }

@@ -7,7 +7,26 @@ import java.util.Random;
 
 public class TestCollection {
     private List<MainTest> testCollection;
+    private int id;
     private double difficulty;
+    private String initGroovyCode;
+    private String grvCode;
+
+    public String getInitGroovyCode() {
+        return String.format(
+                "import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.Testable;\n" +
+                "class GroovyScriptTest implements Testable {\n" +
+                "%s" +
+                "}", grvCode);
+    }
+
+    public void setGrvCode(String grvCode) {
+        this.grvCode = grvCode;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public double getDifficulty() {
         return difficulty;
@@ -26,6 +45,5 @@ public class TestCollection {
         Random rnd = new Random();
         rnd.setSeed(LocalTime.now().toNanoOfDay());
         return testCollection.get(rnd.nextInt(testCollection.size()));
-        //return testCollection.get(6);
     }
 }

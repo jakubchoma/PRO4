@@ -2,18 +2,79 @@
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest
-
 beans {
-    testCollection(TestCollection){
+    testCollection1(TestCollection){
+        grvCode =
+                "    String check(String in) {\n" +
+                        "        ArrayList<String> al =  new ArrayList()\n" +
+                        "        String[] arr=in.split(\" \")\n" +
+                        "\n" +
+                        "\n" +
+                        "//      zde doplňte kód\n " +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
         difficulty = 1.0
         testCollection = [
                 ref("t1_0"), ref("t1_1"), ref("t1_2"), ref("t1_3"), ref("t1_4"), ref("t1_5"),
         ]
     }
     testCollection2(TestCollection){
+        grvCode =
+                "    String check(String in) {\n" +
+                        "        ArrayList<String> al =  new ArrayList()\n" +
+                        "        String[] arr=in.split(\" \")\n" +
+                        "\n" +
+                        "\n" +
+                        "//      zde doplňte kód\n " +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
         difficulty = 1.3
         testCollection = [
-                ref("t2_0"), ref("t2_1"), ref("t2_2"), ref("t2_3")
+                //ref("t2_0"), ref("t2_1"), ref("t2_2"), ref("t2_3")
+                ref("t2_2"), ref("t2_3"), ref("t2_4"), ref("t2_5")
+        ]
+    }
+    testCollection3(TestCollection){
+        grvCode =
+                "    String check(String in) {\n" +
+                        "        ArrayList<String> al =  new ArrayList()\n" +
+                        "        String[] arr=in.split(\" \")\n" +
+                        "\n" +
+                        "\n" +
+                        "//      zde doplňte kód\n " +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 1.9
+        testCollection = [
+                ref("t3_0"), ref("t3_1")
+        ]
+    }
+    testCollection(TestCollection){
+        grvCode =
+                "\n" +
+                        "\n" +
+                        "//      zde doplňte kód\n" +
+                        "\n" +
+                        "\n" +
+                        "    String check(String in) {\n" +
+                        "        ArrayList<String> al =  new ArrayList()\n" +
+                        "        String[] arr=in.split(\" \")\n" +
+                        "        for(int i=0; i<arr.length; i+=2) {\n" +
+                        "           int a = Integer.parseInt(arr[i]);\n" +
+                        "           int b = Integer.parseInt(arr[i+1]);\n" +
+                        "           al.add(rec(a, b));\n" +
+                        "        }\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 1.3
+        testCollection = [
+                ref("t4_1")
         ]
     }
     t1_0(MainTest) {
@@ -56,25 +117,23 @@ beans {
     t2_0(MainTest) {
         id = 0
         entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní sudými čísly vstupního pole arr."
-        inp = "1 2 3 4 5 6 7 8 9 10"
-        out = "2 4 8 10"
+        inp = "1 1 2 3 4 5 6 7 7 7 8 9 9 10"
+        out = "2 4 6 8 10"
     }
     t2_1(MainTest) {
         id = 1
         entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní lichými čísly vstupního pole arr."
-        inp = "1 2 3 4 5 6 7 8 9 10"
+        inp = "1 2 2 2 3 4 4 5 6 6 7 8 8 9 10"
         out = "1 3 5 7 9"
     }
     t2_2(MainTest) {
         id = 2
-        //entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním největším prvkem ve vstupním poli arr."
         entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí největší prvek ve vstupním poli arr."
         inp = "1 2 3 4 555 6 7 8 9 10"
         out = "555"
     }
     t2_3(MainTest) {
         id = 3
-        //entry = "Doplňte metodu String check(String in) o cyklus, který výstupní seznam al naplní jedním nejmenším prvkem ve vstupním poli arr."
         entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí nejmenší prvek ve vstupním poli arr."
         inp = "1 2 3 4 5 6 7 -8 9 10"
         out = "-8"
@@ -92,34 +151,68 @@ beans {
         out = "-9"
     }
 
+    t3_0(MainTest) {
+        id = 0
+        entry = "Doplňte metodu String check(String in) o algoritmus, který naplní výstupní seznam al vzestupně seřazenými prvky vstupního pole arr."
+        inp = "1 0 2 999 3 8 4 7 5 6"
+        out = "0 1 2 3 4 5 6 7 8 999"
+    }
+    t3_1(MainTest) {
+        id = 1
+        entry = "Doplňte metodu String check(String in) o algoritmus, který naplní výstupní seznam al sestupně seřazenými prvky vstupního pole arr."
+        inp = "1 0 2 999 3 8 4 7 5 6"
+        out = "999 8 7 6 5 4 3 2 1 0"
+    }
+
+    t4_0(MainTest) {
+        id = 0
+        entry = "Rekurze, mocnina: Víte, že platí x[n] =\n" +
+                "                                        1; pro n=0, \n" +
+                "                                        x * x[n-1]; pro n>0.\n" +
+                " Vytvořte rekurzivní metodu rec(int x, int n)," +
+                " která bude vracet n-tou mocninu čísla x tak, aby zbytek kódu pro následující vstup (formát x0, n0, x1, n1, x2, n2,...) vypsal x^n."
+        inp = "2 1 2 4 2 7"
+        out = "2 16 128"
+    }
+    t4_1(MainTest) {
+        id = 1
+        entry = "Rekurze, největší společný dělitel : Víte, že platí NSD(A, B) = \n" +
+                "                                                               A; pro A=B,\n" +
+                "                                                               NSD(A-B, B); pro A>B,\n" +
+                "                                                               NSD(A, B-A); pro B>A.\n" +
+                "Vytvořte rekurzivní metodu rec(int A, int B), která bude vracet nejmenší společný dělitel čísel A a B pro následující vstup (formát A0, B0, A1, B1, ...). " +
+                "Zbytek kódu se postará o správný výpis nejmenších společných dělitelů."
+        inp = "10 20 18 27"
+        out = "10 9"
+    }
 
     welcomeScreen(WelcomeScreen){
         messages = [
-        " Vítej v Groovy Simple Testu ! ",
-        " Pravidla:",
-        " - řeší se vždy otázka zadaná nahoře pomocí editovatelného okna uprostřed, ",
-        " - vstupem je String, který se pomocí metody split rozdělí na pole Stringů, ",
-        " - výstup se ukládá do seznamu, který se pak pomocí metody .join(\" \") převádí na string, který se porovnává,",
-        " - pro přidání prvku do výstupního pole slouží al.add(x) - zapiš si !,",
-        " - v poli Stringů jsou čísla, které je možné převést na int pomocí Integer.valueOf(arr[i]) - zapiš si!, ",
-        " - naopak, pokud mám int a potřebuji ho převést na int (nutné pro výstup), použiji Integer.toString(x) - zapiš si!, ",
-        " - čas na známku 4 je max. 300 sekund, limity na ost. známky (zbývající čas): {210, 140, 70 }, ",
-        " - máš 3 volné pokusy, ostatní jsou zpoplatněny 10 sekundami každý, ",
-        " - test je ukončen ulpynutím časovače (známka 5), nebo úspěšným vyřešením, ",
-        " - výsledný kód v případě známek 1-4 musí vždy zkontrolovat učitel !"
+                " Vítej v Groovy Simple Testu ! ",
+                " Pravidla:",
+                " - řeší se vždy otázka zadaná nahoře pomocí editovatelného okna uprostřed, ",
+                " - vstupem je String, který se pomocí metody split rozdělí na pole Stringů, ",
+                " - výstup se ukládá do seznamu, který se pak pomocí metody .join(\" \") převádí na string, který se porovnává,",
+                " - pro přidání prvku do výstupního pole slouží al.add(x) - zapiš si !,",
+                " - v poli Stringů jsou čísla, které je možné převést na int pomocí Integer.valueOf(arr[i]) - zapiš si!, ",
+                " - naopak, pokud mám int a potřebuji ho převést na int (nutné pro výstup), použiji Integer.toString(x) - zapiš si!, ",
+                " - čas na známku 4 je max. 300 sekund, limity na ost. známky (zbývající čas): {210, 140, 70 }, ",
+                " - máš 3 volné pokusy, ostatní jsou zpoplatněny 10 sekundami každý, ",
+                " - test je ukončen ulpynutím časovače (známka 5), nebo úspěšným vyřešením, ",
+                " - výsledný kód v případě známek 1-4 musí vždy zkontrolovat učitel !"
         ]
         fontSize = 20
     }
     cheatingWarningScreen(WelcomeScreen){
         messages = [
-        "Tohle je za 5,",
-        " je vvýslovně zakázáno spouštět test 2x"
+                "Tohle je za 5,",
+                " je zakázáno spouštět test 2x"
         ]
         fontSize = 110
     }
 }
-    /*
-    Alternatively, we can use the GroovyScriptEngine class to execute Groovy scripts. GroovyScriptEngine is provided by Groovy itself, and there's no dependency on Spring to use it.
+/*
+Alternatively, we can use the GroovyScriptEngine class to execute Groovy scripts. GroovyScriptEngine is provided by Groovy itself, and there's no dependency on Spring to use it.
 
 This class supports reloading the scripts automatically whenever there's a change. In addition, it also loads all the classes that depend on it.
 
@@ -140,4 +233,4 @@ binding.setVariable("arg1", "Mr.");
 binding.setVariable("arg2", "Bob");
 Object result = engine.run("StringJoinerScript.groovy", binding);
 assertEquals("Mr.Bob", result.toString());
-     */
+ */
