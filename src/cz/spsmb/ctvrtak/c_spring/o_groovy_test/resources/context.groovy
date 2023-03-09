@@ -2,6 +2,8 @@
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest
+
+
 beans {
     testCollection1(TestCollection){
         grvCode =
@@ -38,7 +40,7 @@ beans {
                 ref("t2_2"), ref("t2_3"), ref("t2_4"), ref("t2_5")
         ]
     }
-    testCollection3(TestCollection){
+    testCollection(TestCollection){
         grvCode =
                 "    String check(String in) {\n" +
                         "        ArrayList<String> al =  new ArrayList()\n" +
@@ -50,12 +52,12 @@ beans {
                         "\n" +
                         "        return al.join(\" \")\n" +
                         "    }\n";
-        difficulty = 1.9
+        difficulty = 2
         testCollection = [
-                ref("t3_0"), ref("t3_1")
+                ref("t3_0"), ref("t3_1"), ref("t3_2"), ref("t3_3")
         ]
     }
-    testCollection(TestCollection){
+    testCollection4(TestCollection){
         grvCode =
                 "\n" +
                         "\n" +
@@ -162,6 +164,22 @@ beans {
         entry = "Doplňte metodu String check(String in) o algoritmus, který naplní výstupní seznam al sestupně seřazenými prvky vstupního pole arr."
         inp = "1 0 2 999 3 8 4 7 5 6"
         out = "999 8 7 6 5 4 3 2 1 0"
+    }
+    t3_2(MainTest) {
+        id = 2
+        entry = "Doplňte metodu String check(String in) o algoritmus, který\n" +
+                "1. seřadí vstupní pole dle velikosti do nového pole int[] tmp,\n" +
+                "2. naplní výstupní seznam al vzestupně největším a každým v pořadí druhým prvkem seřazeného pole tmp."
+        inp = "1 0 2 999 3 8 4 7 5 6"
+        out = "999 7 5 3 1"
+    }
+    t3_3(MainTest) {
+        id = 3
+        entry = "Doplňte metodu String check(String in) o algoritmus, který\n" +
+                "1. seřadí vstupní pole dle velikosti do nového pole int[] tmp,\n" +
+                "2. naplní výstupní seznam al sestupně nejmenším a každým v pořadí druhým prvkem seřazeného pole tmp."
+        inp = "1 0 2 999 3 8 4 7 5 6"
+        out = "0 2 4 6 8"
     }
 
     t4_0(MainTest) {
