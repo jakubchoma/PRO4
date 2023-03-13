@@ -76,8 +76,7 @@ beans {
                         "    }\n";
         difficulty = 1.1
         testCollection = [
-                //ref("t4_0"), ref("t4_1"), ref("t4_2"), ref("t4_3")
-                ref("t4_3")
+                ref("t4_0"), ref("t4_1"), ref("t4_2"), ref("t4_3")
         ]
     }
     t1_0(MainTest) {
@@ -210,7 +209,7 @@ beans {
                 "                                                               1; pro k=0,\n" +
                 "                                                               d + ap(d, k-1); k > 0\n" +
                 "Vytvořte rekurzivní metodu rec(int d, int k), která bude vracet k-tý člen aritmetické posloupnosti s diferencí d, kde první člen je 1 (formát d0, k0, d1, k1, ...). " +
-                "Zbytek kódu se postará o správný výpis aritmetick0 posloupnosti."
+                "Zbytek kódu se postará o správný výpis aritmetické posloupnosti."
         inp = "1 1 7 2"
         out = "2 15"
     }
@@ -218,9 +217,9 @@ beans {
         id = 3
         entry = "Rekurze, geometrická posloupnost od 1 : Víte, že platí gp(d, k) = \n" +
                 "                                                               1; pro k=0,\n" +
-                "                                                               q * ap(q, k-1); k > 0\n" +
+                "                                                               q * gp(q, k-1); k > 0\n" +
                 "Vytvořte rekurzivní metodu rec(int q, int k), která bude vracet k-tý člen gemoterické posloupnosti s kvocientem q, kde první člen je 1 (formát q0, k0, q1, k1, ...). " +
-                "Zbytek kódu se postará o správný výpis aritmetick0 posloupnosti."
+                "Zbytek kódu se postará o správný výpis geometrické posloupnosti."
         inp = "1 1 7 2"
         out = "1 49"
     }

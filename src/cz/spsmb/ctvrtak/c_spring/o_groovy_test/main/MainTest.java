@@ -17,8 +17,8 @@ import java.nio.charset.Charset;
 
 public class MainTest {
     public static final long TIMEOUT_IN_MILISECONDS = 1000;
-    public static final String FILENAME_CODE_FILE_NAME = "grvtst";
-    public static final String DIRECTORY_CODE_PATH = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH")+"\\gst";
+    public static final String FILENAME_CODE_FILE_NAME = "test.groovy";
+    public static final String DIRECTORY_CODE_PATH = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH");
     public static final String FILENAME_CODE_PATH = DIRECTORY_CODE_PATH+"\\"+FILENAME_CODE_FILE_NAME;
 
     public static void createGroovyTemplateFile(String code) throws IOException {
