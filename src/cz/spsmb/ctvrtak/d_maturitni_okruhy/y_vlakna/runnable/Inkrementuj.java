@@ -4,7 +4,7 @@ import cz.spsmb.ctvrtak.d_maturitni_okruhy.y_vlakna.APriklad;
 
 public class Inkrementuj implements Runnable {
     public static  int tmp;
-    // pokud použiji Thread namísto runnable, musím omplementovat metodu
+    // pokud použiji Runnable namísto Thread, musím implementovat metodu
     // start následujícím způsobem:
     private Thread zobrazVl = null;
     public void start() {
