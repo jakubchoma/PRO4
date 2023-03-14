@@ -16,23 +16,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 public class MainTest {
-    public static final String FILENAME_CODE_DIR = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH");
-    public static final String FILENAME_CODE_FILE_NAME = "groovytest.groovy";
-    public static final String FILENAME_CODE_PATH = MainTest.FILENAME_CODE_DIR + "\\" + MainTest.FILENAME_CODE_FILE_NAME;
-    public static final    String initGroovyCode =
-        "import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.Testable;\n" +
-        "class GroovyScriptTest implements Testable {\n" +
-        "    String check(String in) {\n" +
-        "        ArrayList<String> al =  new ArrayList()\n" +
-        "        String[] arr=in.split(\" \")\n" +
-        "\n" +
-        "\n" +
-        "//      zde doplňte kód\n " +
-        "\n" +
-        "\n" +
-        "        return al.join(\" \")\n" +
-        "    }\n" +
-        "}\n";
+    public static final long TIMEOUT_IN_MILISECONDS = 1000;
+    public static final String FILENAME_CODE_FILE_NAME = "test.groovy";
+    public static final String DIRECTORY_CODE_PATH = System.getenv("HOMEDRIVE")+System.getenv("HOMEPATH");
+    public static final String FILENAME_CODE_PATH = DIRECTORY_CODE_PATH+"\\"+FILENAME_CODE_FILE_NAME;
+
     public static void createGroovyTemplateFile(String code) throws IOException {
         FileUtils.writeStringToFile(new File(MainTest.FILENAME_CODE_PATH), code, Charset.forName("UTF-8").toString());
     }
@@ -42,6 +30,7 @@ public class MainTest {
     private String out;
     private Testable test;
     private int id;
+    private String result;
     GroovyScriptEngine engine;
 
     public String getInp() {
@@ -90,24 +79,35 @@ public class MainTest {
         }
     }
 
-    public String check(){
-        Binding binding = new Binding();
-        binding.setVariable("in", this.inp);
-        String result = "";
-        Class<GroovyObject> joinerClass = null;
+    public String check() {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                Binding binding = new Binding();
+                binding.setVariable("in", MainTest.this.inp);
+                Class<GroovyObject> joinerClass = null;
+                try {
+                    joinerClass = engine.loadScriptByName(MainTest.FILENAME_CODE_FILE_NAME);
+                    GroovyObject joiner = joinerClass.newInstance();
+                    MainTest.this.result = joiner.invokeMethod("check", new Object[]{MainTest.this.inp}).toString();
+                } catch (ResourceException e) {
+                    e.printStackTrace();
+                } catch (ScriptException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        t.start();
         try {
-            joinerClass = engine.loadScriptByName(MainTest.FILENAME_CODE_FILE_NAME);
-            GroovyObject joiner = joinerClass.newInstance();
-            result = joiner.invokeMethod("check", new Object[]{this.inp}).toString();
-        } catch (ResourceException e) {
-            e.printStackTrace();
-        } catch (ScriptException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+            t.join(MainTest.TIMEOUT_IN_MILISECONDS);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        return this.result;
         /*
         try {
             result = engine.run(MainTest.FILENAME_CODE_FILE_NAME, binding).toString();
@@ -118,7 +118,7 @@ public class MainTest {
         }*/
         //return test.check(this.in);
         //System.out.println();
-        return result;
+        //return result;
     }
 
     public boolean isValid() {
