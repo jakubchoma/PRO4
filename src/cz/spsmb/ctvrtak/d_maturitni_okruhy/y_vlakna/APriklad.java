@@ -7,6 +7,9 @@ import cz.spsmb.ctvrtak.d_maturitni_okruhy.y_vlakna.runnable.Inkrementuj;
 
 // Vytvořte a spusťte nové vlákno, které bude čekat na vstup od uživatele a po
 // každém zadání celočíselného čísla vypíše toto číslo a stav tmp.
+
+
+
 public class APriklad {
     public static  int tmp;
     public static void main(String[] args) throws InterruptedException {
