@@ -5,35 +5,26 @@ import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest
 
 
 beans {
+    code_1 =
+            "    String check(String in) {\n" +
+                    "        ArrayList<String> al =  new ArrayList()\n" +
+                    "        String[] arr=in.split(\" \")\n" +
+                    "\n" +
+                    "\n" +
+                    "//      zde doplňte kód\n " +
+                    "\n" +
+                    "\n" +
+                    "        return al.join(\" \")\n" +
+                    "    }\n";
     testCollection1(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1.0
         testCollection = [
                 ref("t1_0"), ref("t1_1"), ref("t1_2"), ref("t1_3"), ref("t1_4"), ref("t1_5"),
         ]
     }
     testCollection2(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1.3
         testCollection = [
                 //ref("t2_0"), ref("t2_1"), ref("t2_2"), ref("t2_3")
@@ -41,17 +32,7 @@ beans {
         ]
     }
     testCollection3(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 2
         testCollection = [
                 ref("t3_0"), ref("t3_1"), ref("t3_2"), ref("t3_3")
@@ -80,51 +61,21 @@ beans {
         ]
     }
     testCollection5(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1
         testCollection = [
                 ref("t5_0"),ref("t5_1"),ref("t5_2"),ref("t5_3")
         ]
     }
     testCollection6(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1
         testCollection = [
                 ref("t6_0"),ref("t6_1"),ref("t6_2"),ref("t6_3")
         ]
     }
     testCollection(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 2
         testCollection = [
                 ref("t7_0"), ref("t7_1"), ref("t7_2"), ref("t7_3"), ref("t7_4")
