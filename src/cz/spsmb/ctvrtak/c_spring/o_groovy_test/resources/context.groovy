@@ -92,8 +92,7 @@ beans {
                         "    }\n";
         difficulty = 3
         testCollection = [
-                //ref("t8_0"), ref("t8_1"), ref("t8_2"), ref("t8_3"), ref("t8_4")
-                ref("t8_2")
+                ref("t8_0"), ref("t8_1"), ref("t8_2"), ref("t8_3"), ref("t8_4")
         ]
     }
     t1_0(MainTest) {
