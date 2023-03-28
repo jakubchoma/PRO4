@@ -3,36 +3,28 @@ import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.TestCollection
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.WelcomeScreen
 import cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.MainTest
 
+
 beans {
+    code_1 =
+            "    String check(String in) {\n" +
+                    "        ArrayList<String> al =  new ArrayList()\n" +
+                    "        String[] arr=in.split(\" \")\n" +
+                    "\n" +
+                    "\n" +
+                    "//      zde doplňte kód\n " +
+                    "\n" +
+                    "\n" +
+                    "        return al.join(\" \")\n" +
+                    "    }\n";
     testCollection1(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1.0
         testCollection = [
                 ref("t1_0"), ref("t1_1"), ref("t1_2"), ref("t1_3"), ref("t1_4"), ref("t1_5"),
         ]
     }
     testCollection2(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 1.3
         testCollection = [
                 //ref("t2_0"), ref("t2_1"), ref("t2_2"), ref("t2_3")
@@ -40,17 +32,7 @@ beans {
         ]
     }
     testCollection3(TestCollection){
-        grvCode =
-                "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
-                        "\n" +
-                        "\n" +
-                        "//      zde doplňte kód\n " +
-                        "\n" +
-                        "\n" +
-                        "        return al.join(\" \")\n" +
-                        "    }\n";
+        grvCode = code_1
         difficulty = 2
         testCollection = [
                 ref("t3_0"), ref("t3_1"), ref("t3_2"), ref("t3_3")
@@ -78,21 +60,40 @@ beans {
                 ref("t4_0"), ref("t4_1"), ref("t4_2"), ref("t4_3")
         ]
     }
+    testCollection5(TestCollection){
+        grvCode = code_1
+        difficulty = 1
+        testCollection = [
+                ref("t5_0"),ref("t5_1"),ref("t5_2"),ref("t5_3")
+        ]
+    }
+    testCollection6(TestCollection){
+        grvCode = code_1
+        difficulty = 1
+        testCollection = [
+                //ref("t6_0"),ref("t6_1"),ref("t6_2"),
+                ref("t6_3")
+        ]
+    }
+    testCollection7(TestCollection){
+        grvCode = code_1
+        difficulty = 2
+        testCollection = [
+                ref("t7_0"), ref("t7_1"), ref("t7_2"), ref("t7_3"), ref("t7_4")
+        ]
+    }
     testCollection(TestCollection){
         grvCode =
                 "    String check(String in) {\n" +
-                        "        ArrayList<String> al =  new ArrayList()\n" +
-                        "        String[] arr=in.split(\" \")\n" +
                         "\n" +
                         "\n" +
                         "//      zde doplňte kód\n " +
                         "\n" +
                         "\n" +
-                        "        return al.join(\" \")\n" +
                         "    }\n";
-        difficulty = 1
+        difficulty = 3
         testCollection = [
-                ref("t5_0"),ref("t5_1"),ref("t5_2"),ref("t5_3")
+                ref("t8_0"), ref("t8_1"), ref("t8_2"), ref("t8_3"), ref("t8_4")
         ]
     }
     t1_0(MainTest) {
@@ -262,6 +263,133 @@ beans {
         entry = "Doplňte metodu String check(String in) o algoritmus, který převede vstupní znaky na číslo a to vypíše v hexadecimálním fotmátu"
         inp = "A h o j"
         out = "41 68 6f 6a"
+    }
+    t6_0(MainTest) {
+        id = 0
+        entry = "Doplňte metodu String check(String in) o cyklus, který pomocí TERNÁRNÍHO OPERÁTORU" +
+                " naplní seznam al řetězcem \"sudá\", nebo \"lichá\" dle vstupních čísel."
+        inp = "12 34 84 98 101 345235"
+        out = "sudá sudá sudá sudá lichá lichá"
+    }
+    t6_1(MainTest) {
+        id = 1
+        entry = "Doplňte metodu String check(String in) o cyklus, který pomocí TERNÁRNÍHO OPERÁTORU" +
+                " naplní seznam al řetězcem \"muž\", nebo \"žena\" dle vstupních jmen. Končí-li jméno na znak" +
+                " \"a\" jde o ženu jinak o muže."
+        inp = "Jana Pavel Miroslava Jiří Kateřina Lenka Jaroslav Petra"
+        out = "žena muž žena muž žena žena muž žena"
+    }
+    t6_2(MainTest) {
+        id = 2
+        entry = "Doplňte metodu String check(String in) o cyklus, který pomocí TERNÁRNÍHO OPERÁTORU" +
+                " naplní seznam al absolutní hodnotou vstupních čísel tak, že platí: \n" +
+                " |a| =  a pro a >= 0, \n" +
+                "     = -a pro a < 0 ."
+        inp = "6 -3 8 -90 47 -788"
+        out = "6 3 8 90 47 788"
+    }
+    t6_3(MainTest) {
+        id = 3
+        entry = "Doplňte metodu String check(String in) o cyklus, který pomocí TERNÁRNÍHO OPERÁTORU" +
+                " naplní seznam al řetězcem \"ráno\", \"dopoledne\", \"odpoledne\", nebo \"večer\" dle vstupních hodin." +
+                " 0-8: ráno, 9-12: dopoledne, 13-16: odpoledne, 17-23 večer."
+        inp = "11 23 9 13 8 4 0"
+        out = "dopoledne večer dopoledne odpoledne ráno ráno ráno"
+    }
+    t7_0(MainTest) {
+        id = 0
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí aritmetický průměr vstupního " +
+                "pole arr. Pro výpočet použijte datový typ float."
+        inp = "33 88 11 23 9 13 8 4 1 5"
+        out = "19.5"
+    }
+    t7_1(MainTest) {
+        id = 1
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí geometrický průměr vstupního pole arr. " +
+                "Geometrický průměr je definován jako n-tá odmocnina součinu všech n čísel. " +
+                "Použijte funkci Math.pow(soucin, 1.0/n). " +
+                "Pro výpočet použijte datový typ float."
+        inp = "33 88 11 23 9 13 8 4 1 5"
+        out = "10.323864565239498"
+    }
+    t7_2(MainTest) {
+        id = 2
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí medián vstupního pole arr." +
+                "Medián je definován jako prostřední hodnota vzestupně seřazeného pole. Pokud má pole " +
+                "sudý počet prvků (tento případ), jedná se o aritmetický průměr hodnot na místech n/2-1 a n/2. " +
+                "Pro výpočet použijte datový typ float."
+        inp = "33 88 11 23 9 13 8 4 1 5"
+        out = "10"
+    }
+    t7_3(MainTest) {
+        id = 3
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí dolní kvintil vstupního pole arr. " +
+                "Dolní kvintil je definován tak že 20%% hodnot v poli je menších (nebo rovných) hodnotě " +
+                "dolního kvintilu a 80%% hodnot je větších (nebo rovných)."
+        inp = "33 88 11 23 9 13 8 4 1 5"
+        out = "4"
+    }
+    t7_4(MainTest) {
+        id = 4
+        entry = "Doplňte metodu String check(String in) o algoritmus, který vrátí harmonický průměr vstupního pole arr. " +
+                "Harmonický průměr je definován jako podíl počtu čísel a součtu jejich převrácených hodnot. " +
+                "Pro výpočet použijte datový typ float."
+        inp = "33 88 11 23 9 13 8 4 1 5"
+        out = "5.157062927407182"
+    }
+    t8_0(MainTest) {
+        id = 0
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupního řetězce vybere každý 2. znak a" +
+                " uloží ho do výstupního řetězce, který metoda vrátí."
+        inp = "Tohle je groovy simple test."
+        out = "ol egov ipets."
+    }
+    t8_1(MainTest) {
+        id = 1
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupního řetězce vybere první polovinu znaků," +
+                " ty uloží do výstupního řetězce a přidá k němu tentýž řetězec pozpátku. Použijte 2 instance třídy StringBuffer," +
+                " kde jedna bude sloužit pro použití metody .reverse()."
+        inp = "groovy"
+        out = "groorg"
+    }
+    t8_2(MainTest) {
+        id = 2
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
+                " bez samohlásek a,e,i,o,u. K definici samohlásek použijte inicializovaný seznam: " +
+                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+        inp = "simple groovy test is best"
+        out = "smpl grv tst s bst"
+    }
+    t8_3(MainTest) {
+        id = 3
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
+                " bez souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
+                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+        inp = "simple groovy test is best"
+        out = "ie ooy e i e"
+    }
+    t8_4(MainTest) {
+        id = 4
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který každou hodnotu znaku vstupního řetězce posune o 1 a" +
+                " uloží ho do výstupního řetězce, který metoda vrátí. Tzv. Caesarova šifra."
+        inp = "Ahoj lidi!"
+        out = "Bipk!mjej\""
+    }
+    t8_13_dobrovolne(MainTest) {
+        id = 13
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
+                " tak, že otočí pořadí samohlásek a,e,i,o,u. K definici samohlásek použijte inicializovaný seznam: " +
+                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+        inp = "tohle je fajn škola"
+        out = "tahlo ja fejn škelo"
+    }
+    t8_14_dobrovolne(MainTest) {
+        id = 14
+        entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
+                " tak, že otočí pořadí souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
+                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+        inp = "tohle je fajn škola"
+        out = "tahlo ja fejn škelo"
     }
     welcomeScreen(WelcomeScreen){
         messages = [
