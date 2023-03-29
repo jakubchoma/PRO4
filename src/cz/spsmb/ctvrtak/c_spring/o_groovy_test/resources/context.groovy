@@ -101,7 +101,7 @@ beans {
                 "import java.time.LocalDate;\n" +
                 "import java.time.LocalTime;\n" +
                 "import java.time.LocalDateTime;\n" +
-                "import java.time.format.DateTimeFormatter;\n"
+                "import java.time.format.DateTimeFormatter;\n" +
                 "import java.time.temporal.ChronoUnit;\n"
 
         grvCode = code_1
