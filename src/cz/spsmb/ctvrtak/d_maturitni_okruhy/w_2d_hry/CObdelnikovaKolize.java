@@ -61,8 +61,8 @@ public class CObdelnikovaKolize extends Application {
         /*return this.rectangle1.intersects(this.rectangle2.getLayoutX(), this.rectangle2.getLayoutY(),
                 this.rectangle2.getWidth(),this.rectangle2.getHeight());*/
 
-        return this.rectangle1.getLayoutX()>this.rectangle2.getLayoutX()-this.rectangle2.getWidth() &&
-                this.rectangle2.getLayoutX()>this.rectangle1.getLayoutX()-this.rectangle1.getWidth() &&
+        return this.rectangle1.getLayoutX()<this.rectangle2.getLayoutX()+this.rectangle2.getWidth() &&
+                this.rectangle2.getLayoutX()<this.rectangle1.getLayoutX()+this.rectangle1.getWidth() &&
                 this.rectangle1.getLayoutY()<this.rectangle2.getLayoutY()+this.rectangle2.getHeight() &&
                 this.rectangle2.getLayoutY()<this.rectangle1.getLayoutY()+this.rectangle1.getHeight()
                 ;
