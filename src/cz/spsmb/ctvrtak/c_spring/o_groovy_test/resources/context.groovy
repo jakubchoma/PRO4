@@ -96,7 +96,7 @@ beans {
                 ref("t8_0"), ref("t8_1"), ref("t8_2"), ref("t8_3"), ref("t8_4")
         ]
     }
-    testCollection(TestCollection){
+    testCollection9(TestCollection){
         imports =
                 "import java.time.LocalDate;\n" +
                 "import java.time.LocalTime;\n" +
@@ -108,6 +108,35 @@ beans {
         difficulty = 1
         testCollection = [
                 ref("t9_0"), ref("t9_1"), ref("t9_2"), ref("t9_3"), ref("t9_4")
+        ]
+    }
+    testCollection(TestCollection){
+        grvCode =
+                "private static final String PATH = System.getenv(\"HOMEDRIVE\")+System.getenv(\"HOMEPATH\")+\"\\\\\";\n" +
+                "    String check(String in) {\n" +
+                "        ArrayList<String> al =  new ArrayList()\n" +
+                "        String[] arr=in.split(\" \")\n" +
+                "\n" +
+                "\n" +
+                "//      zde doplňte kód\n " +
+                "\n" +
+                "\n" +
+                "/*\n" +
+                "for(String n: arr){\n" +
+                "    Path p = Path.of(PATH+n+\".txt\")\n" +
+                "    al.add(new String(Files.readString(p)))\n" +
+                "} \n" +
+                "*/\n" +
+                "        return al.join(\" \")\n" +
+                "    }\n";
+        imports =
+                "import java.nio.file.Files;\n" +
+                "import java.nio.file.Path;\n" +
+                "import java.net.URI;\n"
+        difficulty = 2
+        testCollection = [
+                //ref("t10_0"), ref("t10_1")
+                ref("t10_0")
         ]
     }
     t1_0(MainTest) {
@@ -442,11 +471,30 @@ beans {
     t9_4(MainTest) {
         id = 4
         entry = "Datum a čas. Načtěte data z pole Stringů arr do instance třídy LocalDate pomocí tovární statické metody " +
-                "LocalDate.parse(String in). Vypište tyto datumy pomocí ve formátu např.: 31.října,2023 22 pomocí metody " +
+                "LocalDate.parse(String in). Vypište tyto datumy pomocí ve formátu např.: 31.října,2023 pomocí metody " +
                 "date.format(DateTimeFormatter.ofPattern(\"...\") a výsledek " +
                 "přidejte do výstupního seznamu al."
         inp = "2023-03-30 2023-03-31 2023-05-01 2023-08-31"
         out = "30.března,2023 31.března,2023 01.května,2023 31.srpna,2023"
+    }
+    t10_0(MainTest) {
+        id = 0
+        entry = "Soubory. NUTNÉ ODKOMENTOVAT SPODNÍ ČÁST KÓDU DOLE !!! Slouží pro kontrolu vytvořených souborů.\n" +
+                "Vytvořte ve adresáři pojmenovaném konstantou PATH soubory s názvem, který odvodíte z jmen v poli arr tak, " +
+                "že přidáte \".txt\" k tomuto jménu. Pomocí Files.write(path, jmeno.getBytes()) zapište do těchto " +
+                "souborů jejich jména bez koncovky. Samotný soubor vytvoříte ponocí Files.createFile(path). " +
+                "Případně můžete ověřovat existenci souboru pomocí Files.exists(path). Případně půžete prvně existující " +
+                "soubory vymazat pomocí Files.delete(path)"
+        inp = "prvniSoubor druhySoubor tretiSoubor"
+        out = "prvniSoubor druhySoubor tretiSoubor"
+    }
+    t10_1(MainTest) {
+        id = 1
+        entry = "Soubory. Pomocí Files.readString(Path.of(ClassLoader.getSystemResource(String jmeno).toURI())) načtěte z resource " +
+                "složky v GST testu soubory, které jsou dány prvky vstupního pole arr. " +
+                "Postupně je přečtěte a přečtený řetězec přidejte do kolekce al."
+        inp = "prvniSoubor.txt druhySoubor.txt tretiSoubor.txt"
+        out = "Já snad i odmaturuji 😂😂😂 Spolužák snad i odmaturuje 😂😂😂 Všichni snad i odmaturujeme 😂😂😂"
     }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){

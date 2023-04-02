@@ -1,16 +1,50 @@
 package cz.spsmb.ctvrtak.c_spring.o_groovy_test;
 
+import groovy.transform.Synchronized;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class SuperMain {
-    public static void main(String[] args) {
+    private  static Random rnd1 = new Random(1);
+    private  static Random rnd2 = new Random(1);
+    private static  List<Integer> al = new ArrayList<>();
+    public static void main(String[] args) throws InterruptedException {
+        final int N = 1;
+
+        Thread t1 = new Thread(){
+            public void run() {
+                for(int i=0; i<N; i++) {
+                    al.add(rnd1.nextInt(N));
+                }
+                System.out.println("ok?");
+            }
+        };
+        Thread t2 = new Thread(){
+            public void run() {
+                for(int i=0; i<N; i++) {
+                    al.add(rnd2.nextInt(N));
+                }
+                System.out.println("ok2?");
+            }
+        };
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+
+        for(int n: al){
+            System.out.println(n);
+        }
+
         //String inp = "Groovy";
         String inp = "15:30 17:22 18:01 22:22 23:23";
         inp = "2023-03-30 2023-03-31 2023-05-01 2023-08-31";

@@ -27,18 +27,16 @@ public class AUvod {
         // Rozhraní Path reprezentuje cestu ve souborovém systému. Může tak odkazovat absolutní, či relativní cestou na
         // soubor, či adresář.
         // Pro vytvoření instance využijeme tovární metodu get:
-        Path path = Paths.get("c:\\data\\myfile.txt");
-        Path sourcePath      = Paths.get("data/logging.properties");
-        Path destinationPath = Paths.get("data/logging-copy.properties");
-
+        Path path = Path.of("c:\\data\\myfile.txt");
+        Path sourcePath      = Path.of("data/logging.properties");
+        Path destinationPath = Path.of("data/logging-copy.properties");
         // Třída Files poskytuje několik statických metod pro manipulaci se soubory:
         boolean pathExists = Files.exists(path);
-        Path newDir = Files.createDirectory(path);
+        Path newDir = Files.createDirectory(Path.of("mujadresar"));
         Files.copy(sourcePath, destinationPath);
         Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
         // Třída BasicFileAttributes poskytuje další informace (čas vytvoření, ...) o daném souboru, resp. adresáři:
         BasicFileAttributes bfa = Files.readAttributes(path, BasicFileAttributes.class);
-
         //Možnost načtení souboru do Stringu pomocí Files.readAllBytes (https://www.digitalocean.com/community/tutorials/java-read-file-to-string)
         content = new String(Files.readAllBytes(path));
 
@@ -48,7 +46,7 @@ public class AUvod {
         scanner.close();
 
         //Zápis:
-        Files.write(Paths.get("w.txt"), str.getBytes());
+        Files.write(Path.of("w.txt"), str.getBytes());
 
     }
 }
