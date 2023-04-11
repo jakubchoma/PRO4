@@ -7,13 +7,13 @@ import java.util.Random;
 - Vytvořte program, který bude generovat náhodnou posloupnost se seed 1.
   Výsledky (celkem 10) pište do konzole každou sekundu.
 
-- Vytvořte algoritmus, který bude generovat 3 náhodné posloupnosti se seed 1,
+- Vytvořte algoritmus, který bude generovat 3 náhodné posloupnosti odélce 10 se seed 1,
   každou v jiném vlákně. Ve finále zobrazte součty jednotlivých posloupností
   a celkový součet.
 
 * */
 public class CDalsiPriklady {
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Random rnd = new Random(LocalTime.now().toNanoOfDay());
         for(int i = 0; i<10; i++) {
             System.out.println(rnd.nextInt());
@@ -23,5 +23,19 @@ public class CDalsiPriklady {
                 e.printStackTrace();
             }
         }
+    }*/
+    class InnerThread extends Thread {
+        Random rnd = new Random(1);
+        long sum = 0;
+        @Override
+        public void run() {
+            for(int i=0; i<10; i++) {
+                sum += rnd.nextInt();
+            }
+        }
+
+    }
+    public static void main(String[] args) {
+
     }
 }
