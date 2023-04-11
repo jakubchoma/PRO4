@@ -407,7 +407,7 @@ beans {
         id = 3
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " bez souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "simple groovy test is best"
         out = "ie ooy e i e"
     }
@@ -422,7 +422,7 @@ beans {
         id = 13
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " tak, že otočí pořadí samohlásek a,e,i,o,u. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "tohle je fajn škola"
         out = "tahlo ja fejn škelo"
     }
@@ -430,7 +430,7 @@ beans {
         id = 14
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " tak, že otočí pořadí souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "tohle je fajn škola"
         out = "tahlo ja fejn škelo"
     }
