@@ -24,7 +24,7 @@ public class CDalsiPriklady {
             }
         }
     }*/
-    class innerThread extends Thread {
+    class InnerThread extends Thread {
         Random rnd = new Random(1);
         long sum = 0;
         @Override
