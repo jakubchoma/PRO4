@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 
 public class MainTest {
     public static final long TIMEOUT_IN_MILISECONDS = 1000;
@@ -31,6 +32,7 @@ public class MainTest {
     private Testable test;
     private int id;
     private String result;
+    private boolean mustBeResultSorted;
     GroovyScriptEngine engine;
 
     public String getInp() {
@@ -68,7 +70,10 @@ public class MainTest {
         this.out = out;
     }
 
-    /*public void setTest(Testable test) {
+    public void setMustBeResultSorted(boolean mustBeResultSorted) {
+        this.mustBeResultSorted = mustBeResultSorted;
+    }
+/*public void setTest(Testable test) {
         this.test = test;
     }*/
 
@@ -128,7 +133,16 @@ public class MainTest {
         //String tmp = test.check(this.in);
 
         //System.out.println(tmp);
-        return out.equals(this.check());
+        if(this.mustBeResultSorted){
+            String[] requestedOutput = out.split(" ");
+            Arrays.sort(requestedOutput);
+            String[] obtainedOutput = this.check().split(" ");
+            Arrays.sort(obtainedOutput);
+            System.out.format("%s%n%s%n", Arrays.toString(requestedOutput), Arrays.toString(obtainedOutput));
+            return Arrays.toString(obtainedOutput).equals(Arrays.toString(requestedOutput));
+        } else {
+            return out.equals(this.check());
+        }
     }
     /*
     Binding binding = new Binding();

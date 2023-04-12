@@ -65,6 +65,7 @@ public class SuperMain {
         }
         System.out.println();
         List<String> souhl = Arrays.asList("a", "e", "i", "o", "u");
+
         StringBuffer sb = new StringBuffer();
 
         for(int i = 0; i<inp.length(); i++){

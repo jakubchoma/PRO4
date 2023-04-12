@@ -110,7 +110,7 @@ beans {
                 ref("t9_0"), ref("t9_1"), ref("t9_2"), ref("t9_3"), ref("t9_4")
         ]
     }
-    testCollection(TestCollection){
+    testCollection10(TestCollection){
         grvCode =
                 "private static final String PATH = System.getenv(\"HOMEDRIVE\")+System.getenv(\"HOMEPATH\")+\"\\\\\";\n" +
                 "    String check(String in) {\n" +
@@ -137,6 +137,15 @@ beans {
         testCollection = [
                 //ref("t10_0"), ref("t10_1")
                 ref("t10_0")
+        ]
+    }
+    testCollection11(TestCollection){
+        imports =
+                "import java.util.Random;\n"
+        grvCode = code_1
+        difficulty = 1
+        testCollection = [
+                ref("t11_0")//, ref("t11_1"), ref("t11_2"), ref("t11_3"), ref("t11_4")
         ]
     }
     t1_0(MainTest) {
@@ -495,6 +504,18 @@ beans {
                 "Postupně je přečtěte a přečtený řetězec přidejte do kolekce al."
         inp = "prvniSoubor.txt druhySoubor.txt tretiSoubor.txt"
         out = "Já snad i odmaturuji 😂😂😂 Spolužák snad i odmaturuje 😂😂😂 Všichni snad i odmaturujeme 😂😂😂"
+    }
+    t11_0(MainTest) {
+        id = 0
+        entry = "Vlákna. Vytvořte anonymní vnitřní třídy dvou vláken:\n" +
+                "   1. vlákno bude generovat 5 čísel pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 8 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla, na pořadí čísel ve výsledné kontrole nezáleží " +
+                "Mezi vlákny si pomocí Thread.yield() předávejte po každém vygenerovaném čísle řízení"
+
+        inp = ""
+        out = "10 4 13 5 12 6 7 13 8 14"
+        mustBeResultSorted = true;
     }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){
