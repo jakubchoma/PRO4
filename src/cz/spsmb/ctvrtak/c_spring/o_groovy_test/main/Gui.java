@@ -143,8 +143,9 @@ public class Gui extends Application {
                     //context = new ClassPathXmlApplicationContext("context.xml");
                     //test = context.getBean("test", MainTest.class);
                     Thread.sleep(800);
-                    Gui.this.lOutput.setText(test.check());
-                    if(Gui.this.test.isValid()){
+                    String obt = test.check();
+                    Gui.this.lOutput.setText(obt);
+                    if(Gui.this.test.isValid(obt)){
                         Gui.this.stopTest();
                     }
                 } catch (Exception e) {

@@ -20,31 +20,6 @@ public class SuperMain {
     public static void main(String[] args) throws InterruptedException {
         final int N = 1;
 
-        Thread t1 = new Thread(){
-            public void run() {
-                for(int i=0; i<N; i++) {
-                    al.add(rnd1.nextInt(N));
-                }
-                System.out.println("ok?");
-            }
-        };
-        Thread t2 = new Thread(){
-            public void run() {
-                for(int i=0; i<N; i++) {
-                    al.add(rnd2.nextInt(N));
-                }
-                System.out.println("ok2?");
-            }
-        };
-        t1.start();
-        t2.start();
-        t1.join();
-        t2.join();
-        t1.resume();
-
-        for(int n: al){
-            System.out.println(n);
-        }
 
         //String inp = "Groovy";
         String inp = "15:30 17:22 18:01 22:22 23:23";

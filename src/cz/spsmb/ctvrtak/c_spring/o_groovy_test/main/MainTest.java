@@ -128,7 +128,7 @@ public class MainTest {
         //return result;
     }
 
-    public boolean isValid() {
+    public boolean isValid(String input) {
 
         //String tmp = test.check(this.in);
 
@@ -136,12 +136,13 @@ public class MainTest {
         if(this.mustBeResultSorted){
             String[] requestedOutput = out.split(" ");
             Arrays.sort(requestedOutput);
-            String[] obtainedOutput = this.check().split(" ");
+            String[] obtainedOutput = input.split(" ");
             Arrays.sort(obtainedOutput);
             System.out.format("%s%n%s%n", Arrays.toString(requestedOutput), Arrays.toString(obtainedOutput));
             return Arrays.toString(obtainedOutput).equals(Arrays.toString(requestedOutput));
         } else {
-            return out.equals(this.check());
+            System.out.format("req: %s%nobt:%s%n",out, input);
+            return out.equals(input);
         }
     }
     /*
