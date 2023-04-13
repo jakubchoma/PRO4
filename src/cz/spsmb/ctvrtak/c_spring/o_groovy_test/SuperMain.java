@@ -40,6 +40,7 @@ public class SuperMain {
         t2.start();
         t1.join();
         t2.join();
+        t1.resume();
 
         for(int n: al){
             System.out.println(n);
@@ -75,6 +76,7 @@ public class SuperMain {
                 System.out.println(inp.charAt(i));
             }
         }
+
         cz.spsmb.ctvrtak.c_spring.o_groovy_test.main.Gui.main(args);
     }
 }

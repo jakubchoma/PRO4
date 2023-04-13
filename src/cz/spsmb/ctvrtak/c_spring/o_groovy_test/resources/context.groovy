@@ -75,7 +75,7 @@ beans {
                 ref("t6_3")
         ]
     }
-    testCollection(TestCollection){
+    testCollection7(TestCollection){
         grvCode = code_1
         difficulty = 2
         testCollection = [
@@ -139,13 +139,24 @@ beans {
                 ref("t10_0")
         ]
     }
-    testCollection11(TestCollection){
+    testCollection(TestCollection){
         imports =
                 "import java.util.Random;\n"
-        grvCode = code_1
-        difficulty = 1
+        grvCode =
+                "    private static ArrayList<String> al =  new ArrayList()\n" +
+                        "\n" +
+                        "\n" +
+                "    String check(String in) {\n" +
+                        "\n" +
+                        "\n" +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 3
         testCollection = [
-                ref("t11_0")//, ref("t11_1"), ref("t11_2"), ref("t11_3"), ref("t11_4")
+                //ref("t11_0"), ref("t11_1"),ref("t11_2")//,
+                ref("t11_3")//, ref("t11_4")
         ]
     }
     t1_0(MainTest) {
@@ -510,12 +521,47 @@ beans {
         entry = "Vlákna. Vytvořte anonymní vnitřní třídy dvou vláken:\n" +
                 "   1. vlákno bude generovat 5 čísel pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10,\n" +
                 "   2. vlákno bude generovat čísla po jedné od 4 do 8 včetně.\n" +
-                "Do kolekce al. přidávejte vygenerovaná čísla, na pořadí čísel ve výsledné kontrole nezáleží " +
-                "Mezi vlákny si pomocí Thread.yield() předávejte po každém vygenerovaném čísle řízení"
+                "Do kolekce al. přidávejte vygenerovaná čísla, na pořadí čísel ve výsledné kontrole nezáleží. " +
+                "Mezi vlákny si pomocí Thread.yield() předávejte po každém vygenerovaném čísle řízení. Spusťte obě vlákna a počkejte, až doběhnou"
 
         inp = ""
         out = "10 4 13 5 12 6 7 13 8 14"
         mustBeResultSorted = true;
+    }
+    t11_1(MainTest) {
+        id = 1
+        entry = "Vlákna. Vytvořte anonymní vnitřní třídy dvou vláken:\n" +
+                "   1. vlákno bude generovat 5 čísel pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 8 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "spusťte první vlákno, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Nakonec přidejte do kolekce al číslo 99."
+
+        inp = ""
+        out = "10 13 12 13 14 4 5 6 7 8 99"
+    }
+    t11_2(MainTest) {
+        id = 2
+        entry = "Vlákna. Vytvořte další 2 třídy pro 2 vlákna:\n" +
+                "   1. vlákno bude generovat 2 čísla pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10. " +
+                " Tato posloupnost bude vždy začínat stejně s novou instací této třídy,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 5 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "vtvořte instanci 1. vlákna, spusťte ho, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Toto opakujte celkem 3 krát."
+
+        inp = ""
+        out = "10 13 4 5 10 13 4 5 10 13 4 5"
+    }
+    t11_3(MainTest) {
+        id = 3
+        entry = "Vlákna. Vytvořte další 2 třídy pro 2 vlákna:\n" +
+                "   1. vlákno bude generovat 2 čísla pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10. " +
+                " Tato posloupnost bude pokračovat dál s novou instací této třídy,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 5 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "vtvořte instanci 1. vlákna, spusťte ho, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Toto opakujte celkem 3 krát."
+
+        inp = ""
+        out = "10 13 4 5 12 13 4 5 14 14 4 5"
     }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){

@@ -1,24 +1,21 @@
 package cz.spsmb.ctvrtak.d_maturitni_okruhy.y_vlakna.runnable;
 
 public class Inkrementuj implements Runnable {
-    public static  int tmp;
-    // pokud použiji Runnable namísto Thread, musím implementovat metodu
-    // start následujícím způsobem:
-    private Thread zobrazVl = null;
-    public void start() {
-        this.zobrazVl = new Thread(this);
-        this.zobrazVl.start();
-    }
 
     @Override
     public void run() {
-        while(true) {
-            Inkrementuj.tmp += 3;
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        for(int i=0; i<5; i++){
+            System.out.println(i);
         }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        InkrementujDalsiMoznost i = new InkrementujDalsiMoznost();
+        // pokud použiji Runnable namísto Thread, musím buď implementovat členskou proměnnou Třídy Thread a metodu start ,
+        // nebo rovnou použiji při vytváření instance vlákna konstruktor třídy Thread s parametrem třídy implementující Runnable (tento přístup) :
+        Thread t = new Thread(i);
+        t.start();
+        t.join();
+
     }
 }

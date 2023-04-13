@@ -1,7 +1,5 @@
 package cz.spsmb.ctvrtak.d_maturitni_okruhy.y_vlakna;
 
-import cz.spsmb.ctvrtak.d_maturitni_okruhy.y_vlakna.runnable.Inkrementuj;
-
 // Vytvořte vlákno, které bude periodicky zvyšovat statickou proměnnou tmp
 // o vámi zvolenou hodnotu každých 200ms
 
