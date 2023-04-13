@@ -10,7 +10,7 @@ public class Inkrementuj implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        InkrementujDalsiMoznost i = new InkrementujDalsiMoznost();
+        Inkrementuj i = new Inkrementuj();
         // pokud použiji Runnable namísto Thread, musím buď implementovat členskou proměnnou Třídy Thread a metodu start ,
         // nebo rovnou použiji při vytváření instance vlákna konstruktor třídy Thread s parametrem třídy implementující Runnable (tento přístup) :
         Thread t = new Thread(i);
