@@ -139,7 +139,7 @@ beans {
                 ref("t10_0")
         ]
     }
-    testCollection(TestCollection){
+    testCollection11(TestCollection){
         imports =
                 "import java.util.Random;\n"
         grvCode =
@@ -156,6 +156,21 @@ beans {
         difficulty = 3
         testCollection = [
                 ref("t11_0"), ref("t11_1"),ref("t11_2"),ref("t11_3"),ref("t11_4")
+        ]
+    }
+    testCollection(TestCollection){
+        grvCode =
+                "    private static ArrayList<String> al =  new ArrayList()\n" +
+                        "\n" +
+                        "\n" +
+                        "    String check(String in) {\n" +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 3
+        testCollection = [
+                ref("t12_0")//, ref("t11_1"),ref("t11_2"),ref("t11_3"),ref("t11_4")
         ]
     }
     t1_0(MainTest) {
@@ -572,6 +587,18 @@ beans {
 
         inp = ""
         out = "85 88 47 13 54 4 34 6 78 48"
+    }
+    t12_0(MainTest) {
+        id = 0
+        entry = "OOP Vytvořte základní třídu Automobil, která bude mít abstraktní metodu int pocetNaprav(). Vytvořte odvozené " +
+                " třídy od třídy Automobil Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava). Vytvořte a naplňte " +
+                " pole typu Automobil všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu pocetNaprav(). " +
+                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží."
+
+        inp = ""
+        out = "1 2 6"
+        mustBeResultSorted = true;
     }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){
