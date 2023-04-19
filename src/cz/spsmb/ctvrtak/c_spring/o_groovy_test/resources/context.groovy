@@ -170,7 +170,8 @@ beans {
                         "    }\n";
         difficulty = 3
         testCollection = [
-                ref("t12_0")//, ref("t11_1"),ref("t11_2"),ref("t11_3"),ref("t11_4")
+                //ref("t12_0"), ref("t12_1")//,
+                ref("t12_2")//,ref("t12_3"),ref("t12_4")
         ]
     }
     t1_0(MainTest) {
@@ -590,14 +591,58 @@ beans {
     }
     t12_0(MainTest) {
         id = 0
-        entry = "OOP Vytvořte základní třídu Automobil, která bude mít abstraktní metodu int pocetNaprav(). Vytvořte odvozené " +
-                " třídy od třídy Automobil Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava). Vytvořte a naplňte " +
+        entry = "OOP Vytvořte základní abstraktní třídu Automobil, která bude obsahovat abstraktní metodu int pocetNaprav(). Vytvořte odvozené " +
+                " třídy od třídy Automobil Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava).\n" +
+                " V metodě check() Vytvořte a naplňte " +
                 " pole typu Automobil všemi instancemi odvozených tříd. " +
                 " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu pocetNaprav(). " +
-                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží."
+                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží. Veškeré nové třídy " +
+                " zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
 
         inp = ""
         out = "1 2 6"
+        mustBeResultSorted = true;
+    }
+    t12_1(MainTest) {
+        id = 1
+        entry = "OOP Vytvořte základní abstraktní třídu Potravina, která bude obsahovat abstraktní metodu String chutna(). Vytvořte odvozené " +
+                " třídy od třídy Potravina Citron (kysele), Cukr (sladce) a Pivo(hořce).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
+    t12_2(MainTest) {
+        id = 2
+        entry = "OOP Vytvořte rozhraní Automobil, které bude obsahovat metodu int pocetNaprav(). Vytvořte " +
+                " třídy implementující rozhraní Automobil: Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Automobil všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu pocetNaprav(). " +
+                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "1 2 6"
+        mustBeResultSorted = true;
+    }
+    t12_3(MainTest) {
+        id = 3
+        entry = "OOP Vytvořte rozhraní Potravina, které bude obsahovat metodu String chutna(). Vytvořte " +
+                " třídy implementující rozhraní Potravina: Citron (kysele), Cukr (sladce) a Pivo(hořce).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
         mustBeResultSorted = true;
     }
     //2022-04-30T11:36:38.051628200
