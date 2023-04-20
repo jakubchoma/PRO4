@@ -168,10 +168,9 @@ beans {
                         "\n" +
                         "        return al.join(\" \")\n" +
                         "    }\n";
-        difficulty = 3
+        difficulty = 2
         testCollection = [
-                //ref("t12_0"), ref("t12_1")//,
-                ref("t12_2")//,ref("t12_3"),ref("t12_4")
+                ref("t12_0"), ref("t12_1"), ref("t12_2"), ref("t12_3")//,ref("t12_4")
         ]
     }
     t1_0(MainTest) {
