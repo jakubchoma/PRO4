@@ -644,6 +644,37 @@ beans {
         out = "kysele sladce hořce"
         mustBeResultSorted = true;
     }
+    t12_4_dobrovolne(MainTest) {
+        id = 4
+        entry = "Na základě vašeho uvážení vytvořte základní abstraktní třídu, či rozhraní tak, aby obsahovala členskou " +
+                " proměnnou String chut a jeji getter String chutna(). Vytvořte " +
+                " třídy implementující rozhraní Potravina: Citron (kysele), Cukr (sladce) a Pivo(hořce). Včetně konstruktorů" +
+                " nastavujících proměnnou chut v rodičovi. \n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
+    t12_5_dobrovolne(MainTest) {
+        id = 5
+        entry = "Na základě vašeho uvážení vytvořte základní 2 abstraktní třídy, či rozhraní (dále jen předek) tak, " +
+                "aby jeden předek obsahoval metodu String chutna(). a druhý String barva(). Vytvořte " +
+                " třídy, které vystupují jako přímí potomci obou těchto předků: Citron (kysele, žlutá), Cukr (sladce, bílá) a Pivo(hořce, zlatá).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){
         messages = [
