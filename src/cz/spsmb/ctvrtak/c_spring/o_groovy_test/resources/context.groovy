@@ -75,7 +75,7 @@ beans {
                 ref("t6_3")
         ]
     }
-    testCollection(TestCollection){
+    testCollection7(TestCollection){
         grvCode = code_1
         difficulty = 2
         testCollection = [
@@ -110,7 +110,7 @@ beans {
                 ref("t9_0"), ref("t9_1"), ref("t9_2"), ref("t9_3"), ref("t9_4")
         ]
     }
-    testCollection(TestCollection){
+    testCollection10(TestCollection){
         grvCode =
                 "private static final String PATH = System.getenv(\"HOMEDRIVE\")+System.getenv(\"HOMEPATH\")+\"\\\\\";\n" +
                 "    String check(String in) {\n" +
@@ -137,6 +137,40 @@ beans {
         testCollection = [
                 //ref("t10_0"), ref("t10_1")
                 ref("t10_0")
+        ]
+    }
+    testCollection11(TestCollection){
+        imports =
+                "import java.util.Random;\n"
+        grvCode =
+                "    private static ArrayList<String> al =  new ArrayList()\n" +
+                        "\n" +
+                        "\n" +
+                "    String check(String in) {\n" +
+                "      al.clear()" +
+                        "\n" +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 3
+        testCollection = [
+                ref("t11_0"), ref("t11_1"),ref("t11_2"),ref("t11_3"),ref("t11_4")
+        ]
+    }
+    testCollection(TestCollection){
+        grvCode =
+                "    private static ArrayList<String> al =  new ArrayList()\n" +
+                        "\n" +
+                        "\n" +
+                        "    String check(String in) {\n" +
+                        "\n" +
+                        "\n" +
+                        "        return al.join(\" \")\n" +
+                        "    }\n";
+        difficulty = 2
+        testCollection = [
+                ref("t12_0"), ref("t12_1"), ref("t12_2"), ref("t12_3")//,ref("t12_4")
         ]
     }
     t1_0(MainTest) {
@@ -407,7 +441,7 @@ beans {
         id = 3
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " bez souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "simple groovy test is best"
         out = "ie ooy e i e"
     }
@@ -422,7 +456,7 @@ beans {
         id = 13
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " tak, že otočí pořadí samohlásek a,e,i,o,u. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "tohle je fajn škola"
         out = "tahlo ja fejn škelo"
     }
@@ -430,7 +464,7 @@ beans {
         id = 14
         entry = "Práce s řetězci a třída StringBuffer. Doplňte metodu String check(String in) o algoritmus, který ze vstupní řetězec zkopíruje do výstupního" +
                 " tak, že otočí pořadí souhlásek. K definici samohlásek použijte inicializovaný seznam: " +
-                " List<String> souhl = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
+                " List<String> sam = Arrays.asList(\"a\", \"e\", \"i\", \"y\", \"o\", \"u\") ."
         inp = "tohle je fajn škola"
         out = "tahlo ja fejn škelo"
     }
@@ -495,6 +529,151 @@ beans {
                 "Postupně je přečtěte a přečtený řetězec přidejte do kolekce al."
         inp = "prvniSoubor.txt druhySoubor.txt tretiSoubor.txt"
         out = "Já snad i odmaturuji 😂😂😂 Spolužák snad i odmaturuje 😂😂😂 Všichni snad i odmaturujeme 😂😂😂"
+    }
+    t11_0(MainTest) {
+        id = 0
+        entry = "Vlákna. Vytvořte anonymní vnitřní třídy dvou vláken:\n" +
+                "   1. vlákno bude generovat 5 čísel pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 8 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla, na pořadí čísel ve výsledné kontrole nezáleží. " +
+                "Mezi vlákny si pomocí Thread.yield() předávejte po každém vygenerovaném čísle řízení. Spusťte obě vlákna a počkejte, až doběhnou."
+
+        inp = ""
+        out = "10 4 13 5 12 6 7 13 8 14"
+        mustBeResultSorted = true;
+    }
+    t11_1(MainTest) {
+        id = 1
+        entry = "Vlákna. Vytvořte anonymní vnitřní třídy dvou vláken:\n" +
+                "   1. vlákno bude generovat 5 čísel pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 8 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "Spusťte první vlákno, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Nakonec přidejte do kolekce al číslo 99."
+
+        inp = ""
+        out = "10 13 12 13 14 4 5 6 7 8 99"
+    }
+    t11_2(MainTest) {
+        id = 2
+        entry = "Vlákna. Vytvořte další 2 vnořené vnitřní třídy ve třídě GroovyScriptTest pro 2 vlákna:\n" +
+                "   1. vlákno bude generovat 2 čísla pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10. " +
+                " Tato posloupnost bude vždy začínat stejně s novou instací této třídy,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 5 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "Vytvořte instanci 1. vlákna, spusťte ho, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Toto opakujte celkem 3 krát."
+
+        inp = ""
+        out = "10 13 4 5 10 13 4 5 10 13 4 5"
+    }
+    t11_3(MainTest) {
+        id = 3
+        entry = "Vlákna. Vytvořte další 2 vnořené vnitřní třídy ve třídě GroovyScriptTest pro 2 vlákna:\n" +
+                "   1. vlákno bude generovat 2 čísla pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(5)+10. " +
+                " Tato posloupnost bude pokračovat dál s novou instací této třídy,\n" +
+                "   2. vlákno bude generovat čísla po jedné od 4 do 5 včetně.\n" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "Vytvořte instanci 1. vlákna, spusťte ho, počkejte až doběhne, pak udělejte totéž pro druhé vlákno. Toto opakujte celkem 3 krát."
+
+        inp = ""
+        out = "10 13 4 5 12 13 4 5 14 14 4 5"
+    }
+    t11_4(MainTest) {
+        id = 4
+        entry = "Vlákna. Proveďte, aby třída GroovyScriptTest implementovala také rozhraní Runnable. Vlákno, které vznikne použitím instance této třídy " +
+                " pomocí t=new Thread(gst), kde gst je instance třídy GroovyScriptTest připravte tak, aby generovalo  10 čísel " +
+                " pseudonáhodné posloupnosti rnd=new Random(1) pomocí metody rnd.nextInt(100)" +
+                "Do kolekce al. přidávejte vygenerovaná čísla. " +
+                "Vytvořte instanci tohoto vlákna, spusťte ho a  počkejte až doběhne."
+
+        inp = ""
+        out = "85 88 47 13 54 4 34 6 78 48"
+    }
+    t12_0(MainTest) {
+        id = 0
+        entry = "OOP Vytvořte základní abstraktní třídu Automobil, která bude obsahovat abstraktní metodu int pocetNaprav(). Vytvořte odvozené " +
+                " třídy od třídy Automobil Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Automobil všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu pocetNaprav(). " +
+                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží. Veškeré nové třídy " +
+                " zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "1 2 6"
+        mustBeResultSorted = true;
+    }
+    t12_1(MainTest) {
+        id = 1
+        entry = "OOP Vytvořte základní abstraktní třídu Potravina, která bude obsahovat abstraktní metodu String chutna(). Vytvořte odvozené " +
+                " třídy od třídy Potravina Citron (kysele), Cukr (sladce) a Pivo(hořce).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
+    t12_2(MainTest) {
+        id = 2
+        entry = "OOP Vytvořte rozhraní Automobil, které bude obsahovat metodu int pocetNaprav(). Vytvořte " +
+                " třídy implementující rozhraní Automobil: Osobak (2 nápravy), Nakladak (6 náprav) a Prives(1 náprava).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Automobil všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu pocetNaprav(). " +
+                " Do kolekce al. přidávejte touto metodou vrácená čísla. Na pořadí těchto čísel nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "1 2 6"
+        mustBeResultSorted = true;
+    }
+    t12_3(MainTest) {
+        id = 3
+        entry = "OOP Vytvořte rozhraní Potravina, které bude obsahovat metodu String chutna(). Vytvořte " +
+                " třídy implementující rozhraní Potravina: Citron (kysele), Cukr (sladce) a Pivo(hořce).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
+    t12_4_dobrovolne(MainTest) {
+        id = 4
+        entry = "Na základě vašeho uvážení vytvořte základní abstraktní třídu, či rozhraní tak, aby obsahovala členskou " +
+                " proměnnou String chut a jeji getter String chutna(). Vytvořte " +
+                " třídy implementující rozhraní Potravina: Citron (kysele), Cukr (sladce) a Pivo(hořce). Včetně konstruktorů" +
+                " nastavujících proměnnou chut v rodičovi. \n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
+    }
+    t12_5_dobrovolne(MainTest) {
+        id = 5
+        entry = "Na základě vašeho uvážení vytvořte základní 2 abstraktní třídy, či rozhraní (dále jen předek) tak, " +
+                "aby jeden předek obsahoval metodu String chutna(). a druhý String barva(). Vytvořte " +
+                " třídy, které vystupují jako přímí potomci obou těchto předků: Citron (kysele, žlutá), Cukr (sladce, bílá) a Pivo(hořce, zlatá).\n" +
+                " V metodě check() Vytvořte a naplňte " +
+                " pole typu Potravina všemi instancemi odvozených tříd. " +
+                " Pole se 3 instancemi odvozených tříd proiterujte a v každé iteraci volejte metodu chutna(). " +
+                " Do kolekce al. přidávejte touto metodou vrácené stringy. Na pořadí těchto stringů nezáleží. Veškeré nové třídy " +
+                " i rozhraní zde musí být vnořeny do třídy GroovyScriptTest. Doporučuji statické vnořené třídy."
+
+        inp = ""
+        out = "kysele sladce hořce"
+        mustBeResultSorted = true;
     }
     //2022-04-30T11:36:38.051628200
     welcomeScreen(WelcomeScreen){

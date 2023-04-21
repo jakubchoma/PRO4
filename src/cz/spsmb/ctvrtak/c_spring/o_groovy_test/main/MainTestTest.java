@@ -18,7 +18,7 @@ class MainTestTest {
     }
     @Test
     public void testTest(){
-        Assertions.assertTrue(test.isValid());
+        Assertions.assertTrue(test.isValid(test.check()));
     }
 
 
